@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import CustomTextField, { SliderTextField } from './CustomTextField';
@@ -18,12 +18,12 @@ export default function CreateAccount({ value, setValue, valueR, setValueR, vali
                     <CustomTextField setValidName={setValidName} />
                 </Grid>
                 <Grid item xs={12}>
-                    <Box sx={{ height: '1.5vh' }} />
+                    <Box sx={{ height: '1vh' }} />
                 </Grid>
                 {!validName &&
-                    <Grid item xs={12} container spacing={0.5}>
+                    <Grid item xs={12} container spacing={0}>
                         <Grid item xs={12}>
-                            <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
+                            <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16, padding: '20px 0px 0px 0px' }}>
                                 Getting started is as easy as choosing your name.
                             </p>
                         </Grid>

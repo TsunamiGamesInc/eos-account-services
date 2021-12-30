@@ -4,17 +4,18 @@ import ecc from 'eosjs-ecc';
 import fs from 'fs';
 import { SetKeyValue } from './ValidName';
 
-const endpoint = 'https://api.testnet.eos.io';
+/* const endpoint = 'https://api.testnet.eos.io';
 const chainId = 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906';
 
 const holdOverPath = './creatorKey.txt'
-//const holdOver = fs.readFileSync(holdOverPath, 'utf-8');
+const holdOver = fs.readFileSync(holdOverPath, 'utf-8');
+let creatorKey = ['ABC123']
 
 const signatureProvider = new JsSignatureProvider(creatorKey);
 const rpc = new JsonRpc(endpoint);
 const api = new Api({ rpc, signatureProvider });
 
-/* const wasmFilePath = '\eosio.token.wasm';
+const wasmFilePath = '\eosio.token.wasm';
 const wasmHexString = fs.readFileSync(wasmFilePath).toString('hex');
 
 const buffer = new Serialize.SerialBuffer({
@@ -40,7 +41,7 @@ export async function GenerateKey() {
     });
 }
 
-export default function CreateAccount({ receiverName }) {
+/* export default function CreateAccount({ receiverName }) {
     return (
         (async () => {
             await api.transact({
@@ -133,7 +134,7 @@ export function TransferEOS({ receiverName, eosQuantity }) {
     );
 }
 
-/* export function DeployContract({ receiverName }) {
+export function DeployContract({ receiverName }) {
     return (
         (async () => {
             await api.transact({
@@ -216,5 +217,4 @@ export function MintToken({ receiverName, maxTokenSupply, tokenName }) {
             });
         })()
     );
-}
- */
+} */

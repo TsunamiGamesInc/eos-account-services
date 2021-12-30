@@ -65,7 +65,7 @@ export function ValidNameComponentsTwo({ setValue, setValueR, valueMirror, value
                 <Box sx={{ width: '90px' }}>
                     <Grid container>
                         <Grid item xs={12}>
-                            <Box sx={{ height: '16.5vh' }} />
+                            <Box sx={{ height: '16vh' }} />
                         </Grid>
                         <Grid item xs={12}>
                             <Box sx={{ height: '85px' }} />

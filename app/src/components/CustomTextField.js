@@ -80,8 +80,8 @@ export default function CustomTextField({ setValidName }) {
     })
 
     return (
-        <Box sx={{ height: '50px' }}>
-            <Tooltip title="Exactly 12 characters (a-z, 1-5)" placement="right">
+        <Tooltip title="Exactly 12 characters (a-z, 1-5)" placement="right">
+                <Box sx={{ height: '50px' }}>
                 <StyledTextField
                     variant="outlined"
                     label="Choose an account name!"
@@ -99,8 +99,8 @@ export default function CustomTextField({ setValidName }) {
                         }
                     }}
                 />
-            </Tooltip>
         </Box>
+            </Tooltip>
     )
 }
 
