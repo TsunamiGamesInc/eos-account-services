@@ -41,6 +41,14 @@ export async function GenerateKey() {
     });
 }
 
+/* export default function GetAccountInfo({ recieverName }) {
+    return (
+        (async () => {
+            await rpc.get_account(recieverName)
+        })
+    );
+} */
+
 /* export default function CreateAccount({ receiverName }) {
     return (
         (async () => {

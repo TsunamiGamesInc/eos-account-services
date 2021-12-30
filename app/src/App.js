@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { Typography } from "@material-ui/core";
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import NavBar from './components/NavBar';
-import CreateAccount from './components/CreateAccount';
 import './App.css';
+
+import Home from './routes/Home';
+import CreateToken from './routes/CreateToken';
+import Resources from './routes/Resources';
+import CreateNFT from './routes/CreateNFT';
+import VanityKeys from './routes/VanityKeys';
+import Checkout from './routes/Checkout';
+import CreateAccount from './routes/CreateAccount';
 
 const theme = createTheme({
   palette: {
@@ -58,36 +63,34 @@ function App() {
 
   return (
     <div className="App">
-       <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <Typography component={'span'}>
-          <Grid container spacing={4} justifyContent="center">
-            <Grid item xl={2} display={{ xs: 'none', xl: 'block' }} />
-            <Grid item display={{ xs: 'none', lg: 'block' }}>
-              <Box sx={{ width: '250px' }}>
-                <NavBar totalPrice={totalPrice} />
-              </Box>
-            </Grid>
-            <Grid item xl={6}>
-              <Box sx={{ width: '525px', display: { xs: 'none', sm: 'block' } }}>
-                <CreateAccount
-                  value={value} setValue={setValue} valueR={valueR} setValueR={setValueR}
-                  totalPrice={totalPrice} validName={validName} setValidName={setValidName}
-                  keyPair={keyPair}
-                />
-              </Box>
-              <Box sx={{ width: '480px', display: { xs: 'block', sm: 'none' } }}>
-                <CreateAccount
-                  value={value} setValue={setValue} valueR={valueR} setValueR={setValueR}
-                  totalPrice={totalPrice} validName={validName} setValidName={setValidName}
-                  keyPair={keyPair}
-                />
-              </Box>
-            </Grid>
-          </Grid>
+          <BrowserRouter>
+            <Routes>
+              {/* <Route path="/" element={<Home />} /> */}
+              <Route path="/" element={
+                  <CreateAccount
+                    value={value} setValue={setValue} valueR={valueR} setValueR={setValueR}
+                    totalPrice={totalPrice} validName={validName} setValidName={setValidName}
+                    keyPair={keyPair} />
+                } />
+              <Route path="/create-account" element={
+                  <CreateAccount
+                    value={value} setValue={setValue} valueR={valueR} setValueR={setValueR}
+                    totalPrice={totalPrice} validName={validName} setValidName={setValidName}
+                    keyPair={keyPair} />
+                } />
+{/*               <Route path="/create-token" element={<CreateToken />} />
+              <Route path="/resources" element={<Resources />} />
+              <Route path="/create-nft" element={<CreateNFT />} />
+              <Route path="/vanity-keys" element={<VanityKeys />} />
+              <Route path="/checkout" element={<Checkout />} /> */}
+            </Routes>
+          </BrowserRouter>
         </Typography>
-      </ThemeProvider >
+      </ThemeProvider>
     </div >
-  );
+  )
 }
 
 export default App;

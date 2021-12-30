@@ -6,6 +6,7 @@ import CustomSliders from './CustomSliders';
 import { RecommendedButton, CustomButtonSmall, CheckoutButton } from './CustomButtons';
 import CustomCheckBox from './CustomCheckbox';
 import { GenerateKey } from './EOSFunctions';
+import { Link } from 'react-router-dom';
 
 let recieverKey;
 
@@ -52,7 +53,9 @@ export default function ValidNameComponentsOne({ value, setValue, valueR, setVal
                 <CustomCheckBox scaledLabel="I have saved my password and understand it cannot be recovered" />
             </Grid>
             <Grid item xs={12}>
-                <CheckoutButton txt={"Pay " + totalPrice} />
+                <Link to="/checkout" style={{ textDecoration: 'none' }}>
+                    <CheckoutButton txt={"Pay " + totalPrice} />
+                </Link>
             </Grid>
         </>
     );
