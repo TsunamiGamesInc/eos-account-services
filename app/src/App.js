@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import { Typography } from "@material-ui/core";
+import { Typography } from '@material-ui/core';
+import { Helmet } from 'react-helmet';
 import './App.css';
 
 import Home from './routes/Home';
@@ -66,21 +67,33 @@ function App() {
       <ThemeProvider theme={theme}>
         <Typography component={'span'}>
           <BrowserRouter>
+            <Helmet>
+              <title>EOS Account Services</title>
+              <meta
+                name="description"
+                content="Get the easiest and cheapest EOS account creation, premium names, custom cryptocurrency tokens, 
+              NFTs, and EOS resources, all with a credit card."
+              />
+              <meta
+                name="keywords"
+                content="EOS Account Creator, Premium Names, Create Custom Token, Create NFTs, Vanity Keys, Credit Card"
+              />
+            </Helmet>
             <Routes>
               {/* <Route path="/" element={<Home />} /> */}
               <Route path="/" element={
-                  <CreateAccount
-                    value={value} setValue={setValue} valueR={valueR} setValueR={setValueR}
-                    totalPrice={totalPrice} validName={validName} setValidName={setValidName}
-                    keyPair={keyPair} />
-                } />
+                <CreateAccount
+                  value={value} setValue={setValue} valueR={valueR} setValueR={setValueR}
+                  totalPrice={totalPrice} validName={validName} setValidName={setValidName}
+                  keyPair={keyPair} />
+              } />
               <Route path="/create-account" element={
-                  <CreateAccount
-                    value={value} setValue={setValue} valueR={valueR} setValueR={setValueR}
-                    totalPrice={totalPrice} validName={validName} setValidName={setValidName}
-                    keyPair={keyPair} />
-                } />
-{/*               <Route path="/create-token" element={<CreateToken />} />
+                <CreateAccount
+                  value={value} setValue={setValue} valueR={valueR} setValueR={setValueR}
+                  totalPrice={totalPrice} validName={validName} setValidName={setValidName}
+                  keyPair={keyPair} />
+              } />
+              {/*               <Route path="/create-token" element={<CreateToken />} />
               <Route path="/resources" element={<Resources />} />
               <Route path="/create-nft" element={<CreateNFT />} />
               <Route path="/vanity-keys" element={<VanityKeys />} />
