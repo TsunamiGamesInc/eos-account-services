@@ -46,8 +46,8 @@ function App() {
   const [valueR, setValueR] = React.useState(5);
   const [accountName, setAccountName] = React.useState("");
   const [validName, setValidName] = React.useState(false);
+  const [recieverPubKey, setRecieverPubKey] = React.useState("Error, please do not proceed.");
 
-  let keyPair;
   let eosPrice = 6;
   let fees = 0.5;
   const formatter = new Intl.NumberFormat('en-US', {
@@ -86,13 +86,13 @@ function App() {
                 <CreateAccount
                   value={value} setValue={setValue} valueR={valueR} setValueR={setValueR}
                   totalPrice={totalPrice} accountName={accountName} setAccountName={setAccountName}
-                  validName={validName} setValidName={setValidName} keyPair={keyPair} />
+                  validName={validName} setValidName={setValidName} setRecieverPubKey={setRecieverPubKey} />
               } />
               <Route path="/app/create-account" element={
                 <CreateAccount
                   value={value} setValue={setValue} valueR={valueR} setValueR={setValueR}
                   totalPrice={totalPrice} accountName={accountName} setAccountName={setAccountName}
-                  validName={validName} setValidName={setValidName} keyPair={keyPair} />
+                  validName={validName} setValidName={setValidName} setRecieverPubKey={setRecieverPubKey} />
               } />
               {/*               <Route path="/create-token" element={<CreateToken />} />
               <Route path="/resources" element={<Resources />} />

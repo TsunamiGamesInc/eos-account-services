@@ -1,25 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { SliderTextField } from './CustomTextField';
 import CustomSliders from './CustomSliders';
 import { RecommendedButton, CustomButtonSmall, CheckoutButton } from './CustomButtons';
 import CustomCheckBox from './CustomCheckbox';
-import GetAccountInfo, { GenerateKey } from './EOSFunctions';
+import { GenerateKey } from './EosClient';
 import ConditionalLink from './ConditionalLink';
 import CustomAlert from './CustomAlert';
 
-let recieverKey = "Error, please do not proceed.";
-
-GenerateKey()
-
-export function SetKeyValue(keyPromise) {
-    recieverKey = keyPromise
-}
-
-export default function ValidNameComponentsOne({ value, setValue, valueR, setValueR, valueMirror, valueMirrorR, totalPrice }) {
+export default function ValidNameComponentsOne({ value, setValue, valueR, setValueR, valueMirror, valueMirrorR, setRecieverPubKey, totalPrice }) {
     const [keyCopied, setKeyCopied] = React.useState(false);
     const [open, setOpen] = React.useState(false);
+    const [recieverPrivKey, setRecieverPrivKey] = React.useState("Error! Please do not proceed.");
+
+    useEffect(() => {
+        GenerateKey({ setRecieverPrivKey, setRecieverPubKey })
+    }, [setRecieverPrivKey, setRecieverPubKey])
 
     return (
         <>
@@ -48,7 +45,7 @@ export default function ValidNameComponentsOne({ value, setValue, valueR, setVal
                 <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}> Private Key/Password </p>
             </Grid>
             <Grid item xs={12}>
-                <CustomButtonSmall txt={recieverKey} />
+                <CustomButtonSmall txt={recieverPrivKey} />
             </Grid>
             <Grid item xs={12}>
                 <Box sx={{ height: '1vh' }} />

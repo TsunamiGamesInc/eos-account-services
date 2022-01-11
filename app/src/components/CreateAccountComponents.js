@@ -5,7 +5,7 @@ import CustomTextField from './CustomTextField';
 import ValidName, { ValidNameComponentsTwo } from './ValidName.js'
 
 export default function CreateAccountComponents({ value, setValue, valueR, setValueR,
-    accountName, setAccountName, validName, setValidName, totalPrice }) {
+    accountName, setAccountName, validName, setValidName, setRecieverPubKey, totalPrice }) {
     let valueMirror = value;
     let valueMirrorR = valueR;
 
@@ -43,7 +43,7 @@ export default function CreateAccountComponents({ value, setValue, valueR, setVa
                 {validName &&
                     <ValidName
                         value={value} setValue={setValue} valueR={valueR} setValueR={setValueR} totalPrice={totalPrice}
-                        valueMirror={valueMirror} valueMirrorR={valueMirrorR}
+                        valueMirror={valueMirror} valueMirrorR={valueMirrorR} setRecieverPubKey={setRecieverPubKey}
                     />}
             </Grid>
             {validName &&

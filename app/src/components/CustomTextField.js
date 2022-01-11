@@ -6,7 +6,7 @@ import { ReactComponent as CheckIconMd } from '../images/check-icon-md.svg';
 import { ReactComponent as CloseIconMd } from '../images/close-icon-md.svg';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
-import GetAccountInfo from './EOSFunctions';
+import GetAccountInfo from './EosClient';
 
 const StyledTextField = withStyles({
     root: {
@@ -50,6 +50,7 @@ let closeIconMd =
 export default function CustomTextField({ accountName, setAccountName, setValidName }) {
     const [error, setError] = useState("");
     const [icon, setIcon] = useState(null)
+    const [tooltipTitle, setTooltipTitle] = useState("Exactly 12 characters (a-z, 1-5)")
 
     const onChange = (e) => {
         const newValue = e.target.value;
@@ -67,18 +68,20 @@ export default function CustomTextField({ accountName, setAccountName, setValidN
         if (accountNameLength === 0) {
             setIcon(null)
             setValidName(false)
+            setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
         }
         else if (accountNameLength === 12) {
-            GetAccountInfo(newValue, setIcon, checkIconMd, closeIconMd, setValidName)
+            GetAccountInfo(newValue, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle)
         }
         else {
             setIcon(closeIconMd)
             setValidName(false)
+            setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
         }
     };
 
     return (
-        <Tooltip title="Exactly 12 characters (a-z, 1-5)" placement="right">
+        <Tooltip title={tooltipTitle} placement="right">
             <Box sx={{ height: '50px' }}>
                 <StyledTextField
                     variant="outlined"
