@@ -1,0 +1,10 @@
+{
+	"deployment": {
+		"name": "eos_functions",
+		"stack": "node14",
+		"type": "advancedio"
+	},
+	"execution": {
+		"main": "index.js"
+	}
+}

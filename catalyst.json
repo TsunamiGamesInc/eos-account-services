@@ -1,0 +1,12 @@
+{
+  "functions": {
+    "targets": [
+      "eos_functions"
+    ],
+    "ignore": [],
+    "source": "functions"
+  },
+  "client": {
+    "source": "app/build"
+  }
+}

@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import NavBar from '../components/NavBar';
 import CreateAccountComponents from '../components/CreateAccountComponents';
 
-export default function CreateAccount({ value, setValue, valueR, setValueR, validName, setValidName, totalPrice }) {
+export default function CreateAccount({ value, setValue, valueR, setValueR, accountName, setAccountName, validName, setValidName, totalPrice }) {
     return (
         <Grid container spacing={4} justifyContent="center">
             <Grid item xl={2} display={{ xs: 'none', xl: 'block' }} />
@@ -17,13 +17,15 @@ export default function CreateAccount({ value, setValue, valueR, setValueR, vali
                 <Box sx={{ width: '525px', display: { xs: 'none', sm: 'block' } }}>
                     <CreateAccountComponents
                         value={value} setValue={setValue} valueR={valueR} setValueR={setValueR}
-                        totalPrice={totalPrice} validName={validName} setValidName={setValidName}
+                        totalPrice={totalPrice} accountName={accountName} setAccountName={setAccountName}
+                        validName={validName} setValidName={setValidName}
                     />
                 </Box>
-                <Box sx={{ width: '480px', display: { xs: 'block', sm: 'none' } }}>
+                <Box sx={{ zoom: '55%', width: '525px', display: { xs: 'block', sm: 'none' } }}>
                     <CreateAccountComponents
                         value={value} setValue={setValue} valueR={valueR} setValueR={setValueR}
-                        totalPrice={totalPrice} validName={validName} setValidName={setValidName}
+                        totalPrice={totalPrice} accountName={accountName} setAccountName={setAccountName}
+                        validName={validName} setValidName={setValidName}
                     />
                 </Box>
             </Grid>

@@ -1,7 +1,7 @@
-import React from 'react';
-import { Button } from '@material-ui/core';
+import React, { useEffect, useRef } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Tooltip from '@mui/material/Tooltip';
+import { Button } from '@material-ui/core';
 import { SvgIcon } from '@mui/material';
 import { ReactComponent as CheckIconSm } from '../images/check-icon-sm.svg';
 import { ReactComponent as CloseIconSm } from '../images/close-icon-sm.svg';
@@ -30,12 +30,12 @@ const StyledButton = withStyles({
     }
 })(Button);
 
-const StyledButtonNoTopBorder = withStyles({
+/* const StyledButtonNoTopBorder = withStyles({
     root:
     {
         borderTop: 0
     }
-})(StyledButton);
+})(StyledButton); */
 
 const StyledRecommendedButton = withStyles({
     root: {
@@ -122,23 +122,28 @@ export function CustomButtonNoRipple(props) {
 
 export function CustomButtonSmall(props) {
     const [text, setText] = React.useState("Click to copy");
-    const [canClick, setClick] = React.useState(true);
-
-    function defaultText() {
-        setText("Click to copy")
-        setClick(true)
-    }
+    const [canClick, setCanClick] = React.useState(true);
+    const timer = useRef();
 
     function ChangeText() {
-        if (text === "Click to copy") {
+        if (canClick) {
+            navigator.clipboard.writeText(props.txt)
+            setCanClick(false)
             setText("Copied")
-            setClick(false)
-            setTimeout(defaultText, 2000)
-        }
-        else {
-            setText("Click to copy")
+            timer.current = setTimeout(RevertText, 3000)
         }
     }
+
+    function RevertText() {
+        setText("Click to copy")
+        setCanClick(true)
+    }
+
+    useEffect(() => {
+        return () => {
+            clearTimeout(timer.current)
+        }
+    }, [])
 
     return (
         <Tooltip
@@ -146,12 +151,7 @@ export function CustomButtonSmall(props) {
             placement="top-end">
             <StyledButton
                 variant="outlined"
-                onClick={() => {
-                    if (canClick) {
-                        ChangeText()
-                        navigator.clipboard.writeText(props.txt)
-                    }
-                }}
+                onClick={ChangeText}
                 style={{
                     height: '16px',
                     padding: "16px 50px",
@@ -161,9 +161,16 @@ export function CustomButtonSmall(props) {
     );
 }
 
-export function CheckoutButton(props) {
+export function CheckoutButton({ children, keyCopied, setOpen }) {
+    const handleClick = () => {
+        if (!keyCopied) {
+            setOpen(true)
+        }
+    }
+
     return (
-        <StyledButton variant="outlined" style={{ backgroundColor: '#0083FF' }} onClick={null}>
-            {props.txt}</StyledButton>
+        <StyledButton variant="outlined" style={{ backgroundColor: '#0083FF' }} onClick={handleClick}>
+            {children}
+        </StyledButton>
     );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { TextField } from '@material-ui/core';
 import { SvgIcon } from '@mui/material';
@@ -6,6 +6,7 @@ import { ReactComponent as CheckIconMd } from '../images/check-icon-md.svg';
 import { ReactComponent as CloseIconMd } from '../images/close-icon-md.svg';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
+import GetAccountInfo from './EOSFunctions';
 
 const StyledTextField = withStyles({
     root: {
@@ -37,8 +38,6 @@ const StyledTextField = withStyles({
     }
 })(TextField);
 
-let accountNameLength;
-let icon;
 let checkIconMd =
     <SvgIcon>
         <CheckIconMd />
@@ -48,40 +47,39 @@ let closeIconMd =
         <CloseIconMd />
     </SvgIcon>;
 
-export default function CustomTextField({ setValidName }) {
-    const [accountName, setAccountName] = useState("");
+export default function CustomTextField({ accountName, setAccountName, setValidName }) {
     const [error, setError] = useState("");
+    const [icon, setIcon] = useState(null)
 
     const onChange = (e) => {
         const newValue = e.target.value;
-        let checkNameLength = e.target.value.length;
+        let accountNameLength = e.target.value.length;
 
-        if (!newValue.match(/[!@#$%^&*()-+`~|{}[:;"'<>,.06789\]\=\-\_\?\/\ \\]/)) {
+        if (!newValue.match(/[!@#$%^&*()-+`~|{}[:;"'<>,.06789\]=\-_?/ \\]/)) {
             setError("")
             setAccountName(newValue)
         }
         else {
             setError("a-z, 1-5 only")
-            checkNameLength--;
+            accountNameLength--;
         }
 
-        accountNameLength = checkNameLength;
-    };
-
-    useEffect(() => {
-        if (accountNameLength === 12) {
-            icon = checkIconMd
-            setValidName(true)
-        }
-        else {
-            icon = closeIconMd
+        if (accountNameLength === 0) {
+            setIcon(null)
             setValidName(false)
         }
-    })
+        else if (accountNameLength === 12) {
+            GetAccountInfo(newValue, setIcon, checkIconMd, closeIconMd, setValidName)
+        }
+        else {
+            setIcon(closeIconMd)
+            setValidName(false)
+        }
+    };
 
     return (
         <Tooltip title="Exactly 12 characters (a-z, 1-5)" placement="right">
-                <Box sx={{ height: '50px' }}>
+            <Box sx={{ height: '50px' }}>
                 <StyledTextField
                     variant="outlined"
                     label="Choose an account name!"
@@ -99,8 +97,8 @@ export default function CustomTextField({ setValidName }) {
                         }
                     }}
                 />
-        </Box>
-            </Tooltip>
+            </Box>
+        </Tooltip>
     )
 }
 
@@ -109,7 +107,7 @@ export function SliderTextField({ setValue, valueMirror, maxValue, endAdornmentT
         const newSliderTextFieldValue = e.target.value;
 
         if (!newSliderTextFieldValue.match(
-            /[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-+`~|{}[:;"'<>,.\]\=\-\_\?\/\ \\]/
+            /[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-+`~|{}[:;"'<>,.\]=\-_?/ \\]/
         )) {
             if (newSliderTextFieldValue === "") {
                 valueMirror = ""

@@ -6,7 +6,7 @@ import { SvgIcon } from '@mui/material';
 import { ReactComponent as CheckboxBlankSm } from '../images/checkbox-blank-sm.svg'
 import { ReactComponent as CheckboxMarkedSm } from '../images/checkbox-marked-sm.svg'
 
-export default function CustomCheckBox({ scaledLabel }) {
+export default function CustomCheckBox({ scaledLabel, keyCopied, setKeyCopied }) {
     return (
         <FormGroup>
             <FormControlLabel
@@ -20,6 +20,7 @@ export default function CustomCheckBox({ scaledLabel }) {
                             <SvgIcon>
                                 <CheckboxMarkedSm />
                             </SvgIcon>}
+                        onChange={() => {setKeyCopied(!keyCopied)}}
                     />
                 }
                 label={<p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontFamily: 'Calibri', fontSize: 12 }}>{scaledLabel}</p>}

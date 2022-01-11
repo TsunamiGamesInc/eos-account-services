@@ -4,7 +4,8 @@ import Box from '@mui/material/Box';
 import CustomTextField from './CustomTextField';
 import ValidName, { ValidNameComponentsTwo } from './ValidName.js'
 
-export default function CreateAccountComponents({ value, setValue, valueR, setValueR, validName, setValidName, totalPrice }) {
+export default function CreateAccountComponents({ value, setValue, valueR, setValueR,
+    accountName, setAccountName, validName, setValidName, totalPrice }) {
     let valueMirror = value;
     let valueMirrorR = valueR;
 
@@ -15,7 +16,7 @@ export default function CreateAccountComponents({ value, setValue, valueR, setVa
                     <Box sx={{ height: '15vh', backgroundColor: 'transparent' }} />
                 </Grid>
                 <Grid item xs={12}>
-                    <CustomTextField setValidName={setValidName} />
+                    <CustomTextField accountName={accountName} setAccountName={setAccountName} setValidName={setValidName} />
                 </Grid>
                 <Grid item xs={12}>
                     <Box sx={{ height: '1vh' }} />

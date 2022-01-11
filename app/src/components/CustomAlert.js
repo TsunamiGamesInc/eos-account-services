@@ -1,0 +1,45 @@
+import React from 'react';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+
+export default function CustomAlert({ open, setOpen }) {
+    const handleClose = (e, reason) => {
+        setOpen(false)
+    }
+
+    if (open) {
+        return (
+            <Grid container>
+                <Grid item xs={1.75} />
+                <Grid item xs={10} container>
+                    <Snackbar
+                        style={{
+                            position: 'inherit'
+                        }}
+                        open={open}
+                        onClose={handleClose}
+                        autoHideDuration={3000}>
+                        <Alert
+                            severity="error"
+                            style={{
+                                fontFamily: 'Calibri',
+                                borderRadius: '10px',
+                                blockSize: '20px',
+                                padding: '0px 10px 15px 10px',
+                                fontSize: '15px'
+                            }}>
+                            Save this key - it cannot be recovered!
+                        </Alert>
+                    </Snackbar>
+                </Grid>
+            </Grid>
+        );
+    }
+    else {
+        return (
+            <Box sx={{ height: '2.7vh' }} />
+        );
+    }
+}

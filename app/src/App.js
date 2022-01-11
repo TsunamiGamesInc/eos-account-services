@@ -5,11 +5,11 @@ import { Typography } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
 import './App.css';
 
-import Home from './routes/Home';
+/* import Home from './routes/Home';
 import CreateToken from './routes/CreateToken';
 import Resources from './routes/Resources';
 import CreateNFT from './routes/CreateNFT';
-import VanityKeys from './routes/VanityKeys';
+import VanityKeys from './routes/VanityKeys';*/
 import Checkout from './routes/Checkout';
 import CreateAccount from './routes/CreateAccount';
 
@@ -44,6 +44,7 @@ const theme = createTheme({
 function App() {
   const [value, setValue] = React.useState(5);
   const [valueR, setValueR] = React.useState(5);
+  const [accountName, setAccountName] = React.useState("");
   const [validName, setValidName] = React.useState(false);
 
   let keyPair;
@@ -76,28 +77,28 @@ function App() {
               />
               <meta
                 name="keywords"
-                content="EOS Account Creator, Premium Names, Create Custom Token, Create NFTs, Vanity Keys, Credit Card"
+                content="EOS Account Creator, Premium Names, Create Custom Token, Create NFTs, Vanity Keys, Credit Card, Free"
               />
             </Helmet>
             <Routes>
               {/* <Route path="/" element={<Home />} /> */}
-              <Route path="/" element={
+              <Route path="/app" element={
                 <CreateAccount
                   value={value} setValue={setValue} valueR={valueR} setValueR={setValueR}
-                  totalPrice={totalPrice} validName={validName} setValidName={setValidName}
-                  keyPair={keyPair} />
+                  totalPrice={totalPrice} accountName={accountName} setAccountName={setAccountName}
+                  validName={validName} setValidName={setValidName} keyPair={keyPair} />
               } />
-              <Route path="/create-account" element={
+              <Route path="/app/create-account" element={
                 <CreateAccount
                   value={value} setValue={setValue} valueR={valueR} setValueR={setValueR}
-                  totalPrice={totalPrice} validName={validName} setValidName={setValidName}
-                  keyPair={keyPair} />
+                  totalPrice={totalPrice} accountName={accountName} setAccountName={setAccountName}
+                  validName={validName} setValidName={setValidName} keyPair={keyPair} />
               } />
               {/*               <Route path="/create-token" element={<CreateToken />} />
               <Route path="/resources" element={<Resources />} />
               <Route path="/create-nft" element={<CreateNFT />} />
-              <Route path="/vanity-keys" element={<VanityKeys />} />
-              <Route path="/checkout" element={<Checkout />} /> */}
+              <Route path="/vanity-keys" element={<VanityKeys />} /> */}
+              <Route path="/app/checkout" element={<Checkout />} />
             </Routes>
           </BrowserRouter>
         </Typography>

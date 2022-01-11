@@ -5,10 +5,11 @@ import { SliderTextField } from './CustomTextField';
 import CustomSliders from './CustomSliders';
 import { RecommendedButton, CustomButtonSmall, CheckoutButton } from './CustomButtons';
 import CustomCheckBox from './CustomCheckbox';
-import { GenerateKey } from './EOSFunctions';
-import { Link } from 'react-router-dom';
+import GetAccountInfo, { GenerateKey } from './EOSFunctions';
+import ConditionalLink from './ConditionalLink';
+import CustomAlert from './CustomAlert';
 
-let recieverKey;
+let recieverKey = "Error, please do not proceed.";
 
 GenerateKey()
 
@@ -17,6 +18,9 @@ export function SetKeyValue(keyPromise) {
 }
 
 export default function ValidNameComponentsOne({ value, setValue, valueR, setValueR, valueMirror, valueMirrorR, totalPrice }) {
+    const [keyCopied, setKeyCopied] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
+
     return (
         <>
             <Grid item xs={12} container>
@@ -47,15 +51,20 @@ export default function ValidNameComponentsOne({ value, setValue, valueR, setVal
                 <CustomButtonSmall txt={recieverKey} />
             </Grid>
             <Grid item xs={12}>
-                <Box sx={{ height: '3vh' }} />
+                <Box sx={{ height: '1vh' }} />
             </Grid>
             <Grid item xs={12}>
-                <CustomCheckBox scaledLabel="I have saved my password and understand it cannot be recovered" />
+                <CustomAlert open={open} setOpen={setOpen} />
             </Grid>
             <Grid item xs={12}>
-                <Link to="/checkout" style={{ textDecoration: 'none' }}>
-                    <CheckoutButton txt={"Pay " + totalPrice} />
-                </Link>
+                <CustomCheckBox keyCopied={keyCopied} setKeyCopied={setKeyCopied} scaledLabel="I have saved my password and understand it cannot be recovered" />
+            </Grid>
+            <Grid item xs={12}>
+                <ConditionalLink to="/app/checkout" condition={keyCopied}>
+                    <CheckoutButton keyCopied={keyCopied} setOpen={setOpen}>
+                        {"Pay " + totalPrice}
+                    </CheckoutButton>
+                </ConditionalLink>
             </Grid>
         </>
     );
