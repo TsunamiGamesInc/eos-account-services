@@ -7,9 +7,9 @@ import './App.css';
 
 /* import Home from './routes/Home';
 import CreateToken from './routes/CreateToken';
-import Resources from './routes/Resources';
 import CreateNFT from './routes/CreateNFT';
 import VanityKeys from './routes/VanityKeys';*/
+import Resources from './routes/Resources';
 import Checkout from './routes/Checkout';
 import CreateAccount from './routes/CreateAccount';
 
@@ -48,7 +48,7 @@ function App() {
   const [validName, setValidName] = React.useState(false);
   const [recieverPubKey, setRecieverPubKey] = React.useState("Error, please do not proceed.");
 
-  let eosPrice = 6;
+  let eosPrice = 10;
   let fees = 0.5;
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -56,11 +56,14 @@ function App() {
   });
   let totalPrice;
 
-  if (validName) {
-    totalPrice = formatter.format(((eosPrice * 0.2) + 0.1) + (eosPrice * value) + (eosPrice * 0.3 * valueR) + fees) + " USD"
+  if (!validName && window.location.href.match("account")) {
+    totalPrice = formatter.format((eosPrice * 0.2) + 0.1) + " USD"  
+  }
+  if (!validName && window.location.href.match("resources")) {
+    totalPrice = "$0.00 USD"  
   }
   else {
-    totalPrice = formatter.format((eosPrice * 0.2) + 0.1) + " USD"
+    totalPrice = formatter.format(((eosPrice * 0.2) + 0.1) + (eosPrice * value) + (eosPrice * 0.3 * valueR) + fees) + " USD"
   }
 
   return (
@@ -96,9 +99,13 @@ function App() {
                   validName={validName} setValidName={setValidName}
                   setRecieverPubKey={setRecieverPubKey} totalPrice={totalPrice} />
               } />
-              {/*               <Route path="/create-token" element={<CreateToken />} />
-              <Route path="/resources" element={<Resources />} />
-              <Route path="/create-nft" element={<CreateNFT />} />
+              {/* <Route path="/create-token" element={<CreateToken />} /> */}
+              <Route path="/app/resources" element={<Resources
+                value={value} setValue={setValue} valueR={valueR} setValueR={setValueR}
+                accountName={accountName} setAccountName={setAccountName}
+                validName={validName} setValidName={setValidName}
+                totalPrice={totalPrice} />} />
+              {/* <Route path="/create-nft" element={<CreateNFT />} />
               <Route path="/vanity-keys" element={<VanityKeys />} /> */}
               <Route path="/app/checkout" element={
                 <Checkout

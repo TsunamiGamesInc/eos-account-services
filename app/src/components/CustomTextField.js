@@ -6,7 +6,7 @@ import { ReactComponent as CheckIconMd } from '../images/check-icon-md.svg';
 import { ReactComponent as CloseIconMd } from '../images/close-icon-md.svg';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
-import GetAccountInfo from './EosClient';
+import GetAccountInfo, { CheckExistingName } from './EosClient';
 
 const StyledTextField = withStyles({
     root: {
@@ -86,6 +86,64 @@ export default function CustomTextField({ accountName, setAccountName, setValidN
                 <StyledTextField
                     variant="outlined"
                     label="Choose an account name!"
+                    value={accountName}
+                    onChange={onChange}
+                    helperText={error}
+                    error={!!error}
+                    InputProps={{
+                        endAdornment: icon,
+                    }}
+                    inputProps={{
+                        maxLength: 12,
+                        style: {
+                            textTransform: 'lowercase',
+                        }
+                    }}
+                />
+            </Box>
+        </Tooltip>
+    )
+}
+
+export function ResourcesTextField({ accountName, setAccountName, setValidName }) {
+    const [error, setError] = useState("");
+    const [icon, setIcon] = useState(null)
+    const [tooltipTitle, setTooltipTitle] = useState("Type your account name!")
+
+    const onChange = (e) => {
+        const newValue = e.target.value;
+        let accountNameLength = e.target.value.length;
+
+        if (!newValue.match(/[!@#$%^&*()-+`~|{}[:;"'<>,06789\]=\-_?/ \\]/)) {
+            setError("")
+            setAccountName(newValue)
+        }
+        else {
+            setError("a-z, 1-5 only")
+            accountNameLength--;
+        }
+
+        if (accountNameLength === 0) {
+            setIcon(null)
+            setValidName(false)
+            setTooltipTitle("Type your account name!")
+        }
+        else if ((accountNameLength === 12) || (newValue.includes("."))) {
+            CheckExistingName(newValue, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle)
+        }
+        else {
+            setIcon(closeIconMd)
+            setValidName(false)
+            setTooltipTitle("That account doesn't exist!")
+        }
+    };
+
+    return (
+        <Tooltip title={tooltipTitle} placement="right">
+            <Box sx={{ height: '50px' }}>
+                <StyledTextField
+                    variant="outlined"
+                    label="Enter your account name!"
                     value={accountName}
                     onChange={onChange}
                     helperText={error}

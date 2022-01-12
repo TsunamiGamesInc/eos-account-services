@@ -1,23 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import { SliderTextField } from './CustomTextField';
-import CustomSliders from './CustomSliders';
-import { RecommendedButton, CustomButtonSmall, CheckoutButton } from './CustomButtons';
-import CustomCheckBox from './CustomCheckbox';
-import { GenerateKey } from './EosClient';
-import ConditionalLink from './ConditionalLink';
-import CustomAlert from './CustomAlert';
+import { SliderTextField } from '../CustomTextField';
+import CustomSliders from '../CustomSliders';
+import { RecommendedButton, CheckoutButton } from '../CustomButtons';
+import CustomCheckBox from '../CustomCheckbox';
+import ConditionalLink from '../ConditionalLink';
+import CustomAlert from '../CustomAlert';
 
-export default function ValidNameComponentsOne({
-    value, setValue, valueR, setValueR, valueMirror, valueMirrorR, setRecieverPubKey, totalPrice }) {
+export default function ResourcesValidNameComponentsOne({
+    value, setValue, valueR, setValueR, valueMirror, valueMirrorR, totalPrice }) {
     const [keyCopied, setKeyCopied] = React.useState(false);
     const [open, setOpen] = React.useState(false);
-    const [recieverPrivKey, setRecieverPrivKey] = React.useState("Error! Please do not proceed.");
-
-    useEffect(() => {
-        GenerateKey({ setRecieverPrivKey, setRecieverPubKey })
-    }, [setRecieverPrivKey, setRecieverPubKey])
 
     return (
         <>
@@ -42,15 +36,6 @@ export default function ValidNameComponentsOne({
             <Grid item xs={12}>
                 <Box sx={{ height: '1vh' }} />
             </Grid>
-            <Grid item xs={12}>
-                <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}> Private Key/Password </p>
-            </Grid>
-            <Grid item xs={12}>
-                <CustomButtonSmall txt={recieverPrivKey} />
-            </Grid>
-            <Grid item xs={12}>
-                <Box sx={{ height: '1vh' }} />
-            </Grid>
             {!open &&
                 <Grid item xs={12}>
                     <Box sx={{ height: '35px' }} />
@@ -58,11 +43,11 @@ export default function ValidNameComponentsOne({
             }
             {open &&
                 <Grid item xs={12}>
-                    <CustomAlert open={open} setOpen={setOpen} text={"Save this key - it cannot be recovered!"} />
+                    <CustomAlert open={open} setOpen={setOpen} text={"Check you typed the name correctly!"} />
                 </Grid>
             }
             <Grid item xs={12}>
-                <CustomCheckBox keyCopied={keyCopied} setKeyCopied={setKeyCopied} scaledLabel="I have saved my password and understand it cannot be recovered" />
+                <CustomCheckBox keyCopied={keyCopied} setKeyCopied={setKeyCopied} scaledLabel="My account name is correct and I understand this can't be refunded" />
             </Grid>
             <Grid item xs={12}>
                 <ConditionalLink to="/app/checkout" condition={keyCopied}>
@@ -75,7 +60,7 @@ export default function ValidNameComponentsOne({
     );
 }
 
-export function ValidNameComponentsTwo({ setValue, setValueR, valueMirror, valueMirrorR }) {
+export function ResourcesValidNameComponentsTwo({ setValue, setValueR, valueMirror, valueMirrorR }) {
     return (
         <>
             <Grid item xs={2.5} container>

@@ -4,7 +4,7 @@ import Alert from '@mui/material/Alert';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-export default function CustomAlert({ open, setOpen }) {
+export default function CustomAlert({ open, setOpen, text }) {
     const handleClose = (e, reason) => {
         setOpen(false)
     }
@@ -30,7 +30,7 @@ export default function CustomAlert({ open, setOpen }) {
                                 padding: '0px 10px 15px 10px',
                                 fontSize: '15px'
                             }}>
-                            Save this key - it cannot be recovered!
+                            {text}
                         </Alert>
                     </Snackbar>
                 </Grid>
