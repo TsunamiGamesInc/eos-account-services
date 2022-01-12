@@ -1,241 +1,43 @@
 var express = require('express');
 var app = express();
-app.use(express.json());
-var catalyst = require('zcatalyst-sdk-node');
+//const path = require('path');
+//var catalyst = require('zcatalyst-sdk-node');
 
 var declareModule = require('/JS Projects/eos-account-services/functions/eos_functions/declare');
 var api = declareModule.api;
 
-//const fs = require('fs');
-const path = require('path');
+app.use(express.json());
 
-/* const eosIconPath = path.resolve('../../client/eos_icon.svg')
-const logoPath = path.resolve('../../client/logo192.png')
-const manifestPath = path.resolve('../../client/manifest.json');
-const indexPath = path.resolve('../../client/index.html') */
-/* const cssChunkPath = path.resolve('../../client/static/css/main.d6ec0740.chunk.css');
-const cssChunkMapPath = path.resolve('../../client/static/css/main.d6ec0740.chunk.css.map');
-const jsChunkOnePath = path.resolve('../../client/static/js/2.3f6a6e29.chunk.js')
-const jsChunkOneMapPath = path.resolve('../../client/static/js/2.3f6a6e29.chunk.js.map')
-const jsChunkTwoPath = path.resolve('../../client/static/js/main.08ad643f.chunk.js')
-const jsChunkTwoMapPath = path.resolve('../../client/static/js/main.08ad643f.chunk.js.map')
-const backgroundPath = path.resolve('../../client/static/media/background.1bfa5595.webp')
-
-/* app.get('/eos_icon.svg', function (req, res) {
-	return (
-		res.sendFile(eosIconPath)
-	);
+app.post('/createAccount', async (req, res) => {
+    createAccount()
+        .then(buyRAM(req.accountName, req.valueR))
+        .then(transferEOS(req.accountName, req.value))
+        .then(buyRAM('ipfkoutwqois', 128))
+        .then(result => {
+            res.send(result)
+        }).catch(err => {
+            sendErrorResponse(res)
+        })
 })
 
-app.get('/logo192.png', function (req, res) {
-	return (
-		res.sendFile(logoPath)
-	);
-})
-
-app.get('/manifest.json', function (req, res) {
-	return (
-		res.sendFile(manifestPath)
-	);
+/* app.post('/transfer', async (req, res) => {
+    transferEOS(req.accountName, req.value)
+        .then(result => {
+            res.send(result)
+        })
+        .catch(err => {
+            sendErrorResponse(res)
+        })
 }) */
-
-/* app.get('/static/css/main.d6ec0740.chunk.css', function (req, res) {
-	return (
-		res.sendFile(cssChunkPath)
-	);
-})
-
-app.get('/static/css/main.d6ec0740.chunk.css.map', function (req, res) {
-	return (
-		res.sendFile(cssChunkMapPath)
-	);
-})
-
-app.get('/static/js/2.3f6a6e29.chunk.js', function (req, res) {
-	return (
-		res.sendFile(jsChunkOnePath)
-	);
-})
-
-app.get('/static/js/2.3f6a6e29.chunk.js.map', function (req, res) {
-	return (
-		res.sendFile(jsChunkOneMapPath)
-	);
-})
-
-app.get('/static/js/main.08ad643f.chunk.js', function (req, res) {
-	return (
-		res.sendFile(jsChunkTwoPath)
-	);
-})
-
-app.get('/static/js/main.08ad643f.chunk.js.map', function (req, res) {
-	return (
-		res.sendFile(jsChunkTwoMapPath)
-	);
-})
-
-app.get('/static/js/main.08ad643f.chunk.js.map', function (req, res) {
-	return (
-		res.sendFile(jsChunkTwoMapPath)
-	);
-})
-
-app.get('/static/media/background.1bfa5595.webp', function (req, res) {
-	return (
-		res.sendFile(backgroundPath)
-	);
-}) */
-
-app.get('/createAccount', function (req, res) {
-	createAccount()
-		.then(buyRamBytes(newaccount, bytes))
-		.then(transferToken(receiver, quantity))
-		.then(buyRamBytes(self, bytes))
-		.then(result => {
-			res.send(result)
-		}).catch(err => {
-			sendErrorResponse(res)
-		})
-})
-
-app.get('/getCreatorKey', function (req, res) {
-	var catalystApp = catalyst.initialize(req);
-	getCreatorKeyFromDataStore(catalystApp).then(
-		creatorKey => {
-			res.send(creatorKey);
-		}
-	).catch(err => {
-		sendErrorResponse(res)
-	})
-})
-
-app.get('/transfer', function (req, res) {
-	transferToken().then(result => {
-		res.send(result)
-	}).catch(err => {
-		sendErrorResponse(res)
-	})
-})
-
-app.use('/static', express.static(path.resolve('../../client/static')))
-
-app.all(function (req, res, next) {
-	console.log("Called")
-	next()
-})
-
-app.get('*', function (req, res) {
-	res.sendFile(indexPath)
-})
-
-function getCreatorKeyFromDataStore(catalystApp) {
-	return new Promise((resolve, reject) => {
-		catalystApp.zcql().executeZCQLQuery("Select CreatorKey from creatorKey").then(queryResponse => {
-			resolve(queryResponse)
-		}).catch(err => {
-			reject(err)
-		})
-	});
-}
-
-async function createAccount() {
-	(async () => {
-		await api.transact({
-			actions: [{
-				account: 'eosio',
-				name: 'newaccount',
-				authorization: [{
-					actor: 'bunlrkvgqoby',
-					permission: 'active',
-				}],
-				data: {
-					creator: 'bunlrkvgqoby',
-					name: 'tsunamigames',
-					owner: {
-						threshold: 1,
-						keys: [{
-							key: 'publickey',
-							weight: 1
-						}],
-						accounts: [],
-						waits: []
-					},
-					active: {
-						threshold: 1,
-						keys: [{
-							key: 'publickey',
-							weight: 1
-						}],
-						accounts: [],
-						waits: []
-					}
-				}
-			}]
-		},
-			{
-				blocksBehind: 3,
-				expireSeconds: 30
-			});
-	})();
-};
-
-async function buyRamBytes(receiver, bytes) {
-	(async () => {
-		await api.transact({
-			actions: [{
-				account: 'eosio',
-				name: 'buyrambytes',
-				authorization: [{
-					actor: 'bunlrkvgqoby',
-					permission: 'active',
-				}],
-				data: {
-					payer: 'bunlrkvgqoby',
-					receiver: receiver,
-					bytes: bytes
-				}
-			}]
-		}, {
-			blocksBehind: 3,
-			expireSeconds: 30,
-
-		})
-	})();
-};
-
-async function transferToken() {
-	(async () => {
-		await api.transact({
-			actions: [{
-				account: 'ipfkoutwqois',
-				name: 'transfer',
-				authorization: [{
-					actor: 'bunlrkvgqoby',
-					permission: 'active',
-				}],
-				data: {
-					from: 'bunlrkvgqoby',
-					to: 'ipfkoutwqois',
-					quantity: '0.0001 NEET',
-					memo: 'working'
-				}
-			}]
-		}, {
-			blocksBehind: 3,
-			expireSeconds: 30
-		});
-	})();
-};
 
 function sendErrorResponse(res) {
-	res.status(500);
-	res.send({
-		"error": "There was an error."
-	});
+    res.status(500);
+    res.send({
+        "error": "There was an error, please contact info@eosaccountservices.com"
+    });
 }
 
-/* export default function CreateAccount({ receiverName }) {
+export default function createAccount({ accountName, recieverPubKey }) {
     return (
         (async () => {
             await api.transact({
@@ -248,11 +50,11 @@ function sendErrorResponse(res) {
                     }],
                     data: {
                         creator: 'ipfkoutwqois',
-                        name: receiverName,
+                        name: accountName,
                         owner: {
                             threshold: 1,
                             keys: [{
-                                key: '',
+                                key: recieverPubKey,
                                 wight: 1
                             }],
                             accounts: [],
@@ -261,7 +63,7 @@ function sendErrorResponse(res) {
                         active: {
                             threshold: 1,
                             keys: [{
-                                key: '',
+                                key: recieverPubKey,
                                 wight: 1
                             }],
                             accounts: [],
@@ -277,7 +79,7 @@ function sendErrorResponse(res) {
     );
 }
 
-export function BuyRAM({ receiverName, bytesToBuy }) {
+export function buyRAM({ accountName, valueR }) {
     return (
         (async () => {
             await api.transact({
@@ -290,8 +92,8 @@ export function BuyRAM({ receiverName, bytesToBuy }) {
                     }],
                     data: {
                         payer: 'ipfkoutwqois',
-                        receiver: receiverName,
-                        bytes: bytesToBuy
+                        receiver: accountName,
+                        bytes: valueR
                     }
                 }]
             }, {
@@ -302,7 +104,7 @@ export function BuyRAM({ receiverName, bytesToBuy }) {
     );
 }
 
-export function TransferEOS({ receiverName, eosQuantity }) {
+export function transferEOS({ accountName, value }) {
     return (
         (async () => {
             await api.transact({
@@ -315,8 +117,8 @@ export function TransferEOS({ receiverName, eosQuantity }) {
                     }],
                     data: {
                         from: 'ipfkoutwqois',
-                        to: receiverName,
-                        quantity: eosQuantity + " EOS",
+                        to: accountName,
+                        quantity: value + " EOS",
                         memo: ''
                     }
                 }]
@@ -328,7 +130,7 @@ export function TransferEOS({ receiverName, eosQuantity }) {
     );
 }
 
-export function DeployContract({ receiverName }) {
+/* export function deployContract({ accountName, wasmHexString, serializedAbiHexString }) {
     return (
         (async () => {
             await api.transact({
@@ -343,7 +145,7 @@ export function DeployContract({ receiverName }) {
                             },
                         ],
                         data: {
-                            account: receiverName,
+                            account: accountName,
                             vmtype: '0',
                             vmversion: '0',
                             code: wasmHexString
@@ -359,7 +161,7 @@ export function DeployContract({ receiverName }) {
                             },
                         ],
                         data: {
-                            account: receiverName,
+                            account: accountName,
                             abi: serializedAbiHexString
                         },
                     },
@@ -373,7 +175,7 @@ export function DeployContract({ receiverName }) {
     );
 }
 
-export function MintToken({ receiverName, maxTokenSupply, tokenName }) {
+export function mintToken({ accountName, maxTokenSupply, tokenName }) {
     return (
         (async () => {
             await api.transact({
@@ -387,7 +189,7 @@ export function MintToken({ receiverName, maxTokenSupply, tokenName }) {
                         },
                         ],
                         data: {
-                            issuer: receiverName,
+                            issuer: accountName,
                             maximum_supply: maxTokenSupply + " " + tokenName
                         },
                     },

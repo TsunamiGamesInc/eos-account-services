@@ -85,20 +85,25 @@ function App() {
               <Route path="/app" element={
                 <CreateAccount
                   value={value} setValue={setValue} valueR={valueR} setValueR={setValueR}
-                  totalPrice={totalPrice} accountName={accountName} setAccountName={setAccountName}
-                  validName={validName} setValidName={setValidName} setRecieverPubKey={setRecieverPubKey} />
+                  accountName={accountName} setAccountName={setAccountName}
+                  validName={validName} setValidName={setValidName}
+                  setRecieverPubKey={setRecieverPubKey} totalPrice={totalPrice} />
               } />
               <Route path="/app/create-account" element={
                 <CreateAccount
                   value={value} setValue={setValue} valueR={valueR} setValueR={setValueR}
-                  totalPrice={totalPrice} accountName={accountName} setAccountName={setAccountName}
-                  validName={validName} setValidName={setValidName} setRecieverPubKey={setRecieverPubKey} />
+                  accountName={accountName} setAccountName={setAccountName}
+                  validName={validName} setValidName={setValidName}
+                  setRecieverPubKey={setRecieverPubKey} totalPrice={totalPrice} />
               } />
               {/*               <Route path="/create-token" element={<CreateToken />} />
               <Route path="/resources" element={<Resources />} />
               <Route path="/create-nft" element={<CreateNFT />} />
               <Route path="/vanity-keys" element={<VanityKeys />} /> */}
-              <Route path="/app/checkout" element={<Checkout />} />
+              <Route path="/app/checkout" element={
+                <Checkout
+                  accountName={accountName} recieverPubKey={recieverPubKey}
+                  value={value} valueR={valueR} totalPrice={totalPrice} />} />
             </Routes>
           </BrowserRouter>
         </Typography>

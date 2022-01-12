@@ -1,19 +1,25 @@
 import React from 'react';
-import CustomButton from '../components/CustomButtons';
 
-export default function Checkout() {
+export default function Checkout({ accountName, recieverPubKey, value, valueR, totalPrice }) {
+    function TransferToken() {
+        const postData = {
+            accountName: accountName,
+            recieverPubKey: recieverPubKey,
+            value: value,
+            valueR: valueR,
+            totalPrice: totalPrice
+        };
+
+        fetch('/server/eos_functions/createAccount', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postData)
+        })
+    }
+
     return (
-        <>
-            <CustomButton onClick={TransferToken} txt="Transfer" />
-            <p>Testing</p>
-            <button onClick={TransferToken}>Silly</button>
-        </>
+        <button onClick={TransferToken}>Process Payment</button>
     );
-}
-
-function TransferToken() {
-    fetch('/server/eos_functions/transfer', {
-        method: 'GET'
-    })
-        .then(data => console.log(data));
 }

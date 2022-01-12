@@ -1,4 +1,4 @@
-import { JsonRpc } from 'eosjs';
+/* import { JsonRpc } from 'eosjs';
 import { ecc } from 'eosjs/dist/eosjs-ecc-migration';
 
 const endpoint = 'https://api.testnet.eos.io';
@@ -28,4 +28,17 @@ export default async function GetAccountInfo(recieverName, setIcon, checkIconMd,
             setValidName(true)
             setTooltipTitle("Name is available!")
         });
+} */
+
+//just for testing catalyst functions without building eosjs everytime
+
+export async function GenerateKey({ setRecieverPrivKey, setRecieverPubKey }) {
+    setRecieverPrivKey("hello comrade")
+    setRecieverPubKey("hello general")
+}
+
+export default async function GetAccountInfo(recieverName, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle) {
+    setIcon(checkIconMd)
+    setValidName(true)
+    setTooltipTitle("Name is available!")
 }
