@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import { SliderTextField } from './CustomTextField';
+import { SliderTextField } from './CustomTextFields';
 import CustomSliders from './CustomSliders';
 import { RecommendedButton, CustomButtonSmall, CheckoutButton } from './CustomButtons';
 import CustomCheckBox from './CustomCheckbox';
 import { GenerateKey } from './EosClient';
 import ConditionalLink from './ConditionalLink';
-import CustomAlert from './CustomAlert';
+import CustomAlert from './CustomAlerts';
 
 export default function ValidNameComponentsOne({
     value, setValue, valueR, setValueR, valueMirror, valueMirrorR, setRecieverPubKey, totalPrice }) {

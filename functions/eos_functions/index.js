@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.post('/createAccount', async (req, res) => {
     createAccount()
-        .then(buyRAM(req.accountName, req.valueR))
+        .then(buyRAM(req.accountName, (req.valueR * 1000)))
         .then(transferEOS(req.accountName, req.value))
         .then(buyRAM('ipfkoutwqois', 128))
         .then(result => {

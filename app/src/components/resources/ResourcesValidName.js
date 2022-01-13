@@ -1,12 +1,12 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import { SliderTextField } from '../CustomTextField';
+import { SliderTextField } from '../CustomTextFields';
 import CustomSliders from '../CustomSliders';
 import { RecommendedButton, CheckoutButton } from '../CustomButtons';
 import CustomCheckBox from '../CustomCheckbox';
 import ConditionalLink from '../ConditionalLink';
-import CustomAlert from '../CustomAlert';
+import CustomAlert from '../CustomAlerts';
 
 export default function ResourcesValidNameComponentsOne({
     value, setValue, valueR, setValueR, valueMirror, valueMirrorR, totalPrice }) {

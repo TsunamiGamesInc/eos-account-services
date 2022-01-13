@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import { ResourcesTextField } from '../CustomTextField';
+import { ResourcesTextField } from '../CustomTextFields';
 import ResourcesValidName, { ResourcesValidNameComponentsTwo } from './ResourcesValidName.js'
 
 export default function ResourcesComponents({ value, setValue, valueR, setValueR,

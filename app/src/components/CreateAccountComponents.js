@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import CustomTextField from './CustomTextField';
+import CustomTextField from './CustomTextFields';
 import ValidName, { ValidNameComponentsTwo } from './ValidName.js'
 
 export default function CreateAccountComponents({ value, setValue, valueR, setValueR,
