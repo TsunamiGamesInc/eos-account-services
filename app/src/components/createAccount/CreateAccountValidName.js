@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import { SliderTextField } from './CustomTextFields';
-import CustomSliders from './CustomSliders';
-import { RecommendedButton, CustomButtonSmall, CheckoutButton } from './CustomButtons';
-import CustomCheckBox from './CustomCheckbox';
-import { GenerateKey } from './EosClient';
-import ConditionalLink from './ConditionalLink';
-import CustomAlert from './CustomAlerts';
+import { SliderTextField } from '../CustomTextFields';
+import CustomSliders from '../CustomSliders';
+import { RecommendedButton, CustomButtonSmall, CheckoutButton } from '../CustomButtons';
+import CustomCheckBox from '../CustomCheckbox';
+import { GenerateKey } from '../EosClient';
+import ConditionalLink from '../ConditionalLink';
+import CustomAlert from '../CustomAlerts';
 
 export default function ValidNameComponentsOne({
-    value, setValue, valueR, setValueR, valueMirror, valueMirrorR, setRecieverPubKey, totalPrice }) {
+    eosQuantity, setEosQuantity, ramQuantity, setRamQuantity, eosQuantityMirror, ramQuantityMirror, setRecieverPubKey, totalPrice }) {
     const [keyCopied, setKeyCopied] = React.useState(false);
     const [open, setOpen] = React.useState(false);
     const [recieverPrivKey, setRecieverPrivKey] = React.useState("Error! Please do not proceed.");
@@ -27,17 +27,17 @@ export default function ValidNameComponentsOne({
                     <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 18 }}> EOS </p>
                 </Grid>
                 <Grid item xs={5.25}>
-                    <RecommendedButton value={value} setValue={setValue} valueR={valueR} setValueR={setValueR} />
+                    <RecommendedButton eosQuantity={eosQuantity} setEosQuantity={setEosQuantity} ramQuantity={ramQuantity} setRamQuantity={setRamQuantity} />
                 </Grid>
             </Grid>
             <Grid item xs={12}>
-                <CustomSliders value={value} setValue={setValue} valueMirror={valueMirror} />
+                <CustomSliders value={eosQuantity} setValue={setEosQuantity} valueMirror={eosQuantityMirror} />
             </Grid>
             <Grid item xs={12}>
                 <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 18 }}> RAM </p>
             </Grid>
             <Grid item xs={12}>
-                <CustomSliders value={valueR} setValue={setValueR} valueMirror={valueMirrorR} />
+                <CustomSliders value={ramQuantity} setValue={setRamQuantity} valueMirror={ramQuantityMirror} />
             </Grid>
             <Grid item xs={12}>
                 <Box sx={{ height: '1vh' }} />
@@ -62,7 +62,7 @@ export default function ValidNameComponentsOne({
                 </Grid>
             }
             <Grid item xs={12}>
-                <CustomCheckBox keyCopied={keyCopied} setKeyCopied={setKeyCopied} scaledLabel="I have saved my password and understand it cannot be recovered" />
+                <CustomCheckBox keyCopied={keyCopied} setKeyCopied={setKeyCopied} label="I have saved my password and understand it cannot be recovered" />
             </Grid>
             <Grid item xs={12}>
                 <ConditionalLink to="/app/checkout" condition={keyCopied}>
@@ -75,7 +75,7 @@ export default function ValidNameComponentsOne({
     );
 }
 
-export function ValidNameComponentsTwo({ setValue, setValueR, valueMirror, valueMirrorR }) {
+export function ValidNameComponentsTwo({ setEosQuantity, setRamQuantity, eosQuantityMirror, ramQuantityMirror }) {
     return (
         <>
             <Grid item xs={2.5} container>
@@ -91,10 +91,10 @@ export function ValidNameComponentsTwo({ setValue, setValueR, valueMirror, value
                             <Box sx={{ height: '112px' }}>
                                 <Grid container spacing={4}>
                                     <Grid item xs={12}>
-                                        <SliderTextField setValue={setValue} valueMirror={valueMirror} maxValue={10} endAdornmentText="EOS" />
+                                        <SliderTextField setValue={setEosQuantity} valueMirror={eosQuantityMirror} maxValue={10} endAdornmentText="EOS" />
                                     </Grid>
                                     <Grid item xs={12}>
-                                        <SliderTextField setValue={setValueR} valueMirror={valueMirrorR} maxValue={999} endAdornmentText="KB" />
+                                        <SliderTextField setValue={setRamQuantity} valueMirror={ramQuantityMirror} maxValue={999} endAdornmentText="KB" />
                                     </Grid>
                                 </Grid>
                             </Box>

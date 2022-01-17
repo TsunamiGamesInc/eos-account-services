@@ -1,11 +1,12 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import CustomButtons, { CustomButtonNoRipple } from './CustomButtons';
+import CustomButtons, { CustomButtonNoTopBorder, CustomButtonNoRipple } from './CustomButtons';
 import IconButton from '@mui/material/IconButton';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { InfoAlert } from './CustomAlerts';
+import { Link } from 'react-router-dom';
 
 export default function NavBar({ totalPrice }) {
     const [infoOpen, setInfoOpen] = React.useState(false);
@@ -26,7 +27,19 @@ export default function NavBar({ totalPrice }) {
                     <Box sx={{ height: '15vh' }} />
                 </Grid>
                 <Grid item xs={12}>
-                    <CustomButtons txt="Create Account" />
+                    <Link to="/app/create-account" style={{ textDecoration: 'none' }}>
+                        <CustomButtons txt="Create Account" />
+                    </Link>
+                </Grid>
+                <Grid item xs={12}>
+                    <Link to="/app/resources" style={{ textDecoration: 'none' }}>
+                        <CustomButtonNoTopBorder txt="Get Resources" />
+                    </Link>
+                </Grid>
+                <Grid item xs={12}>
+                    <Link to="/app/create-token" style={{ textDecoration: 'none' }}>
+                        <CustomButtonNoTopBorder txt="Create Custom Token" />
+                    </Link>
                 </Grid>
                 <Grid item xs={12}>
                     <Box sx={{ height: '5vh' }} />

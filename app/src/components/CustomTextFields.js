@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { TextField } from '@material-ui/core';
 import { SvgIcon } from '@mui/material';
@@ -52,9 +52,31 @@ export default function CustomTextField({ accountName, setAccountName, setValidN
     const [icon, setIcon] = useState(null)
     const [tooltipTitle, setTooltipTitle] = useState("Exactly 12 characters (a-z, 1-5)")
 
+    useEffect(() => {
+        if (accountName.includes("."))
+        {
+            let removeDot = accountName.replace('.','')
+            setAccountName(removeDot)
+        }
+
+        if (accountName.length === 0) {
+            setIcon(null)
+            setValidName(false)
+            setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
+        }
+        else if ((accountName.length < 12) && (icon !== closeIconMd)) {
+            setIcon(closeIconMd)
+            setValidName(false)
+            setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
+        }
+        else if ((accountName.length === 12) && (icon !== checkIconMd))
+        {
+            GetAccountInfo(accountName, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle)
+        }
+    }, [accountName, icon, setValidName, setAccountName])
+
     const onChange = (e) => {
         const newValue = e.target.value;
-        let accountNameLength = e.target.value.length;
 
         if (!newValue.match(/[!@#$%^&*()-+`~|{}[:;"'<>,.06789\]=\-_?/ \\]/)) {
             setError("")
@@ -62,21 +84,6 @@ export default function CustomTextField({ accountName, setAccountName, setValidN
         }
         else {
             setError("a-z, 1-5 only")
-            accountNameLength--;
-        }
-
-        if (accountNameLength === 0) {
-            setIcon(null)
-            setValidName(false)
-            setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
-        }
-        else if (accountNameLength === 12) {
-            GetAccountInfo(newValue, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle)
-        }
-        else {
-            setIcon(closeIconMd)
-            setValidName(false)
-            setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
         }
     };
 
@@ -110,9 +117,26 @@ export function ResourcesTextField({ accountName, setAccountName, setValidName }
     const [icon, setIcon] = useState(null)
     const [tooltipTitle, setTooltipTitle] = useState("Type your account name!")
 
+    useEffect(() => {
+        if (accountName.length === 0) {
+            setIcon(null)
+            setValidName(false)
+            setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
+        }
+        else if (((accountName.length < 12) && (!accountName.includes('.'))) && (icon !== closeIconMd)) {
+            setIcon(closeIconMd)
+            setValidName(false)
+            setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
+        }
+        else if (((accountName.length === 12) || (accountName.includes('.'))) && (icon !== checkIconMd))
+        {
+            CheckExistingName(accountName, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle)
+        }
+    }, [accountName, icon, setValidName, setAccountName])
+
+
     const onChange = (e) => {
         const newValue = e.target.value;
-        let accountNameLength = e.target.value.length;
 
         if (!newValue.match(/[!@#$%^&*()-+`~|{}[:;"'<>,06789\]=\-_?/ \\]/)) {
             setError("")
@@ -120,21 +144,6 @@ export function ResourcesTextField({ accountName, setAccountName, setValidName }
         }
         else {
             setError("a-z, 1-5 only")
-            accountNameLength--;
-        }
-
-        if (accountNameLength === 0) {
-            setIcon(null)
-            setValidName(false)
-            setTooltipTitle("Type your account name!")
-        }
-        else if ((accountNameLength === 12) || (newValue.includes("."))) {
-            CheckExistingName(newValue, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle)
-        }
-        else {
-            setIcon(closeIconMd)
-            setValidName(false)
-            setTooltipTitle("That account doesn't exist!")
         }
     };
 
@@ -198,4 +207,63 @@ export function SliderTextField({ setValue, valueMirror, maxValue, endAdornmentT
             }}
         />
     );
+}
+
+export function TokenTextField({ accountName, setAccountName, setValidName }) {
+    const [error, setError] = useState("");
+    const [icon, setIcon] = useState(null)
+    const [tooltipTitle, setTooltipTitle] = useState("3 to 7 characters, a-z only")
+
+    useEffect(() => {
+        if (accountName.length === 0) {
+            setIcon(null)
+            setValidName(false)
+            setTooltipTitle("3 to 7 characters, a-z only")
+        }
+        else if ((accountName.length < 12) && (icon !== closeIconMd)) {
+            setIcon(closeIconMd)
+            setValidName(false)
+            setTooltipTitle("3 to 7 characters, a-z only")
+        }
+        else if ((accountName.length === 12) && (icon !== checkIconMd))
+        {
+            GetAccountInfo(accountName, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle)
+        }
+    }, [accountName, icon, setValidName, setAccountName])
+
+    const onChange = (e) => {
+        const newValue = e.target.value;
+
+        if (!newValue.match(/[!@#$%^&*()-+`~|{}[:;"'<>,.0123456789\]=\-_?/ \\]/)) {
+            setError("")
+            setAccountName(newValue)
+        }
+        else {
+            setError("a-z= only")
+        }
+    };
+
+    return (
+        <Tooltip title={tooltipTitle} placement="right">
+            <Box sx={{ height: '50px' }}>
+                <StyledTextField
+                    variant="outlined"
+                    label="Choose a token name!"
+                    value={accountName}
+                    onChange={onChange}
+                    helperText={error}
+                    error={!!error}
+                    InputProps={{
+                        endAdornment: icon,
+                    }}
+                    inputProps={{
+                        maxLength: 12,
+                        style: {
+                            textTransform: 'lowercase',
+                        }
+                    }}
+                />
+            </Box>
+        </Tooltip>
+    )
 }

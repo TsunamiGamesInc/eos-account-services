@@ -30,12 +30,12 @@ const StyledButton = withStyles({
     }
 })(Button);
 
-/* const StyledButtonNoTopBorder = withStyles({
+const StyledButtonNoTopBorder = withStyles({
     root:
     {
         borderTop: 0
     }
-})(StyledButton); */
+})(StyledButton);
 
 const StyledRecommendedButton = withStyles({
     root: {
@@ -76,11 +76,11 @@ export default function CustomButton(props) {
 
 export function CustomButtonNoTopBorder(props) {
     return (
-        <StyledButton variant="outlined">{props.txt}</StyledButton>
+        <StyledButtonNoTopBorder variant="outlined">{props.txt}</StyledButtonNoTopBorder>
     );
 }
 
-export function RecommendedButton({ value, setValue, valueR, setValueR }) {
+export function RecommendedButton({ eosQuantity, setEosQuantity, ramQuantity, setRamQuantity }) {
     let recommendedIcon = null;
     let checkIcon =
         <SvgIcon>
@@ -91,7 +91,7 @@ export function RecommendedButton({ value, setValue, valueR, setValueR }) {
             <CloseIconSm />
         </SvgIcon>;
 
-    if ((value < 5) || (valueR < 5)) {
+    if ((eosQuantity < 5) || (ramQuantity < 5)) {
         recommendedIcon = closeIcon
     }
     else {
@@ -99,8 +99,8 @@ export function RecommendedButton({ value, setValue, valueR, setValueR }) {
     }
 
     function setRecommended() {
-        setValue(5)
-        setValueR(5)
+        setEosQuantity(5)
+        setRamQuantity(5)
         recommendedIcon = checkIcon
     }
 

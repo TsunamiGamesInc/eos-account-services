@@ -1,13 +1,13 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import CustomTextField from './CustomTextFields';
-import ValidName, { ValidNameComponentsTwo } from './ValidName.js'
+import { TokenTextField } from '../CustomTextFields';
+import CreateTokenValidName, { TokenValidNameComponentsTwo } from './CreateTokenValidName.js'
 
-export default function CreateAccountComponents({ value, setValue, valueR, setValueR,
+export default function CreateTokenComponents({ eosQuantity, setEosQuantity, ramQuantity, setRamQuantity,
     accountName, setAccountName, validName, setValidName, setRecieverPubKey, totalPrice }) {
-    let valueMirror = value;
-    let valueMirrorR = valueR;
+    let eosQuantityMirror = eosQuantity;
+    let ramQuantityMirror = ramQuantity;
 
     return (
         <Grid container spacing={3}>
@@ -16,7 +16,7 @@ export default function CreateAccountComponents({ value, setValue, valueR, setVa
                     <Box sx={{ height: '15vh', backgroundColor: 'transparent' }} />
                 </Grid>
                 <Grid item xs={12}>
-                    <CustomTextField accountName={accountName} setAccountName={setAccountName} setValidName={setValidName} />
+                    <TokenTextField accountName={accountName} setAccountName={setAccountName} setValidName={setValidName} />
                 </Grid>
                 <Grid item xs={12}>
                     <Box sx={{ height: '1vh' }} />
@@ -25,12 +25,12 @@ export default function CreateAccountComponents({ value, setValue, valueR, setVa
                     <Grid item xs={12} container spacing={0}>
                         <Grid item xs={12}>
                             <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16, padding: '12px 0px 0px 0px' }}>
-                                Getting started is as easy as choosing your name.
+                                Getting started is as easy as choosing your token name.
                             </p>
                         </Grid>
                         <Grid item xs={12}>
                             <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
-                                EOS names are 12 characters long (A through Z, 1 through 5).
+                                EOS token names are 3 to 7 characters long (A through Z only).
                             </p>
                         </Grid>
                         <Grid item xs={12}>
@@ -41,15 +41,18 @@ export default function CreateAccountComponents({ value, setValue, valueR, setVa
                     </Grid>
                 }
                 {validName &&
-                    <ValidName
-                        value={value} setValue={setValue} valueR={valueR} setValueR={setValueR} totalPrice={totalPrice}
-                        valueMirror={valueMirror} valueMirrorR={valueMirrorR} setRecieverPubKey={setRecieverPubKey}
+                    <CreateTokenValidName
+                        eosQuantity={eosQuantity} setEosQuantity={setEosQuantity}
+                        ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
+                        eosQuantityMirror={eosQuantityMirror} ramQuantityMirror={ramQuantityMirror}
+                        setRecieverPubKey={setRecieverPubKey} totalPrice={totalPrice}
                     />}
             </Grid>
             {validName &&
-                <ValidNameComponentsTwo
-                    value={value} setValue={setValue} valueR={valueR} setValueR={setValueR} valueMirror={valueMirror}
-                    valueMirrorR={valueMirrorR}
+                <TokenValidNameComponentsTwo
+                    eosQuantity={eosQuantity} setEosQuantity={setEosQuantity}
+                    ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
+                    eosQuantityMirror={eosQuantityMirror} ramQuantityMirror={ramQuantityMirror}
                 />}
         </Grid >
     );

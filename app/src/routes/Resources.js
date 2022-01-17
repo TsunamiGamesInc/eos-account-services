@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import NavBar from '../components/NavBar';
 import ResourcesComponents from '../components/resources/ResourcesComponents';
 
-export default function Resources({ value, setValue, valueR, setValueR,
-    accountName, setAccountName, validName, setValidName, totalPrice }) {
+export default function Resources({ eosQuantity, setEosQuantity, ramQuantity, setRamQuantity,
+    accountName, setAccountName, validName, setValidName, totalPrice, setTotalPrice }) {
+
+    useEffect(() => {
+        const formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD'
+        });
+        let resourcesPrice;
+
+        if (!validName) {
+            resourcesPrice = formatter.format(0) + " USD"
+        }
+        else {
+            resourcesPrice = formatter.format((10 * eosQuantity) + (10 * 0.3 * ramQuantity)) + " USD"
+        }
+        setTotalPrice(resourcesPrice)
+    }, [validName, eosQuantity, ramQuantity, setTotalPrice])
+
     return (
         <Grid container spacing={4} justifyContent="center">
             <Grid item xl={2} display={{ xs: 'none', xl: 'block' }} />
@@ -17,16 +34,20 @@ export default function Resources({ value, setValue, valueR, setValueR,
             <Grid item xl={6}>
                 <Box sx={{ width: '525px', display: { xs: 'none', sm: 'block' } }}>
                     <ResourcesComponents
-                        value={value} setValue={setValue} valueR={valueR} setValueR={setValueR}
-                        totalPrice={totalPrice} accountName={accountName} setAccountName={setAccountName}
+                        eosQuantity={eosQuantity} setEosQuantity={setEosQuantity}
+                        ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
+                        accountName={accountName} setAccountName={setAccountName}
                         validName={validName} setValidName={setValidName}
+                        totalPrice={totalPrice}
                     />
                 </Box>
                 <Box sx={{ zoom: '55%', width: '525px', display: { xs: 'block', sm: 'none' } }}>
                     <ResourcesComponents
-                        value={value} setValue={setValue} valueR={valueR} setValueR={setValueR}
-                        totalPrice={totalPrice} accountName={accountName} setAccountName={setAccountName}
+                        eosQuantity={eosQuantity} setEosQuantity={setEosQuantity}
+                        ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
+                        accountName={accountName} setAccountName={setAccountName}
                         validName={validName} setValidName={setValidName}
+                        totalPrice={totalPrice}
                     />
                 </Box>
             </Grid>

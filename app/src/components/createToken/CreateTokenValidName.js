@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { SliderTextField } from '../CustomTextFields';
 import CustomSliders from '../CustomSliders';
-import { RecommendedButton, CheckoutButton } from '../CustomButtons';
+import { RecommendedButton, CustomButtonSmall, CheckoutButton } from '../CustomButtons';
 import CustomCheckBox from '../CustomCheckbox';
+import { GenerateKey } from '../EosClient';
 import ConditionalLink from '../ConditionalLink';
 import CustomAlert from '../CustomAlerts';
 
-export default function ResourcesValidNameComponentsOne({
-    eosQuantity, setEosQuantity, ramQuantity, setRamQuantity, eosQuantityMirror, ramQuantityMirror, totalPrice }) {
+export default function TokenValidNameComponentsOne({
+    eosQuantity, setEosQuantity, ramQuantity, setRamQuantity, eosQuantityMirror, ramQuantityMirror, setRecieverPubKey, totalPrice }) {
     const [keyCopied, setKeyCopied] = React.useState(false);
     const [open, setOpen] = React.useState(false);
+    const [recieverPrivKey, setRecieverPrivKey] = React.useState("Error! Please do not proceed.");
+
+    useEffect(() => {
+        GenerateKey({ setRecieverPrivKey, setRecieverPubKey })
+    }, [setRecieverPrivKey, setRecieverPubKey])
 
     return (
         <>
@@ -21,9 +27,7 @@ export default function ResourcesValidNameComponentsOne({
                     <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 18 }}> EOS </p>
                 </Grid>
                 <Grid item xs={5.25}>
-                    <RecommendedButton
-                        eosQuantity={eosQuantity} setEosQuantity={setEosQuantity}
-                        ramQuantity={ramQuantity} setRamQuantity={setRamQuantity} />
+                    <RecommendedButton eosQuantity={eosQuantity} setEosQuantity={setEosQuantity} ramQuantity={ramQuantity} setRamQuantity={setRamQuantity} />
                 </Grid>
             </Grid>
             <Grid item xs={12}>
@@ -38,6 +42,15 @@ export default function ResourcesValidNameComponentsOne({
             <Grid item xs={12}>
                 <Box sx={{ height: '1vh' }} />
             </Grid>
+            <Grid item xs={12}>
+                <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}> Private Key/Password </p>
+            </Grid>
+            <Grid item xs={12}>
+                <CustomButtonSmall txt={recieverPrivKey} />
+            </Grid>
+            <Grid item xs={12}>
+                <Box sx={{ height: '1vh' }} />
+            </Grid>
             {!open &&
                 <Grid item xs={12}>
                     <Box sx={{ height: '35px' }} />
@@ -45,11 +58,11 @@ export default function ResourcesValidNameComponentsOne({
             }
             {open &&
                 <Grid item xs={12}>
-                    <CustomAlert open={open} setOpen={setOpen} text={"Check you typed the name correctly!"} />
+                    <CustomAlert open={open} setOpen={setOpen} text={"Save this key - it cannot be recovered!"} />
                 </Grid>
             }
             <Grid item xs={12}>
-                <CustomCheckBox keyCopied={keyCopied} setKeyCopied={setKeyCopied} label="My account name is correct and I understand this can't be refunded" />
+                <CustomCheckBox keyCopied={keyCopied} setKeyCopied={setKeyCopied} label="I have saved my password and understand it cannot be recovered" />
             </Grid>
             <Grid item xs={12}>
                 <ConditionalLink to="/app/checkout" condition={keyCopied}>
@@ -62,7 +75,7 @@ export default function ResourcesValidNameComponentsOne({
     );
 }
 
-export function ResourcesValidNameComponentsTwo({ setEosQuantity, setRamQuantity, eosQuantityMirror, ramQuantityMirror }) {
+export function TokenValidNameComponentsTwo({ setEosQuantity, setRamQuantity, eosQuantityMirror, ramQuantityMirror }) {
     return (
         <>
             <Grid item xs={2.5} container>

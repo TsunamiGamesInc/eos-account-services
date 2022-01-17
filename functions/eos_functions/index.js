@@ -9,7 +9,7 @@ var api = declareModule.api;
 app.use(express.json());
 
 app.post('/createAccount', async (req, res) => {
-    createAccount()
+/*     createAccount()
         .then(buyRAM(req.accountName, (req.valueR * 1000)))
         .then(transferEOS(req.accountName, req.value))
         .then(buyRAM('ipfkoutwqois', 128))
@@ -17,7 +17,7 @@ app.post('/createAccount', async (req, res) => {
             res.send(result)
         }).catch(err => {
             sendErrorResponse(res)
-        })
+        }) */
 })
 
 /* app.post('/transfer', async (req, res) => {

@@ -48,8 +48,8 @@ export async function CheckExistingName(recieverName, setIcon, checkIconMd, clos
 //just for testing catalyst functions without building eosjs everytime
 
 export async function GenerateKey({ setRecieverPrivKey, setRecieverPubKey }) {
-    setRecieverPrivKey("hello comrade")
-    setRecieverPubKey("hello general")
+    setRecieverPrivKey("Hello Helcim")
+    setRecieverPubKey("Hello Helcim")
 }
 
 export default async function GetAccountInfo(recieverName, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle) {
