@@ -6,7 +6,7 @@ import { ReactComponent as CheckIconMd } from '../images/check-icon-md.svg';
 import { ReactComponent as CloseIconMd } from '../images/close-icon-md.svg';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
-import GetAccountInfo, { CheckExistingName } from './EosClient';
+import GetAccountInfo, { CheckExistingName, GetAccountInfoNoValid } from './EosClient';
 
 const StyledTextField = withStyles({
     root: {
@@ -93,6 +93,69 @@ export default function CustomTextField({ accountName, setAccountName, setValidN
                 <StyledTextField
                     variant="outlined"
                     label="Choose an account name!"
+                    value={accountName}
+                    onChange={onChange}
+                    helperText={error}
+                    error={!!error}
+                    InputProps={{
+                        endAdornment: icon,
+                    }}
+                    inputProps={{
+                        maxLength: 12,
+                        style: {
+                            textTransform: 'lowercase',
+                        }
+                    }}
+                />
+            </Box>
+        </Tooltip>
+    )
+}
+
+export function TokenAccountTextField({ accountName, setAccountName }) {
+    const [error, setError] = useState("");
+    const [icon, setIcon] = useState(null)
+    const [tooltipTitle, setTooltipTitle] = useState("Exactly 12 characters (a-z, 1-5)")
+
+    useEffect(() => {
+        if (accountName.includes("."))
+        {
+            let removeDot = accountName.replace('.','')
+            setAccountName(removeDot)
+        }
+
+        if (accountName.length === 0) {
+            setIcon(null)
+            setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
+        }
+        else if ((accountName.length < 12) && (icon !== closeIconMd)) {
+            setIcon(closeIconMd)
+            setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
+        }
+        else if ((accountName.length === 12) && (icon !== checkIconMd))
+        {
+            GetAccountInfoNoValid(accountName, setIcon, checkIconMd, closeIconMd, setTooltipTitle)
+        }
+    }, [accountName, icon, setAccountName])
+
+    const onChange = (e) => {
+        const newValue = e.target.value;
+
+        if (!newValue.match(/[!@#$%^&*()-+`~|{}[:;"'<>,.06789\]=\-_?/ \\]/)) {
+            setError("")
+            setAccountName(newValue)
+        }
+        else {
+            setError("a-z, 1-5 only")
+        }
+    };
+
+    return (
+        <Tooltip title={tooltipTitle} placement="right">
+            <Box sx={{ height: '50px' }}>
+                <StyledTextField
+                    variant="outlined"
+                    label="Choose a Super Admin name!"
                     value={accountName}
                     onChange={onChange}
                     helperText={error}
@@ -209,37 +272,39 @@ export function SliderTextField({ setValue, valueMirror, maxValue, endAdornmentT
     );
 }
 
-export function TokenTextField({ accountName, setAccountName, setValidName }) {
+export function TokenTextField({ tokenName, setTokenName, setValidName }) {
     const [error, setError] = useState("");
     const [icon, setIcon] = useState(null)
     const [tooltipTitle, setTooltipTitle] = useState("3 to 7 characters, a-z only")
 
     useEffect(() => {
-        if (accountName.length === 0) {
+        if (tokenName.length === 0) {
             setIcon(null)
             setValidName(false)
             setTooltipTitle("3 to 7 characters, a-z only")
         }
-        else if ((accountName.length < 12) && (icon !== closeIconMd)) {
+        else if ((tokenName.length < 3) && (icon !== closeIconMd)) {
             setIcon(closeIconMd)
             setValidName(false)
             setTooltipTitle("3 to 7 characters, a-z only")
         }
-        else if ((accountName.length === 12) && (icon !== checkIconMd))
+        else if ((tokenName.length >= 3) && (icon !== checkIconMd))
         {
-            GetAccountInfo(accountName, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle)
+            setIcon(checkIconMd)
+            setValidName(true)
+            setTooltipTitle("Token name available!")
         }
-    }, [accountName, icon, setValidName, setAccountName])
+    }, [tokenName, icon, setValidName, setTokenName])
 
     const onChange = (e) => {
         const newValue = e.target.value;
 
         if (!newValue.match(/[!@#$%^&*()-+`~|{}[:;"'<>,.0123456789\]=\-_?/ \\]/)) {
             setError("")
-            setAccountName(newValue)
+            setTokenName(newValue)
         }
         else {
-            setError("a-z= only")
+            setError("a-z only")
         }
     };
 
@@ -249,7 +314,7 @@ export function TokenTextField({ accountName, setAccountName, setValidName }) {
                 <StyledTextField
                     variant="outlined"
                     label="Choose a token name!"
-                    value={accountName}
+                    value={tokenName}
                     onChange={onChange}
                     helperText={error}
                     error={!!error}
@@ -257,7 +322,7 @@ export function TokenTextField({ accountName, setAccountName, setValidName }) {
                         endAdornment: icon,
                     }}
                     inputProps={{
-                        maxLength: 12,
+                        maxLength: 7,
                         style: {
                             textTransform: 'lowercase',
                         }

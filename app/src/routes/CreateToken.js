@@ -2,26 +2,26 @@ import React, { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import NavBar from '../components/NavBar';
-import CreateAccountComponents from '../components/createToken/CreateTokenComponents';
+import CreateTokenComponents from '../components/createToken/CreateTokenComponents';
 
-export default function CreateToken({ eosQuantity, setEosQuantity, ramQuantity, setRamQuantity,
-    accountName, setAccountName, validName, setValidName, setRecieverPubKey, totalPrice, setTotalPrice }) {
+export default function CreateToken({ tokenName, setTokenName, accountName, setAccountName,
+    validName, setValidName, setRecieverPubKey, totalPrice, setTotalPrice }) {
 
     useEffect(() => {
         const formatter = new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD'
         });
-        let accountPrice;
+        let tokenPrice;
 
         if (!validName) {
-            accountPrice = formatter.format(2.10) + " USD"
+            tokenPrice = formatter.format(200) + " USD"
         }
         else {
-            accountPrice = formatter.format((10 * 0.2 + 0.1) + (10 * eosQuantity) + (10 * 0.3 * ramQuantity) + 0.5) + " USD"
+            tokenPrice = formatter.format(200) + " USD"
         }
-        setTotalPrice(accountPrice)
-    }, [validName, eosQuantity, ramQuantity, setTotalPrice])
+        setTotalPrice(tokenPrice)
+    }, [validName, setTotalPrice])
 
     return (
         <Grid container spacing={4} justifyContent="center">
@@ -33,18 +33,16 @@ export default function CreateToken({ eosQuantity, setEosQuantity, ramQuantity, 
             </Grid>
             <Grid item xl={6}>
                 <Box sx={{ width: '525px', display: { xs: 'none', sm: 'block' } }}>
-                    <CreateAccountComponents
-                        eosQuantity={eosQuantity} setEosQuantity={setEosQuantity}
-                        ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
+                    <CreateTokenComponents
+                        tokenName={tokenName} setTokenName={setTokenName}
                         accountName={accountName} setAccountName={setAccountName}
                         validName={validName} setValidName={setValidName}
                         setRecieverPubKey={setRecieverPubKey} totalPrice={totalPrice}
                     />
                 </Box>
                 <Box sx={{ zoom: '55%', width: '525px', display: { xs: 'block', sm: 'none' } }}>
-                    <CreateAccountComponents
-                        eosQuantity={eosQuantity} setEosQuantity={setEosQuantity}
-                        ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
+                    <CreateTokenComponents
+                        tokenName={tokenName} setTokenName={setTokenName}
                         accountName={accountName} setAccountName={setAccountName}
                         validName={validName} setValidName={setValidName}
                         setRecieverPubKey={setRecieverPubKey} totalPrice={totalPrice}

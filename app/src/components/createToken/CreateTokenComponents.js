@@ -2,12 +2,10 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { TokenTextField } from '../CustomTextFields';
-import CreateTokenValidName, { TokenValidNameComponentsTwo } from './CreateTokenValidName.js'
+import CreateTokenValidName from './CreateTokenValidName.js'
 
-export default function CreateTokenComponents({ eosQuantity, setEosQuantity, ramQuantity, setRamQuantity,
-    accountName, setAccountName, validName, setValidName, setRecieverPubKey, totalPrice }) {
-    let eosQuantityMirror = eosQuantity;
-    let ramQuantityMirror = ramQuantity;
+export default function CreateTokenComponents({ tokenName, setTokenName, accountName, setAccountName,
+    validName, setValidName, setRecieverPubKey, totalPrice }) {
 
     return (
         <Grid container spacing={3}>
@@ -16,7 +14,7 @@ export default function CreateTokenComponents({ eosQuantity, setEosQuantity, ram
                     <Box sx={{ height: '15vh', backgroundColor: 'transparent' }} />
                 </Grid>
                 <Grid item xs={12}>
-                    <TokenTextField accountName={accountName} setAccountName={setAccountName} setValidName={setValidName} />
+                    <TokenTextField tokenName={tokenName} setTokenName={setTokenName} setValidName={setValidName} />
                 </Grid>
                 <Grid item xs={12}>
                     <Box sx={{ height: '1vh' }} />
@@ -42,18 +40,11 @@ export default function CreateTokenComponents({ eosQuantity, setEosQuantity, ram
                 }
                 {validName &&
                     <CreateTokenValidName
-                        eosQuantity={eosQuantity} setEosQuantity={setEosQuantity}
-                        ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
-                        eosQuantityMirror={eosQuantityMirror} ramQuantityMirror={ramQuantityMirror}
+                        tokenName={tokenName}
+                        accountName={accountName} setAccountName={setAccountName}
                         setRecieverPubKey={setRecieverPubKey} totalPrice={totalPrice}
                     />}
             </Grid>
-            {validName &&
-                <TokenValidNameComponentsTwo
-                    eosQuantity={eosQuantity} setEosQuantity={setEosQuantity}
-                    ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
-                    eosQuantityMirror={eosQuantityMirror} ramQuantityMirror={ramQuantityMirror}
-                />}
         </Grid >
     );
 }

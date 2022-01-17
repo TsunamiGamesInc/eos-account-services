@@ -1,46 +1,64 @@
 import React, { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import { SliderTextField } from '../CustomTextFields';
-import CustomSliders from '../CustomSliders';
-import { RecommendedButton, CustomButtonSmall, CheckoutButton } from '../CustomButtons';
+import { TokenAccountTextField } from '../CustomTextFields';
+import { CustomButtonSmall, CheckoutButton } from '../CustomButtons';
 import CustomCheckBox from '../CustomCheckbox';
 import { GenerateKey } from '../EosClient';
 import ConditionalLink from '../ConditionalLink';
 import CustomAlert from '../CustomAlerts';
 
-export default function TokenValidNameComponentsOne({
-    eosQuantity, setEosQuantity, ramQuantity, setRamQuantity, eosQuantityMirror, ramQuantityMirror, setRecieverPubKey, totalPrice }) {
+export default function TokenValidNameComponent({
+    tokenName, accountName, setAccountName, setRecieverPubKey, totalPrice }) {
     const [keyCopied, setKeyCopied] = React.useState(false);
     const [open, setOpen] = React.useState(false);
     const [recieverPrivKey, setRecieverPrivKey] = React.useState("Error! Please do not proceed.");
 
     useEffect(() => {
         GenerateKey({ setRecieverPrivKey, setRecieverPubKey })
-    }, [setRecieverPrivKey, setRecieverPubKey])
+        let suggestedName;
+        switch (tokenName.length) {
+            case 4:
+                suggestedName = tokenName + "tokenact"
+                break;
+            case 5:
+                suggestedName = tokenName + "tknacct"
+                break;
+            case 6:
+                suggestedName = tokenName + "tknact"
+                break;
+            case 7:
+                suggestedName = tokenName + "tknac"
+                break;
+            default:
+                suggestedName = tokenName + "tokenacct"
+        }
+        setAccountName(suggestedName)
+    }, [setRecieverPrivKey, setRecieverPubKey, tokenName, setAccountName])
 
     return (
         <>
-            <Grid item xs={12} container>
-                <Grid item xs={3.4} />
-                <Grid item xs={3} container justifyContent="flex-end">
-                    <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 18 }}> EOS </p>
-                </Grid>
-                <Grid item xs={5.25}>
-                    <RecommendedButton eosQuantity={eosQuantity} setEosQuantity={setEosQuantity} ramQuantity={ramQuantity} setRamQuantity={setRamQuantity} />
-                </Grid>
-            </Grid>
-            <Grid item xs={12}>
-                <CustomSliders value={eosQuantity} setValue={setEosQuantity} valueMirror={eosQuantityMirror} />
-            </Grid>
-            <Grid item xs={12}>
-                <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 18 }}> RAM </p>
-            </Grid>
-            <Grid item xs={12}>
-                <CustomSliders value={ramQuantity} setValue={setRamQuantity} valueMirror={ramQuantityMirror} />
-            </Grid>
             <Grid item xs={12}>
                 <Box sx={{ height: '1vh' }} />
+            </Grid>
+            <Grid item xs={12}>
+                <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
+                    Now let's make the account that will govern your token.
+                </p>
+            </Grid>
+            <Grid item xs={12}>
+                <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
+                    This new account will be the Super Admin for your token.
+                </p>
+            </Grid>
+            <Grid item xs={12}>
+                <Box sx={{ height: '2vh' }} />
+            </Grid>
+            <Grid item xs={12}>
+                <TokenAccountTextField accountName={accountName} setAccountName={setAccountName} />
+            </Grid>
+            <Grid item xs={12}>
+                <Box sx={{ height: '2vh' }} />
             </Grid>
             <Grid item xs={12}>
                 <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}> Private Key/Password </p>
@@ -71,37 +89,6 @@ export default function TokenValidNameComponentsOne({
                     </CheckoutButton>
                 </ConditionalLink>
             </Grid>
-        </>
-    );
-}
-
-export function TokenValidNameComponentsTwo({ setEosQuantity, setRamQuantity, eosQuantityMirror, ramQuantityMirror }) {
-    return (
-        <>
-            <Grid item xs={2.5} container>
-                <Box sx={{ width: '90px' }}>
-                    <Grid container>
-                        <Grid item xs={12}>
-                            <Box sx={{ height: '16vh' }} />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Box sx={{ height: '85px' }} />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Box sx={{ height: '112px' }}>
-                                <Grid container spacing={4}>
-                                    <Grid item xs={12}>
-                                        <SliderTextField setValue={setEosQuantity} valueMirror={eosQuantityMirror} maxValue={10} endAdornmentText="EOS" />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <SliderTextField setValue={setRamQuantity} valueMirror={ramQuantityMirror} maxValue={999} endAdornmentText="KB" />
-                                    </Grid>
-                                </Grid>
-                            </Box>
-                        </Grid>
-                    </Grid>
-                </Box>
-            </Grid >
         </>
     );
 }

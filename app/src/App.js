@@ -45,6 +45,7 @@ function App() {
   const [eosQuantity, setEosQuantity] = React.useState(5);
   const [ramQuantity, setRamQuantity] = React.useState(5);
   const [accountName, setAccountName] = React.useState("");
+  const [tokenName, setTokenName] = React.useState("");
   const [validName, setValidName] = React.useState(false);
   const [recieverPubKey, setRecieverPubKey] = React.useState("Error, please do not proceed.");
   const [totalPrice, setTotalPrice] = React.useState(0);
@@ -88,8 +89,7 @@ function App() {
               } />
               <Route path="/app/create-token" element={
                 <CreateToken
-                  eosQuantity={eosQuantity} setEosQuantity={setEosQuantity}
-                  ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
+                  tokenName={tokenName} setTokenName={setTokenName}
                   accountName={accountName} setAccountName={setAccountName}
                   validName={validName} setValidName={setValidName}
                   setRecieverPubKey={setRecieverPubKey}

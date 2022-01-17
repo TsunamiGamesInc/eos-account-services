@@ -30,6 +30,18 @@ export default async function GetAccountInfo(recieverName, setIcon, checkIconMd,
         });
 }
 
+export async function GetAccountInfoNoValid(recieverName, setIcon, checkIconMd, closeIconMd, setTooltipTitle) {
+    rpc.get_account(recieverName)
+        .then(() => {
+            setIcon(closeIconMd)
+            setTooltipTitle("Name is taken!")
+        })
+        .catch((err) => {
+            setIcon(checkIconMd)
+            setTooltipTitle("Name is available!")
+        });
+}
+
 export async function CheckExistingName(recieverName, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle) {
     rpc.get_account(recieverName)
         .then(() => {
@@ -55,6 +67,11 @@ export async function GenerateKey({ setRecieverPrivKey, setRecieverPubKey }) {
 export default async function GetAccountInfo(recieverName, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle) {
     setIcon(checkIconMd)
     setValidName(true)
+    setTooltipTitle("Name is available!")
+}
+
+export async function GetAccountInfoNoValid(recieverName, setIcon, checkIconMd, closeIconMd, setTooltipTitle) {
+    setIcon(checkIconMd)
     setTooltipTitle("Name is available!")
 }
 
