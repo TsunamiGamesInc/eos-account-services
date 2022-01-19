@@ -332,3 +332,56 @@ export function TokenTextField({ tokenName, setTokenName, setValidName }) {
         </Tooltip>
     )
 }
+
+export function VanityTextField({ vanityName, setVanityName, setValidName }) {
+    const [error, setError] = useState("");
+    const [icon, setIcon] = useState(null)
+    const [tooltipTitle, setTooltipTitle] = useState("1 to 5 characters (a-f, 0-9)")
+
+    useEffect(() => {
+        if (vanityName.length === 0) {
+            setIcon(null)
+            setValidName(false)
+            setTooltipTitle("1 to 5 characters (a-f, 0-9)")
+        }
+        else if ((vanityName.length > 0) && (icon !== checkIconMd))
+        {
+            setIcon(checkIconMd)
+            setValidName(true)
+            setTooltipTitle("Matching keys available!")
+        }
+    }, [vanityName, icon, setValidName, setVanityName])
+
+    const onChange = (e) => {
+        const newValue = e.target.value;
+
+        if (!newValue.match(/[ghijklmnopqrstuvwxyzGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-+`~|{}[:;"'<>,.\]=\-_?/ \\]/)) {
+            setError("")
+            setVanityName(newValue)
+        }
+        else {
+            setError("a-f, 0-9 only")
+        }
+    };
+
+    return (
+        <Tooltip title={tooltipTitle} placement="right">
+            <Box sx={{ height: '50px' }}>
+                <StyledTextField
+                    variant="outlined"
+                    label="Choose a prefix/suffix!"
+                    value={vanityName}
+                    onChange={onChange}
+                    helperText={error}
+                    error={!!error}
+                    InputProps={{
+                        endAdornment: icon,
+                    }}
+                    inputProps={{
+                        maxLength: 5,
+                    }}
+                />
+            </Box>
+        </Tooltip>
+    )
+}

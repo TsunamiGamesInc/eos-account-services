@@ -42,6 +42,11 @@ export default function NavBar({ totalPrice }) {
                     </Link>
                 </Grid>
                 <Grid item xs={12}>
+                    <Link to="/app/vanity-keys" style={{ textDecoration: 'none' }}>
+                        <CustomButtonNoTopBorder txt="Vanity Keys" />
+                    </Link>
+                </Grid>
+                <Grid item xs={12}>
                     <Box sx={{ height: '5vh' }} />
                 </Grid>
                 <Grid item xs={12}>

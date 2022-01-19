@@ -6,11 +6,11 @@ import { Helmet } from 'react-helmet';
 import './App.css';
 
 /* import Home from './routes/Home';
-import CreateNFT from './routes/CreateNFT';
-import VanityKeys from './routes/VanityKeys';*/
+import CreateNFT from './routes/CreateNFT';*/
 import CreateAccount from './routes/CreateAccount';
 import Resources from './routes/Resources';
 import CreateToken from './routes/CreateToken';
+import VanityKeys from './routes/VanityKeys';
 import Checkout from './routes/Checkout';
 
 const theme = createTheme({
@@ -100,8 +100,16 @@ function App() {
                 accountName={accountName} setAccountName={setAccountName}
                 validName={validName} setValidName={setValidName}
                 totalPrice={totalPrice} setTotalPrice={setTotalPrice} />} />
-              {/* <Route path="/create-nft" element={<CreateNFT />} />
-              <Route path="/vanity-keys" element={<VanityKeys />} /> */}
+              {/* <Route path="/create-nft" element={<CreateNFT />} />*/}
+              <Route path="/app/vanity-keys" element={
+                <VanityKeys
+                  eosQuantity={eosQuantity} setEosQuantity={setEosQuantity}
+                  ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
+                  accountName={accountName} setAccountName={setAccountName}
+                  validName={validName} setValidName={setValidName}
+                  setRecieverPubKey={setRecieverPubKey}
+                  totalPrice={totalPrice} setTotalPrice={setTotalPrice} />
+              } />
               <Route path="/app/checkout" element={
                 <Checkout
                   accountName={accountName} recieverPubKey={recieverPubKey}
