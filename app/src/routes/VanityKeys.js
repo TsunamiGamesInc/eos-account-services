@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import NavBar from '../components/NavBar';
 import VanityKeysComponents from '../components/vanityKeys/VanityKeysComponents';
 
-export default function VanityKeys({ validName, setValidName, setRecieverPubKey, totalPrice, setTotalPrice }) {
+export default function VanityKeys({ validName, setValidName, recieverPubKey, setRecieverPubKey, totalPrice, setTotalPrice }) {
 
     useEffect(() => {
         const formatter = new Intl.NumberFormat('en-US', {
@@ -31,16 +31,10 @@ export default function VanityKeys({ validName, setValidName, setRecieverPubKey,
                 </Box>
             </Grid>
             <Grid item xl={6}>
-                <Box sx={{ width: '525px', display: { xs: 'none', sm: 'block' } }}>
+                <Box sx={{ zoom: { xs: '55%', sm: '100%' }, width: '525px' }}>
                     <VanityKeysComponents
                         validName={validName} setValidName={setValidName}
-                        setRecieverPubKey={setRecieverPubKey} totalPrice={totalPrice}
-                    />
-                </Box>
-                <Box sx={{ zoom: '55%', width: '525px', display: { xs: 'block', sm: 'none' } }}>
-                    <VanityKeysComponents
-                        validName={validName} setValidName={setValidName}
-                        setRecieverPubKey={setRecieverPubKey} totalPrice={totalPrice}
+                        recieverPubKey={recieverPubKey} setRecieverPubKey={setRecieverPubKey} totalPrice={totalPrice}
                     />
                 </Box>
             </Grid>

@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import NavBar from '../components/NavBar';
 import ResourcesComponents from '../components/resources/ResourcesComponents';
 
-export default function Resources({ eosQuantity, setEosQuantity, ramQuantity, setRamQuantity,
+export default function Resources({ ramQuantity, setRamQuantity,
     accountName, setAccountName, validName, setValidName, totalPrice, setTotalPrice }) {
 
     useEffect(() => {
@@ -18,10 +18,10 @@ export default function Resources({ eosQuantity, setEosQuantity, ramQuantity, se
             resourcesPrice = formatter.format(0) + " USD"
         }
         else {
-            resourcesPrice = formatter.format((10 * eosQuantity) + (10 * 0.3 * ramQuantity)) + " USD"
+            resourcesPrice = formatter.format((10 * 0.3 * ramQuantity)) + " USD"
         }
         setTotalPrice(resourcesPrice)
-    }, [validName, eosQuantity, ramQuantity, setTotalPrice])
+    }, [validName, ramQuantity, setTotalPrice])
 
     return (
         <Grid container spacing={4} justifyContent="center">
@@ -32,18 +32,8 @@ export default function Resources({ eosQuantity, setEosQuantity, ramQuantity, se
                 </Box>
             </Grid>
             <Grid item xl={6}>
-                <Box sx={{ width: '525px', display: { xs: 'none', sm: 'block' } }}>
+                <Box sx={{ zoom: { xs: '55%', sm: '100%' }, width: '525px' }}>
                     <ResourcesComponents
-                        eosQuantity={eosQuantity} setEosQuantity={setEosQuantity}
-                        ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
-                        accountName={accountName} setAccountName={setAccountName}
-                        validName={validName} setValidName={setValidName}
-                        totalPrice={totalPrice}
-                    />
-                </Box>
-                <Box sx={{ zoom: '55%', width: '525px', display: { xs: 'block', sm: 'none' } }}>
-                    <ResourcesComponents
-                        eosQuantity={eosQuantity} setEosQuantity={setEosQuantity}
                         ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
                         accountName={accountName} setAccountName={setAccountName}
                         validName={validName} setValidName={setValidName}

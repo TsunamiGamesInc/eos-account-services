@@ -4,9 +4,8 @@ import Box from '@mui/material/Box';
 import CustomTextField from '../CustomTextFields';
 import ValidName, { ValidNameComponentsTwo } from './CreateAccountValidName.js'
 
-export default function CreateAccountComponents({ eosQuantity, setEosQuantity, ramQuantity, setRamQuantity,
+export default function CreateAccountComponents({ ramQuantity, setRamQuantity,
     accountName, setAccountName, validName, setValidName, setRecieverPubKey, totalPrice }) {
-    let eosQuantityMirror = eosQuantity;
     let ramQuantityMirror = ramQuantity;
 
     return (
@@ -42,17 +41,15 @@ export default function CreateAccountComponents({ eosQuantity, setEosQuantity, r
                 }
                 {validName &&
                     <ValidName
-                        eosQuantity={eosQuantity} setEosQuantity={setEosQuantity}
                         ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
-                        eosQuantityMirror={eosQuantityMirror} ramQuantityMirror={ramQuantityMirror}
+                        ramQuantityMirror={ramQuantityMirror}
                         setRecieverPubKey={setRecieverPubKey} totalPrice={totalPrice}
                     />}
             </Grid>
             {validName &&
                 <ValidNameComponentsTwo
-                    eosQuantity={eosQuantity} setEosQuantity={setEosQuantity}
                     ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
-                    eosQuantityMirror={eosQuantityMirror} ramQuantityMirror={ramQuantityMirror}
+                    ramQuantityMirror={ramQuantityMirror}
                 />}
         </Grid >
     );

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { TokenAccountTextField } from '../CustomTextFields';
-import { CustomButtonSmall, CheckoutButton } from '../CustomButtons';
+import { TooltipButtonSmall, CheckoutButton } from '../CustomButtons';
 import CustomCheckBox from '../CustomCheckbox';
 import { GenerateKey } from '../EosClient';
 import ConditionalLink from '../ConditionalLink';
@@ -64,7 +64,7 @@ export default function TokenValidNameComponent({
                 <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}> Private Key/Password </p>
             </Grid>
             <Grid item xs={12}>
-                <CustomButtonSmall txt={recieverPrivKey} />
+                <TooltipButtonSmall txt={recieverPrivKey} />
             </Grid>
             <Grid item xs={12}>
                 <Box sx={{ height: '1vh' }} />

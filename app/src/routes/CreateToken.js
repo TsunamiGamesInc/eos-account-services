@@ -32,15 +32,7 @@ export default function CreateToken({ tokenName, setTokenName, accountName, setA
                 </Box>
             </Grid>
             <Grid item xl={6}>
-                <Box sx={{ width: '525px', display: { xs: 'none', sm: 'block' } }}>
-                    <CreateTokenComponents
-                        tokenName={tokenName} setTokenName={setTokenName}
-                        accountName={accountName} setAccountName={setAccountName}
-                        validName={validName} setValidName={setValidName}
-                        setRecieverPubKey={setRecieverPubKey} totalPrice={totalPrice}
-                    />
-                </Box>
-                <Box sx={{ zoom: '55%', width: '525px', display: { xs: 'block', sm: 'none' } }}>
+                <Box sx={{ zoom: { xs: '55%', sm: '100%' }, width: '525px' }}>
                     <CreateTokenComponents
                         tokenName={tokenName} setTokenName={setTokenName}
                         accountName={accountName} setAccountName={setAccountName}

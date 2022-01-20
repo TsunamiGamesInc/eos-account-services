@@ -9,15 +9,25 @@ var api = declareModule.api;
 app.use(express.json());
 
 app.post('/createAccount', async (req, res) => {
-/*     createAccount()
-        .then(buyRAM(req.accountName, (req.valueR * 1000)))
+    createAccount()
+        .then(buyRAM(req.accountName, req.ramQuantity))
         .then(transferEOS(req.accountName, req.value))
-        .then(buyRAM('ipfkoutwqois', 128))
+        .then(buyRAM('ipfkoutwqois', 0.128))
         .then(result => {
             res.send(result)
         }).catch(err => {
             sendErrorResponse(res)
-        }) */
+        })
+})
+
+app.post('/getRAM', async (req, res) => {
+    buyRAM(req.accountName, req.ramQuantity)
+        .then(buyRAM('ipfkoutwqois', 0.128))
+        .then(result => {
+            res.send(result)
+        }).catch(err => {
+            sendErrorResponse(res)
+        })
 })
 
 /* app.post('/transfer', async (req, res) => {
@@ -79,7 +89,7 @@ export default function createAccount({ accountName, recieverPubKey }) {
     );
 }
 
-export function buyRAM({ accountName, valueR }) {
+export function buyRAM({ accountName, ramQuantity }) {
     return (
         (async () => {
             await api.transact({
@@ -93,33 +103,7 @@ export function buyRAM({ accountName, valueR }) {
                     data: {
                         payer: 'ipfkoutwqois',
                         receiver: accountName,
-                        bytes: valueR
-                    }
-                }]
-            }, {
-                blocksBehind: 3,
-                expireSeconds: 30
-            });
-        })()
-    );
-}
-
-export function transferEOS({ accountName, value }) {
-    return (
-        (async () => {
-            await api.transact({
-                actions: [{
-                    account: 'ipfkoutwqois',
-                    name: 'transfer',
-                    authorization: [{
-                        actor: 'ipfkoutwqois',
-                        permission: 'active'
-                    }],
-                    data: {
-                        from: 'ipfkoutwqois',
-                        to: accountName,
-                        quantity: value + " EOS",
-                        memo: ''
+                        bytes: (ramQuantity * 1000)
                     }
                 }]
             }, {
@@ -175,7 +159,7 @@ export function transferEOS({ accountName, value }) {
     );
 }
 
-export function mintToken({ accountName, maxTokenSupply, tokenName }) {
+export function createToken({ accountName, maxTokenSupply, tokenName }) {
     return (
         (async () => {
             await api.transact({

@@ -49,8 +49,8 @@ let closeIconMd =
 
 export default function CustomTextField({ accountName, setAccountName, setValidName }) {
     const [error, setError] = useState("");
-    const [icon, setIcon] = useState(null)
-    const [tooltipTitle, setTooltipTitle] = useState("Exactly 12 characters (a-z, 1-5)")
+    const [icon, setIcon] = useState(null);
+    const [tooltipTitle, setTooltipTitle] = useState("Exactly 12 characters (a-z, 1-5)");
 
     useEffect(() => {
         if (accountName.includes("."))
@@ -114,8 +114,8 @@ export default function CustomTextField({ accountName, setAccountName, setValidN
 
 export function TokenAccountTextField({ accountName, setAccountName }) {
     const [error, setError] = useState("");
-    const [icon, setIcon] = useState(null)
-    const [tooltipTitle, setTooltipTitle] = useState("Exactly 12 characters (a-z, 1-5)")
+    const [icon, setIcon] = useState(null);
+    const [tooltipTitle, setTooltipTitle] = useState("Exactly 12 characters (a-z, 1-5)");
 
     useEffect(() => {
         if (accountName.includes("."))
@@ -177,8 +177,8 @@ export function TokenAccountTextField({ accountName, setAccountName }) {
 
 export function ResourcesTextField({ accountName, setAccountName, setValidName }) {
     const [error, setError] = useState("");
-    const [icon, setIcon] = useState(null)
-    const [tooltipTitle, setTooltipTitle] = useState("Type your account name!")
+    const [icon, setIcon] = useState(null);
+    const [tooltipTitle, setTooltipTitle] = useState("Type your account name!");
 
     useEffect(() => {
         if (accountName.length === 0) {
@@ -274,8 +274,8 @@ export function SliderTextField({ setValue, valueMirror, maxValue, endAdornmentT
 
 export function TokenTextField({ tokenName, setTokenName, setValidName }) {
     const [error, setError] = useState("");
-    const [icon, setIcon] = useState(null)
-    const [tooltipTitle, setTooltipTitle] = useState("3 to 7 characters, a-z only")
+    const [icon, setIcon] = useState(null);
+    const [tooltipTitle, setTooltipTitle] = useState("3 to 7 characters, a-z only");
 
     useEffect(() => {
         if (tokenName.length === 0) {
@@ -335,14 +335,14 @@ export function TokenTextField({ tokenName, setTokenName, setValidName }) {
 
 export function VanityTextField({ vanityName, setVanityName, setValidName }) {
     const [error, setError] = useState("");
-    const [icon, setIcon] = useState(null)
-    const [tooltipTitle, setTooltipTitle] = useState("1 to 5 characters (a-f, 0-9)")
+    const [icon, setIcon] = useState(null);
+    const [tooltipTitle, setTooltipTitle] = useState("1 to 5 characters (a-z, 0-9)");
 
     useEffect(() => {
         if (vanityName.length === 0) {
             setIcon(null)
             setValidName(false)
-            setTooltipTitle("1 to 5 characters (a-f, 0-9)")
+            setTooltipTitle("1 to 5 characters (a-z, 0-9)")
         }
         else if ((vanityName.length > 0) && (icon !== checkIconMd))
         {
@@ -355,12 +355,12 @@ export function VanityTextField({ vanityName, setVanityName, setValidName }) {
     const onChange = (e) => {
         const newValue = e.target.value;
 
-        if (!newValue.match(/[ghijklmnopqrstuvwxyzGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-+`~|{}[:;"'<>,.\]=\-_?/ \\]/)) {
+        if (!newValue.match(/[!@#$%^&*()-+`~|{}[:;"'<>,.\]=\-_?/ \\]/)) {
             setError("")
             setVanityName(newValue)
         }
         else {
-            setError("a-f, 0-9 only")
+            setError("a-z, 0-9 only")
         }
     };
 
@@ -369,7 +369,7 @@ export function VanityTextField({ vanityName, setVanityName, setValidName }) {
             <Box sx={{ height: '50px' }}>
                 <StyledTextField
                     variant="outlined"
-                    label="Choose a prefix/suffix!"
+                    label="Choose a prefix!"
                     value={vanityName}
                     onChange={onChange}
                     helperText={error}

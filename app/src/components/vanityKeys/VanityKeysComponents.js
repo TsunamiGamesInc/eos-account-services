@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import { VanityTextField } from '../CustomTextFields';
 import VanityKeysValidName from './VanityKeysValidName.js'
 
-export default function VanityKeysComponents({ validName, setValidName, setRecieverPubKey, totalPrice }) {
+export default function VanityKeysComponents({ validName, setValidName, recieverPubKey, setRecieverPubKey, totalPrice }) {
     const [vanityName, setVanityName] = useState("")
 
     return (
@@ -28,7 +28,7 @@ export default function VanityKeysComponents({ validName, setValidName, setRecie
                         </Grid>
                         <Grid item xs={12}>
                             <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
-                                Up to 5 characters (A through F, 1 through 5).
+                                Up to 5 characters (A through Z, 1 through 9).
                             </p>
                         </Grid>
                         <Grid item xs={12}>
@@ -40,7 +40,7 @@ export default function VanityKeysComponents({ validName, setValidName, setRecie
                 }
                 {validName &&
                     <VanityKeysValidName
-                        setRecieverPubKey={setRecieverPubKey} totalPrice={totalPrice}
+                        vanityName={vanityName} recieverPubKey={recieverPubKey} setRecieverPubKey={setRecieverPubKey} totalPrice={totalPrice}
                     />}
             </Grid>
         </Grid >

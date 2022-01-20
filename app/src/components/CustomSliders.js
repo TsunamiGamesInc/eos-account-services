@@ -37,7 +37,7 @@ export default function CustomSlider({ value, setValue, valueMirror }) {
 
     return (
         <StyledSlider
-            aria-label="EOS Slider"
+            aria-label="RAM Slider"
             value={value}
             valueLabelDisplay="off"
             step={1}

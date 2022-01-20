@@ -4,9 +4,8 @@ import Box from '@mui/material/Box';
 import { ResourcesTextField } from '../CustomTextFields';
 import ResourcesValidName, { ResourcesValidNameComponentsTwo } from './ResourcesValidName.js'
 
-export default function ResourcesComponents({ eosQuantity, setEosQuantity, ramQuantity, setRamQuantity,
+export default function ResourcesComponents({ ramQuantity, setRamQuantity,
     accountName, setAccountName, validName, setValidName, totalPrice }) {
-    let eosQuantityMirror = eosQuantity;
     let ramQuantityMirror = ramQuantity;
 
     return (
@@ -37,17 +36,14 @@ export default function ResourcesComponents({ eosQuantity, setEosQuantity, ramQu
                 }
                 {validName &&
                     <ResourcesValidName
-                        eosQuantity={eosQuantity} setEosQuantity={setEosQuantity}
                         ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
-                        eosQuantityMirror={eosQuantityMirror} ramQuantityMirror={ramQuantityMirror}
-                        totalPrice={totalPrice}
+                        ramQuantityMirror={ramQuantityMirror} totalPrice={totalPrice}
                     />}
             </Grid>
             {validName &&
                 <ResourcesValidNameComponentsTwo
-                    eosQuantity={eosQuantity} setEosQuantity={setEosQuantity}
                     ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
-                    eosQuantityMirror={eosQuantityMirror} ramQuantityMirror={ramQuantityMirror}
+                    ramQuantityMirror={ramQuantityMirror}
                 />}
         </Grid >
     );

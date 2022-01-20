@@ -10,6 +10,9 @@ const StyledSwitch = styled(Switch)(({ theme }) => ({
                 opacity: 0.5,
                 backgroundColor: 'white'
             }
+        },
+        '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
+            backgroundColor: 'transparent !important'
         }
     },
     '& .MuiSwitch-track': {
@@ -18,11 +21,7 @@ const StyledSwitch = styled(Switch)(({ theme }) => ({
     },
     '& .MuiSwitch-thumb': {
         backgroundColor: '#CCCCCC',
-        boxShadow: 'transparent',
-        '&:hover': {
-            boxShadow: 'inherit'
-        }
-    },
+    }
 }));
 
 export default function CustomSwitch() {

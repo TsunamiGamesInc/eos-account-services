@@ -1,45 +1,34 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import CustomSwitches from '../CustomSwitches';
-import { CustomButtonSmall, CheckoutButton } from '../CustomButtons';
+import { VanityButtonSmall, CheckoutButton } from '../CustomButtons';
 import CustomCheckBox from '../CustomCheckbox';
-import { GenerateKey } from '../EosClient';
 import ConditionalLink from '../ConditionalLink';
 import CustomAlert from '../CustomAlerts';
 
-export default function VanityKeysValidNameComponentsOne({ setRecieverPubKey, totalPrice }) {
+export default function VanityKeysValidNameComponent({ vanityName, recieverPubKey, setRecieverPubKey, totalPrice }) {
     const [keyCopied, setKeyCopied] = React.useState(false);
     const [open, setOpen] = React.useState(false);
     const [recieverPrivKey, setRecieverPrivKey] = React.useState("Error! Please do not proceed.");
 
-    useEffect(() => {
-        GenerateKey({ setRecieverPrivKey, setRecieverPubKey })
-    }, [setRecieverPrivKey, setRecieverPubKey])
-
     return (
         <>
-            <Grid item xs={12} container alignItems='center'>
-                <Grid item xs={4} />
-                <Grid item xs={1.2}>
-                    <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
-                        Prefix
-                    </p>
-                </Grid>
-                <Grid item xs={1.7}>
-                    <CustomSwitches />
-                </Grid>
-                <Grid item xs={0.1}>
-                    <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
-                        Suffix
-                    </p>
-                </Grid>
+            <Grid item xs={12}>
+                <Box sx={{ height: '2vh' }} />
             </Grid>
             <Grid item xs={12}>
-                <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}> Private Key/Password </p>
+                <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}> Vanity Public Key </p>
             </Grid>
             <Grid item xs={12}>
-                <CustomButtonSmall txt={recieverPrivKey} />
+                <VanityButtonSmall
+                    vanityName={vanityName}
+                    recieverPrivKey={recieverPrivKey} setRecieverPrivKey={setRecieverPrivKey}
+                    setRecieverPubKey={setRecieverPubKey} />
+            </Grid>
+            <Grid item xs={12}>
+                <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 12 }}>
+                    Your private key is shown after payment.
+                </p>
             </Grid>
             <Grid item xs={12}>
                 <Box sx={{ height: '1vh' }} />
@@ -51,11 +40,11 @@ export default function VanityKeysValidNameComponentsOne({ setRecieverPubKey, to
             }
             {open &&
                 <Grid item xs={12}>
-                    <CustomAlert open={open} setOpen={setOpen} text={"Save this key - it cannot be recovered!"} />
+                    <CustomAlert open={open} setOpen={setOpen} text={"Ensure you are happy with your key!"} />
                 </Grid>
             }
             <Grid item xs={12}>
-                <CustomCheckBox keyCopied={keyCopied} setKeyCopied={setKeyCopied} label="I have saved my password and understand it cannot be recovered" />
+                <CustomCheckBox keyCopied={keyCopied} setKeyCopied={setKeyCopied} label="I am happy with my key and understand this cannot be refunded" />
             </Grid>
             <Grid item xs={12}>
                 <ConditionalLink to="/app/checkout" condition={keyCopied}>

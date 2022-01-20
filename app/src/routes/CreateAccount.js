@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import NavBar from '../components/NavBar';
 import CreateAccountComponents from '../components/createAccount/CreateAccountComponents';
 
-export default function CreateAccount({ eosQuantity, setEosQuantity, ramQuantity, setRamQuantity,
+export default function CreateAccount({ ramQuantity, setRamQuantity,
     accountName, setAccountName, validName, setValidName, setRecieverPubKey, totalPrice, setTotalPrice }) {
 
     useEffect(() => {
@@ -18,10 +18,10 @@ export default function CreateAccount({ eosQuantity, setEosQuantity, ramQuantity
             accountPrice = formatter.format(2.10) + " USD"
         }
         else {
-            accountPrice = formatter.format((10 * 0.2 + 0.1) + (10 * eosQuantity) + (10 * 0.3 * ramQuantity) + 0.5) + " USD"
+            accountPrice = formatter.format((10 * 0.2 + 0.1) + (10 * 0.3 * ramQuantity) + 0.5) + " USD"
         }
         setTotalPrice(accountPrice)
-    }, [validName, eosQuantity, ramQuantity, setTotalPrice])
+    }, [validName, ramQuantity, setTotalPrice])
 
     return (
         <Grid container spacing={4} justifyContent="center">
@@ -32,18 +32,8 @@ export default function CreateAccount({ eosQuantity, setEosQuantity, ramQuantity
                 </Box>
             </Grid>
             <Grid item xl={6}>
-                <Box sx={{ width: '525px', display: { xs: 'none', sm: 'block' } }}>
+                <Box sx={{ zoom: { xs: '55%', sm: '100%' }, width: '525px' }}>
                     <CreateAccountComponents
-                        eosQuantity={eosQuantity} setEosQuantity={setEosQuantity}
-                        ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
-                        accountName={accountName} setAccountName={setAccountName}
-                        validName={validName} setValidName={setValidName}
-                        setRecieverPubKey={setRecieverPubKey} totalPrice={totalPrice}
-                    />
-                </Box>
-                <Box sx={{ zoom: '55%', width: '525px', display: { xs: 'block', sm: 'none' } }}>
-                    <CreateAccountComponents
-                        eosQuantity={eosQuantity} setEosQuantity={setEosQuantity}
                         ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
                         accountName={accountName} setAccountName={setAccountName}
                         validName={validName} setValidName={setValidName}

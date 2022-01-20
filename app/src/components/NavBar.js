@@ -33,7 +33,7 @@ export default function NavBar({ totalPrice }) {
                 </Grid>
                 <Grid item xs={12}>
                     <Link to="/app/resources" style={{ textDecoration: 'none' }}>
-                        <CustomButtonNoTopBorder txt="Get Resources" />
+                        <CustomButtonNoTopBorder txt="Get RAM" />
                     </Link>
                 </Grid>
                 <Grid item xs={12}>

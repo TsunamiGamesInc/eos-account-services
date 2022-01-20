@@ -5,6 +5,7 @@ import { Button } from '@material-ui/core';
 import { SvgIcon } from '@mui/material';
 import { ReactComponent as CheckIconSm } from '../images/check-icon-sm.svg';
 import { ReactComponent as CloseIconSm } from '../images/close-icon-sm.svg';
+import { GenerateVanityKey } from './EosClient';
 
 const StyledButton = withStyles({
     root: {
@@ -80,7 +81,7 @@ export function CustomButtonNoTopBorder(props) {
     );
 }
 
-export function RecommendedButton({ eosQuantity, setEosQuantity, ramQuantity, setRamQuantity }) {
+export function RecommendedButton({ ramQuantity, setRamQuantity }) {
     let recommendedIcon = null;
     let checkIcon =
         <SvgIcon>
@@ -91,7 +92,7 @@ export function RecommendedButton({ eosQuantity, setEosQuantity, ramQuantity, se
             <CloseIconSm />
         </SvgIcon>;
 
-    if ((eosQuantity < 5) || (ramQuantity < 5)) {
+    if (ramQuantity < 5) {
         recommendedIcon = closeIcon
     }
     else {
@@ -99,7 +100,6 @@ export function RecommendedButton({ eosQuantity, setEosQuantity, ramQuantity, se
     }
 
     function setRecommended() {
-        setEosQuantity(5)
         setRamQuantity(5)
         recommendedIcon = checkIcon
     }
@@ -120,7 +120,45 @@ export function CustomButtonNoRipple(props) {
     );
 }
 
-export function CustomButtonSmall(props) {
+export function VanityButtonSmall({ vanityName, recieverPrivKey, setRecieverPrivKey, setRecieverPubKey }) {
+    const [vanityText, setVanityText] = React.useState("Generate Vanity Key");
+    const [keysCreated, setKeysCreated] = React.useState(0);
+    
+    async function handleClick() {
+        let testers = "Searching... " + keysCreated + " keys created";
+        setVanityText(testers)
+        (async () => {
+            GenerateVanityKey(vanityName, { keysCreated, setKeysCreated, setVanityText, setRecieverPrivKey, setRecieverPubKey })
+        })();
+    }
+
+    return (
+        <StyledButton
+            variant="outlined"
+            onClick={handleClick}
+            style={{
+                height: '16px',
+                padding: "16px 50px",
+                fontSize: "14px",
+            }}>{vanityText}</StyledButton>
+    );
+}
+
+export function ButtonSmallNoRipple(props) {
+    return (
+        <StyledButtonNoRipple
+            variant="outlined"
+            onClick={null}
+            style={{
+                height: '16px',
+                padding: "16px 50px",
+                fontSize: "14px",
+            }}
+            disableRipple>{props.txt}</StyledButtonNoRipple>
+    );
+}
+
+export function TooltipButtonSmall(props) {
     const [text, setText] = React.useState("Click to copy");
     const [canClick, setCanClick] = React.useState(true);
     const timer = useRef();
