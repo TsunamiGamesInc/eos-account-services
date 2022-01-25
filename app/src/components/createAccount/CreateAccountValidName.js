@@ -6,7 +6,6 @@ import CustomSliders from '../CustomSliders';
 import { RecommendedButton, TooltipButtonSmall, CheckoutButton } from '../CustomButtons';
 import CustomCheckBox from '../CustomCheckbox';
 import { GenerateKey } from '../EosClient';
-import ConditionalLink from '../ConditionalLink';
 import CustomAlert from '../CustomAlerts';
 
 export default function ValidNameComponentsOne({
@@ -62,11 +61,9 @@ export default function ValidNameComponentsOne({
                 <CustomCheckBox keyCopied={keyCopied} setKeyCopied={setKeyCopied} label="I have saved my password and understand it cannot be recovered" />
             </Grid>
             <Grid item xs={12}>
-                <ConditionalLink to="/app/checkout" condition={keyCopied}>
-                    <CheckoutButton keyCopied={keyCopied} setOpen={setOpen}>
-                        {"Pay " + totalPrice}
-                    </CheckoutButton>
-                </ConditionalLink>
+                <CheckoutButton keyCopied={keyCopied} setOpen={setOpen}>
+                    {"Pay " + totalPrice}
+                </CheckoutButton>
             </Grid>
         </>
     );

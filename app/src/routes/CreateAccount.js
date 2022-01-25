@@ -15,10 +15,10 @@ export default function CreateAccount({ ramQuantity, setRamQuantity,
         let accountPrice;
 
         if (!validName) {
-            accountPrice = formatter.format(2.10) + " USD"
+            accountPrice = formatter.format(1.89) + " USD"
         }
         else {
-            accountPrice = formatter.format((10 * 0.2 + 0.1) + (10 * 0.3 * ramQuantity) + 0.5) + " USD"
+            accountPrice = formatter.format(1.89 + (10 * 0.3 * ramQuantity)) + " USD"
         }
         setTotalPrice(accountPrice)
     }, [validName, ramQuantity, setTotalPrice])

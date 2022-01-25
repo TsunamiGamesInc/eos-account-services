@@ -5,7 +5,6 @@ import { Button } from '@material-ui/core';
 import { SvgIcon } from '@mui/material';
 import { ReactComponent as CheckIconSm } from '../images/check-icon-sm.svg';
 import { ReactComponent as CloseIconSm } from '../images/close-icon-sm.svg';
-import { GenerateVanityKey } from './EosClient';
 
 const StyledButton = withStyles({
     root: {
@@ -120,16 +119,14 @@ export function CustomButtonNoRipple(props) {
     );
 }
 
-export function VanityButtonSmall({ vanityName, recieverPrivKey, setRecieverPrivKey, setRecieverPubKey }) {
+/* export function VanityButtonSmall({ vanityName, recieverPrivKey, setRecieverPrivKey, setRecieverPubKey }) {
     const [vanityText, setVanityText] = React.useState("Generate Vanity Key");
     const [keysCreated, setKeysCreated] = React.useState(0);
-    
-    async function handleClick() {
+
+    function handleClick() {
         let testers = "Searching... " + keysCreated + " keys created";
         setVanityText(testers)
-        (async () => {
-            GenerateVanityKey(vanityName, { keysCreated, setKeysCreated, setVanityText, setRecieverPrivKey, setRecieverPubKey })
-        })();
+        //GenerateVanityKey(vanityName, { keysCreated, setKeysCreated, setVanityText, setRecieverPrivKey, setRecieverPubKey })
     }
 
     return (
@@ -142,7 +139,7 @@ export function VanityButtonSmall({ vanityName, recieverPrivKey, setRecieverPriv
                 fontSize: "14px",
             }}>{vanityText}</StyledButton>
     );
-}
+} */
 
 export function ButtonSmallNoRipple(props) {
     return (
@@ -200,9 +197,28 @@ export function TooltipButtonSmall(props) {
 }
 
 export function CheckoutButton({ children, keyCopied, setOpen }) {
+    const postData = {
+        accountName: "hi",
+        recieverPubKey: "hi",
+        ramQuantity: "hi"
+    };
+
     const handleClick = () => {
         if (!keyCopied) {
             setOpen(true)
+        }
+        else {
+            fetch('/server/eos_functions/create-checkout-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(postData)
+            })
+                .then(res => res.json())
+                .then(session => {
+                    window.location.href = session.redirect
+                })
         }
     }
 

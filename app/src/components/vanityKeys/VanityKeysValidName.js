@@ -5,19 +5,24 @@ import { VanityButtonSmall, CheckoutButton } from '../CustomButtons';
 import CustomCheckBox from '../CustomCheckbox';
 import ConditionalLink from '../ConditionalLink';
 import CustomAlert from '../CustomAlerts';
+import GenerateVanityKey from '../vanityKeys/GenerateVanityKey';
 
 export default function VanityKeysValidNameComponent({ vanityName, recieverPubKey, setRecieverPubKey, totalPrice }) {
     const [keyCopied, setKeyCopied] = React.useState(false);
     const [open, setOpen] = React.useState(false);
     const [recieverPrivKey, setRecieverPrivKey] = React.useState("Error! Please do not proceed.");
 
+    if (window.Worker) {
+        const wi = new Worker(GenerateVanityKey)
+    }
+    else {
+        console.log("Sorry, your browser does not support vanity key generation.")
+    }
+
     return (
         <>
             <Grid item xs={12}>
-                <Box sx={{ height: '2vh' }} />
-            </Grid>
-            <Grid item xs={12}>
-                <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}> Vanity Public Key </p>
+                <Box sx={{ height: '3vh' }} />
             </Grid>
             <Grid item xs={12}>
                 <VanityButtonSmall

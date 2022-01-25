@@ -1,17 +1,74 @@
 var express = require('express');
 var app = express();
+const stripe = require('stripe')('');
+const endpointSecret = '';
 //const path = require('path');
 //var catalyst = require('zcatalyst-sdk-node');
 
 var declareModule = require('/JS Projects/eos-account-services/functions/eos_functions/declare');
 var api = declareModule.api;
 
-app.use(express.json());
+//app.use(express.json());
+
+app.post('/create-checkout-session', express.json(), async (req, res) => {
+    console.log(req.postData)
+    const session = await stripe.checkout.sessions.create({
+        line_items: [
+            {
+                price: '',
+                quantity: 1
+            }
+        ],
+        mode: 'payment',
+        success_url: 'http://localhost:3000/app/?success=true',
+        cancel_url: 'http://localhost:3000/app/?canceled=true'
+    })
+
+    //res.redirect(303, session.url)
+    res.status(303)
+    res.send({redirect: session.url})
+})
+
+const fulfillOrder = (session, lineItems) => {
+    console.log(lineItems)
+}
+
+app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+    const payload = req.body;
+    const sig = req.headers['stripe-signature'];
+
+    let event;
+
+    try {
+        event = stripe.webhooks.constructEvent(payload, sig, endpointSecret)
+    }
+    catch (err) {
+        sendErrorResponse(res)
+    }
+
+    if (event.type === 'checkout.session.completed') {
+        const session = event.data.object;
+
+        stripe.checkout.sessions.listLineItems(
+            session.id,
+            { limit: 100 },
+            function(err, lineItems) {
+                try {
+                    fulfillOrder(session, lineItems)
+                }
+                catch (err) {
+                    sendErrorResponse(res)
+                }
+            }
+        )
+    }
+
+    res.status(200).end()
+})
 
 app.post('/createAccount', async (req, res) => {
     createAccount()
         .then(buyRAM(req.accountName, req.ramQuantity))
-        .then(transferEOS(req.accountName, req.value))
         .then(buyRAM('ipfkoutwqois', 0.128))
         .then(result => {
             res.send(result)
@@ -41,13 +98,13 @@ app.post('/getRAM', async (req, res) => {
 }) */
 
 function sendErrorResponse(res) {
-    res.status(500);
+    res.status(500)
     res.send({
         "error": "There was an error, please contact info@eosaccountservices.com"
     });
 }
 
-export default function createAccount({ accountName, recieverPubKey }) {
+function createAccount({ accountName, recieverPubKey }) {
     return (
         (async () => {
             await api.transact({
@@ -89,7 +146,7 @@ export default function createAccount({ accountName, recieverPubKey }) {
     );
 }
 
-export function buyRAM({ accountName, ramQuantity }) {
+function buyRAM({ accountName, ramQuantity }) {
     return (
         (async () => {
             await api.transact({
