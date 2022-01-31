@@ -1,9 +1,9 @@
-/*import { JsonRpc } from 'eosjs';
+/* import { JsonRpc } from 'eosjs';
 import { ecc } from 'eosjs/dist/eosjs-ecc-migration';
 
-const endpoint = 'https://api.testnet.eos.io';
+const endpoint = 'https://eos.greymass.com';
 
-const rpc = new eosjs_jsonrpc.JsonRpc(endpoint);
+//const rpc = new eosjs_jsonrpc.JsonRpc(endpoint);
 const rpc = new JsonRpc(endpoint);
 
 export async function GenerateKey({ setRecieverPrivKey, setRecieverPubKey }) {
@@ -58,8 +58,8 @@ export async function CheckExistingName(recieverName, setIcon, checkIconMd, clos
 //just for testing catalyst functions without building eosjs everytime
 
 export async function GenerateKey({ setRecieverPrivKey, setRecieverPubKey }) {
-    setRecieverPrivKey("Hello Helcim")
-    setRecieverPubKey("Hello Helcim")
+    setRecieverPrivKey("Hello")
+    setRecieverPubKey("Hello")
 }
 
 export default async function GetAccountInfo(recieverName, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle) {

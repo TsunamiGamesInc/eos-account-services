@@ -53,9 +53,8 @@ export default function CustomTextField({ accountName, setAccountName, setValidN
     const [tooltipTitle, setTooltipTitle] = useState("Exactly 12 characters (a-z, 1-5)");
 
     useEffect(() => {
-        if (accountName.includes("."))
-        {
-            let removeDot = accountName.replace('.','')
+        if (accountName.includes(".")) {
+            let removeDot = accountName.replace('.', '')
             setAccountName(removeDot)
         }
 
@@ -69,8 +68,7 @@ export default function CustomTextField({ accountName, setAccountName, setValidN
             setValidName(false)
             setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
         }
-        else if ((accountName.length === 12) && (icon !== checkIconMd))
-        {
+        else if ((accountName.length === 12) && (icon !== checkIconMd)) {
             GetAccountInfo(accountName, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle)
         }
     }, [accountName, icon, setValidName, setAccountName])
@@ -78,7 +76,7 @@ export default function CustomTextField({ accountName, setAccountName, setValidN
     const onChange = (e) => {
         const newValue = e.target.value;
 
-        if (!newValue.match(/[!@#$%^&*()-+`~|{}[:;"'<>,.06789\]=\-_?/ \\]/)) {
+        if ((newValue.slice(-1).match(/[a-zA-Z1-5]/)) || (newValue === "")) {
             setError("")
             setAccountName(newValue)
         }
@@ -101,6 +99,7 @@ export default function CustomTextField({ accountName, setAccountName, setValidN
                         endAdornment: icon,
                     }}
                     inputProps={{
+                        'aria-label': 'Choose an account name!',
                         maxLength: 12,
                         style: {
                             textTransform: 'lowercase',
@@ -118,9 +117,8 @@ export function TokenAccountTextField({ accountName, setAccountName }) {
     const [tooltipTitle, setTooltipTitle] = useState("Exactly 12 characters (a-z, 1-5)");
 
     useEffect(() => {
-        if (accountName.includes("."))
-        {
-            let removeDot = accountName.replace('.','')
+        if (accountName.includes(".")) {
+            let removeDot = accountName.replace('.', '')
             setAccountName(removeDot)
         }
 
@@ -132,8 +130,7 @@ export function TokenAccountTextField({ accountName, setAccountName }) {
             setIcon(closeIconMd)
             setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
         }
-        else if ((accountName.length === 12) && (icon !== checkIconMd))
-        {
+        else if ((accountName.length === 12) && (icon !== checkIconMd)) {
             GetAccountInfoNoValid(accountName, setIcon, checkIconMd, closeIconMd, setTooltipTitle)
         }
     }, [accountName, icon, setAccountName])
@@ -141,12 +138,12 @@ export function TokenAccountTextField({ accountName, setAccountName }) {
     const onChange = (e) => {
         const newValue = e.target.value;
 
-        if (!newValue.match(/[!@#$%^&*()-+`~|{}[:;"'<>,.06789\]=\-_?/ \\]/)) {
+        if ((newValue.slice(-1).match(/[a-zA-Z1-5]/)) || (newValue === "")) {
             setError("")
             setAccountName(newValue)
         }
         else {
-            setError("a-z, 1-5 only")
+            setError("a-z, 1-5, and . only")
         }
     };
 
@@ -164,6 +161,7 @@ export function TokenAccountTextField({ accountName, setAccountName }) {
                         endAdornment: icon,
                     }}
                     inputProps={{
+                        'aria-label': 'Choose a Super Admin name!',
                         maxLength: 12,
                         style: {
                             textTransform: 'lowercase',
@@ -184,15 +182,14 @@ export function ResourcesTextField({ accountName, setAccountName, setValidName }
         if (accountName.length === 0) {
             setIcon(null)
             setValidName(false)
-            setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
+            setTooltipTitle("12 characters (a-z, 1-5) or a premium name")
         }
         else if (((accountName.length < 12) && (!accountName.includes('.'))) && (icon !== closeIconMd)) {
             setIcon(closeIconMd)
             setValidName(false)
-            setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
+            setTooltipTitle("12 characters (a-z, 1-5) or a premium name")
         }
-        else if (((accountName.length === 12) || (accountName.includes('.'))) && (icon !== checkIconMd))
-        {
+        else if (((accountName.length === 12) || (accountName.includes('.'))) && (icon !== checkIconMd)) {
             CheckExistingName(accountName, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle)
         }
     }, [accountName, icon, setValidName, setAccountName])
@@ -201,12 +198,12 @@ export function ResourcesTextField({ accountName, setAccountName, setValidName }
     const onChange = (e) => {
         const newValue = e.target.value;
 
-        if (!newValue.match(/[!@#$%^&*()-+`~|{}[:;"'<>,06789\]=\-_?/ \\]/)) {
+        if ((newValue.slice(-1).match(/[a-zA-Z1-5.]/)) || (newValue === "")) {
             setError("")
             setAccountName(newValue)
         }
         else {
-            setError("a-z, 1-5 only")
+            setError("a-z, 1-5, and . only")
         }
     };
 
@@ -224,6 +221,7 @@ export function ResourcesTextField({ accountName, setAccountName, setValidName }
                         endAdornment: icon,
                     }}
                     inputProps={{
+                        'aria-label': 'Enter your account name!',
                         maxLength: 12,
                         style: {
                             textTransform: 'lowercase',
@@ -235,24 +233,16 @@ export function ResourcesTextField({ accountName, setAccountName, setValidName }
     )
 }
 
-export function SliderTextField({ setValue, valueMirror, maxValue, endAdornmentText }) {
+export function SliderTextField({ setValue, valueMirror, endAdornmentText }) {
     const handleInputChange = (e) => {
-        const newSliderTextFieldValue = e.target.value;
+        const newValue = e.target.value;
 
-        if (!newSliderTextFieldValue.match(
-            /[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-+`~|{}[:;"'<>,.\]=\-_?/ \\]/
-        )) {
-            if (newSliderTextFieldValue === "") {
-                valueMirror = ""
-                setValue(0)
-            }
-            else if (newSliderTextFieldValue > maxValue) {
-                valueMirror = 10
-                setValue(10)
-            }
-            else {
-                setValue(newSliderTextFieldValue === '' ? '' : Number(newSliderTextFieldValue))
-            }
+        if (newValue.slice(-1).match(/[0-9]/)) {
+            setValue(newValue === '' ? '' : Number(newValue))
+        }
+        else if (newValue === "") {
+            valueMirror = ""
+            setValue(0)
         }
     };
 
@@ -266,6 +256,7 @@ export function SliderTextField({ setValue, valueMirror, maxValue, endAdornmentT
                 endAdornment: endAdornmentText
             }}
             inputProps={{
+                'aria-label': 'RAM Quantity',
                 maxLength: 3,
             }}
         />
@@ -288,8 +279,7 @@ export function TokenTextField({ tokenName, setTokenName, setValidName }) {
             setValidName(false)
             setTooltipTitle("3 to 7 characters, a-z only")
         }
-        else if ((tokenName.length >= 3) && (icon !== checkIconMd))
-        {
+        else if ((tokenName.length >= 3) && (icon !== checkIconMd)) {
             setIcon(checkIconMd)
             setValidName(true)
             setTooltipTitle("Token name available!")
@@ -299,7 +289,7 @@ export function TokenTextField({ tokenName, setTokenName, setValidName }) {
     const onChange = (e) => {
         const newValue = e.target.value;
 
-        if (!newValue.match(/[!@#$%^&*()-+`~|{}[:;"'<>,.0123456789\]=\-_?/ \\]/)) {
+        if ((!newValue.match(/[a-zA-Z]/)) || (newValue === "")) {
             setError("")
             setTokenName(newValue)
         }
@@ -322,6 +312,7 @@ export function TokenTextField({ tokenName, setTokenName, setValidName }) {
                         endAdornment: icon,
                     }}
                     inputProps={{
+                        'aria-label': 'Choose a token name!',
                         maxLength: 7,
                         style: {
                             textTransform: 'lowercase',
@@ -344,8 +335,7 @@ export function VanityTextField({ vanityName, setVanityName, setValidName }) {
             setValidName(false)
             setTooltipTitle("1 to 5 characters (a-z, 0-9)")
         }
-        else if ((vanityName.length > 0) && (icon !== checkIconMd))
-        {
+        else if ((vanityName.length > 0) && (icon !== checkIconMd)) {
             setIcon(checkIconMd)
             setValidName(true)
             setTooltipTitle("Matching keys available!")
@@ -355,7 +345,7 @@ export function VanityTextField({ vanityName, setVanityName, setValidName }) {
     const onChange = (e) => {
         const newValue = e.target.value;
 
-        if (!newValue.match(/[!@#$%^&*()-+`~|{}[:;"'<>,.\]=\-_?/ \\]/)) {
+        if ((!newValue.match(/[a-zA-Z1-5]/)) || (newValue === "")) {
             setError("")
             setVanityName(newValue)
         }
@@ -369,6 +359,7 @@ export function VanityTextField({ vanityName, setVanityName, setValidName }) {
             <Box sx={{ height: '50px' }}>
                 <StyledTextField
                     variant="outlined"
+                    aria-label="Choose a prefix!"
                     label="Choose a prefix!"
                     value={vanityName}
                     onChange={onChange}
@@ -378,6 +369,7 @@ export function VanityTextField({ vanityName, setVanityName, setValidName }) {
                         endAdornment: icon,
                     }}
                     inputProps={{
+                        'aria-label': 'Choose a prefix!',
                         maxLength: 5,
                     }}
                 />

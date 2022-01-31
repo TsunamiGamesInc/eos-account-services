@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
@@ -6,21 +6,23 @@ import { Helmet } from 'react-helmet';
 import './App.css';
 
 /*
-import Home from './routes/Home';
 import CreateNFT from './routes/CreateNFT';
 const CreateToken = lazy(() => import('./routes/CreateToken'));
 const VanityKeys = lazy(() => import('./routes/VanityKeys'));
+import VanityKeys from './routes/VanityKeys';
+import CreateToken from './routes/CreateToken';
 */
-const CreateAccount = lazy(() => import('./routes/CreateAccount'));
-const Resources = lazy(() => import('./routes/Resources'));
-const Checkout = lazy(() => import('./routes/Checkout'));
 
-/*
+/* const CreateAccount = lazy(() => import('./routes/CreateAccount'));
+const Resources = lazy(() => import('./routes/Resources'));
+const ThankYou = lazy(() => import('./routes/ThankYou'));
+const RouteNotFound = lazy(() => import('./routes/404')); */
+
+
 import CreateAccount from './routes/CreateAccount';
 import Resources from './routes/Resources';
-import CreateToken from './routes/CreateToken';
-import VanityKeys from './routes/VanityKeys';
-import Checkout from './routes/Checkout'; */
+const ThankYou = lazy(() => import('./routes/ThankYou'));
+const RouteNotFound = lazy(() => import('./routes/404'));
 
 const theme = createTheme({
   palette: {
@@ -67,38 +69,39 @@ function App() {
               <title>EOS Account Services</title>
               <meta
                 name="description"
-                content="Get the easiest and cheapest EOS account creation, premium names, custom cryptocurrency tokens, 
-                NFTs, vanity keys, and RAM, all with a credit card."
+                content="Get the easiest and cheapest EOS account creation, plus quick EOS RAM, all with a credit card."
+              /* content="Get the easiest EOS account creation, premium names, custom cryptocurrency tokens, 
+              NFTs, vanity keys, and RAM, all with a credit card." */
               />
               <meta
                 name="keywords"
-                content="EOS Account Creator, Premium Names, Create Custom Token, Create NFTs, Vanity Keys, Credit Card"
+                content="EOS Account Creator, EOS RAM, Credit Card, Cheap"
+              /* content="EOS Account Creator, Premium Names, Create Custom Token, Create NFTs, Vanity Keys, Credit Card" */
               />
             </Helmet>
-            <Suspense fallback={<div>Loading...</div>}>
               <Routes>
-                {/* <Route path="/" element={<Home />} /> */}
-                <Route path="/app" element={
+              <Route path="/app" element={
                   <CreateAccount
-                    ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
                     accountName={accountName} setAccountName={setAccountName}
+                    ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
                     validName={validName} setValidName={setValidName}
-                    setRecieverPubKey={setRecieverPubKey}
+                    recieverPubKey={recieverPubKey} setRecieverPubKey={setRecieverPubKey}
                     totalPrice={totalPrice} setTotalPrice={setTotalPrice} />
                 } />
-                <Route path="/app/create-account" element={
+                <Route path="/app/create-account.html" element={
                   <CreateAccount
-                    ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
                     accountName={accountName} setAccountName={setAccountName}
+                    ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
                     validName={validName} setValidName={setValidName}
-                    setRecieverPubKey={setRecieverPubKey}
+                    recieverPubKey={recieverPubKey} setRecieverPubKey={setRecieverPubKey}
                     totalPrice={totalPrice} setTotalPrice={setTotalPrice} />
                 } />
-                <Route path="/app/resources" element={<Resources
-                  ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
-                  accountName={accountName} setAccountName={setAccountName}
-                  validName={validName} setValidName={setValidName}
-                  totalPrice={totalPrice} setTotalPrice={setTotalPrice} />} />
+                <Route path="/app/resources.html" element={
+                  <Resources
+                    accountName={accountName} setAccountName={setAccountName}
+                    ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
+                    validName={validName} setValidName={setValidName}
+                    totalPrice={totalPrice} setTotalPrice={setTotalPrice} />} />
                 {/* <Route path="/app/create-token" element={
                   <CreateToken
                     tokenName={tokenName} setTokenName={setTokenName}
@@ -115,12 +118,13 @@ function App() {
                     recieverPubKey={recieverPubKey} setRecieverPubKey={setRecieverPubKey}
                     totalPrice={totalPrice} setTotalPrice={setTotalPrice} />
                 } /> */}
-                <Route path="/app/checkout" element={
-                  <Checkout
-                    accountName={accountName} recieverPubKey={recieverPubKey}
-                    ramQuantity={ramQuantity} totalPrice={totalPrice} />} />
+                <Route path="/app/thank-you.html" element={
+                  <ThankYou />
+                } />
+                <Route path="*" element={
+                  <RouteNotFound />
+                } />
               </Routes>
-            </Suspense>
           </BrowserRouter>
         </Typography>
       </ThemeProvider>

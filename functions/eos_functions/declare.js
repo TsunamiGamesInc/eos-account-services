@@ -6,9 +6,13 @@ const { Api, Serialize } = require('eosjs');
 const eosjs_jsonrpc = require('eosjs');
 const { JsSignatureProvider } = require('eosjs/dist/eosjs-jssig.js');
 
+const stripeDetailsPath = path.resolve(__dirname, './files/stripeDetails.txt');
+const stripeHoldover = fs.readFileSync(stripeDetailsPath, 'utf-8');
+const stripeKeys = JSON.parse(stripeHoldover);
+
 const endpoint = 'https://api.testnet.eos.io';
-const creatorKeyFilePath = path.resolve(__dirname, './files/creatorKey.txt');
-const keyHoldover = fs.readFileSync(creatorKeyFilePath, 'utf-8');
+const creatorKeyPath = path.resolve(__dirname, './files/creatorKey.txt');
+const keyHoldover = fs.readFileSync(creatorKeyPath, 'utf-8');
 const creatorKey = [keyHoldover];
 
 const signatureProvider = new JsSignatureProvider(creatorKey);
@@ -35,6 +39,7 @@ abiJSON = abiDefinitions.fields.reduce(
 abiDefinitions.serialize(buffer, abiJSON)
 const serializedAbiHexString = Buffer.from(buffer.asUint8Array()).toString('hex');
 
+exports.stripeKeys = stripeKeys;
 exports.api = api;
 exports.wasmHexString = wasmHexString;
 exports.serializedAbiHexString = serializedAbiHexString;

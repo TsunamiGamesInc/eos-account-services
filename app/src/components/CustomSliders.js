@@ -12,20 +12,22 @@ const StyledSlider = styled(Slider)({
     '& .MuiSlider-thumb': {
         height: 32,
         width: 32,
-        backgroundColor: '#CCCCCC',
-        '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
-            boxShadow: 'inherit'
-        },
-        '&:before': {
-            display: 'none'
-        }
+        backgroundColor: '#CCCCCC'
     },
     '&:before': {
         display: 'none'
     }
+
+/*  '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
+        boxShadow: 'inherit'
+    },
+    '&:before': {
+        display: 'none'
+    }
+*/
 });
 
-export default function CustomSlider({ value, setValue, valueMirror }) {
+export default function CustomSlider({ value, setValue, valueMirror, minimum, maximum }) {
     const error = useState(0);
 
     const handleSliderChange = (e, newValue) => {
@@ -41,8 +43,8 @@ export default function CustomSlider({ value, setValue, valueMirror }) {
             value={value}
             valueLabelDisplay="off"
             step={1}
-            min={0}
-            max={10}
+            min={minimum}
+            max={maximum}
             marks
             onChange={handleSliderChange}
             error={error}

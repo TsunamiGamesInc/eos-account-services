@@ -196,13 +196,7 @@ export function TooltipButtonSmall(props) {
     );
 }
 
-export function CheckoutButton({ children, keyCopied, setOpen }) {
-    const postData = {
-        accountName: "hi",
-        recieverPubKey: "hi",
-        ramQuantity: "hi"
-    };
-
+export function CheckoutButton({ children, keyCopied, setOpen, postData }) {
     const handleClick = () => {
         if (!keyCopied) {
             setOpen(true)

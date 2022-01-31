@@ -27,12 +27,12 @@ export default function NavBar({ totalPrice }) {
                     <Box sx={{ height: '15vh' }} />
                 </Grid>
                 <Grid item xs={12}>
-                    <Link to="/app/create-account" style={{ textDecoration: 'none' }}>
+                    <Link to="/app/create-account.html" style={{ textDecoration: 'none' }}>
                         <CustomButtons txt="Create Account" />
                     </Link>
                 </Grid>
                 <Grid item xs={12}>
-                    <Link to="/app/resources" style={{ textDecoration: 'none' }}>
+                    <Link to="/app/resources.html" style={{ textDecoration: 'none' }}>
                         <CustomButtonNoTopBorder txt="Get RAM" />
                     </Link>
                 </Grid>
@@ -59,6 +59,7 @@ export default function NavBar({ totalPrice }) {
                     <Grid item xs={9} />
                     <Grid item xs={1.25}>
                         <IconButton
+                            aria-label="Questions?"
                             sx={{
                                 padding: "0px 0px 10px 0px", "&:hover": {
                                     backgroundColor: 'transparent'
@@ -70,6 +71,7 @@ export default function NavBar({ totalPrice }) {
                     </Grid>
                     <Grid item xs={1.25}>
                         <IconButton
+                        aria-label="Github"
                             sx={{
                                 padding: "0px 0px 10px 0px", "&:hover": {
                                     backgroundColor: 'transparent'

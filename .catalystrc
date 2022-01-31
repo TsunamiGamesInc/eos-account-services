@@ -10,16 +10,16 @@
   "projects": [
     {
       "idx": 1,
-      "id": "8389000000008001",
+      "id": "8980000000003010",
       "name": "eos-account-services",
       "domain": {
-        "id": "10034928106",
-        "name": "eos-account-services-765726851.development"
+        "id": "10037326947",
+        "name": "eos-account-services-770624113.development"
       },
       "env": [
         {
           "idx": 1,
-          "id": "765726851",
+          "id": "770624113",
           "name": "Development",
           "type": 3
         }

@@ -5,11 +5,10 @@ import { SliderTextField } from '../CustomTextFields';
 import CustomSliders from '../CustomSliders';
 import { RecommendedButton, CheckoutButton } from '../CustomButtons';
 import CustomCheckBox from '../CustomCheckbox';
-import ConditionalLink from '../ConditionalLink';
 import CustomAlert from '../CustomAlerts';
 
 export default function ResourcesValidNameComponentsOne({
-    ramQuantity, setRamQuantity, ramQuantityMirror, totalPrice }) {
+    ramQuantity, setRamQuantity, ramQuantityMirror, postData, totalPrice }) {
     const [keyCopied, setKeyCopied] = React.useState(false);
     const [open, setOpen] = React.useState(false);
 
@@ -28,7 +27,8 @@ export default function ResourcesValidNameComponentsOne({
                 </Grid>
             </Grid>
             <Grid item xs={12}>
-                <CustomSliders value={ramQuantity} setValue={setRamQuantity} valueMirror={ramQuantityMirror} />
+                <CustomSliders
+                    value={ramQuantity} setValue={setRamQuantity} valueMirror={ramQuantityMirror} minimum={1} maximum={30} />
             </Grid>
             <Grid item xs={12}>
                 <Box sx={{ height: '1vh' }} />
@@ -47,11 +47,9 @@ export default function ResourcesValidNameComponentsOne({
                 <CustomCheckBox keyCopied={keyCopied} setKeyCopied={setKeyCopied} label="My account name is correct and I understand this can't be refunded" />
             </Grid>
             <Grid item xs={12}>
-                <ConditionalLink to="/app/checkout" condition={keyCopied}>
-                    <CheckoutButton keyCopied={keyCopied} setOpen={setOpen}>
-                        {"Pay " + totalPrice}
-                    </CheckoutButton>
-                </ConditionalLink>
+                <CheckoutButton keyCopied={keyCopied} setOpen={setOpen} postData={postData}>
+                    {"Pay " + totalPrice}
+                </CheckoutButton>
             </Grid>
         </>
     );
@@ -64,7 +62,7 @@ export function ResourcesValidNameComponentsTwo({ setRamQuantity, ramQuantityMir
                 <Box sx={{ width: '90px' }}>
                     <Grid container>
                         <Grid item xs={12}>
-                            <Box sx={{ height: '16vh' }} />
+                            <Box sx={{ height: '17vh' }} />
                         </Grid>
                         <Grid item xs={12}>
                             <Box sx={{ height: '85px' }} />
@@ -73,7 +71,7 @@ export function ResourcesValidNameComponentsTwo({ setRamQuantity, ramQuantityMir
                             <Box sx={{ height: '112px' }}>
                                 <Grid container spacing={4}>
                                     <Grid item xs={12}>
-                                        <SliderTextField setValue={setRamQuantity} valueMirror={ramQuantityMirror} maxValue={999} endAdornmentText="KB" />
+                                        <SliderTextField setValue={setRamQuantity} valueMirror={ramQuantityMirror} endAdornmentText="KB" />
                                     </Grid>
                                 </Grid>
                             </Box>

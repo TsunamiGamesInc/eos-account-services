@@ -4,8 +4,8 @@ import Box from '@mui/material/Box';
 import { ResourcesTextField } from '../CustomTextFields';
 import ResourcesValidName, { ResourcesValidNameComponentsTwo } from './ResourcesValidName.js'
 
-export default function ResourcesComponents({ ramQuantity, setRamQuantity,
-    accountName, setAccountName, validName, setValidName, totalPrice }) {
+export default function ResourcesComponents({ accountName, setAccountName, validName, setValidName,
+    ramQuantity, setRamQuantity, postData, totalPrice }) {
     let ramQuantityMirror = ramQuantity;
 
     return (
@@ -18,13 +18,13 @@ export default function ResourcesComponents({ ramQuantity, setRamQuantity,
                     <ResourcesTextField accountName={accountName} setAccountName={setAccountName} setValidName={setValidName} />
                 </Grid>
                 <Grid item xs={12}>
-                    <Box sx={{ height: '1vh' }} />
+                    <Box sx={{ height: '1.1vh' }} />
                 </Grid>
                 {!validName &&
                     <Grid item xs={12} container spacing={0}>
                         <Grid item xs={12}>
                             <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16, padding: '12px 0px 0px 0px' }}>
-                                Getting resources is as easy as typing your account name.
+                                Getting RAM is as easy as typing your account name.
                             </p>
                         </Grid>
                         <Grid item xs={12}>
@@ -37,7 +37,8 @@ export default function ResourcesComponents({ ramQuantity, setRamQuantity,
                 {validName &&
                     <ResourcesValidName
                         ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
-                        ramQuantityMirror={ramQuantityMirror} totalPrice={totalPrice}
+                        ramQuantityMirror={ramQuantityMirror}
+                        postData={postData} totalPrice={totalPrice}
                     />}
             </Grid>
             {validName &&

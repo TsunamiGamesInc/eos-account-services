@@ -4,8 +4,8 @@ import Box from '@mui/material/Box';
 import CustomTextField from '../CustomTextFields';
 import ValidName, { ValidNameComponentsTwo } from './CreateAccountValidName.js'
 
-export default function CreateAccountComponents({ ramQuantity, setRamQuantity,
-    accountName, setAccountName, validName, setValidName, setRecieverPubKey, totalPrice }) {
+export default function CreateAccountComponents({ accountName, setAccountName, validName, setValidName,
+    ramQuantity, setRamQuantity, setRecieverPubKey, postData, totalPrice }) {
     let ramQuantityMirror = ramQuantity;
 
     return (
@@ -18,7 +18,7 @@ export default function CreateAccountComponents({ ramQuantity, setRamQuantity,
                     <CustomTextField accountName={accountName} setAccountName={setAccountName} setValidName={setValidName} />
                 </Grid>
                 <Grid item xs={12}>
-                    <Box sx={{ height: '1vh' }} />
+                    <Box sx={{ height: '1.1vh' }} />
                 </Grid>
                 {!validName &&
                     <Grid item xs={12} container spacing={0}>
@@ -29,7 +29,7 @@ export default function CreateAccountComponents({ ramQuantity, setRamQuantity,
                         </Grid>
                         <Grid item xs={12}>
                             <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
-                                EOS names are 12 characters long (A through Z, 1 through 5).
+                                EOS names are 12 characters long (a-z, 1-5).
                             </p>
                         </Grid>
                         <Grid item xs={12}>
@@ -43,7 +43,8 @@ export default function CreateAccountComponents({ ramQuantity, setRamQuantity,
                     <ValidName
                         ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
                         ramQuantityMirror={ramQuantityMirror}
-                        setRecieverPubKey={setRecieverPubKey} totalPrice={totalPrice}
+                        setRecieverPubKey={setRecieverPubKey}
+                        postData={postData} totalPrice={totalPrice}
                     />}
             </Grid>
             {validName &&

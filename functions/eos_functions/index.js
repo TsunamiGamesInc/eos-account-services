@@ -1,37 +1,26 @@
 var express = require('express');
 var app = express();
-const stripe = require('stripe')('');
-const endpointSecret = '';
-//const path = require('path');
-//var catalyst = require('zcatalyst-sdk-node');
 
 var declareModule = require('/JS Projects/eos-account-services/functions/eos_functions/declare');
-var api = declareModule.api;
+const api = declareModule.api;
+const stripeKeys = declareModule.stripeKeys;
 
-//app.use(express.json());
+const stripe = require('stripe')(stripeKeys.apiKey);
+const endpointSecret = stripeKeys.webhookKey;
 
 app.post('/create-checkout-session', express.json(), async (req, res) => {
-    console.log(req.postData)
     const session = await stripe.checkout.sessions.create({
-        line_items: [
-            {
-                price: '',
-                quantity: 1
-            }
-        ],
+        line_items: req.body.lineItems,
         mode: 'payment',
-        success_url: 'http://localhost:3000/app/?success=true',
-        cancel_url: 'http://localhost:3000/app/?canceled=true'
+        success_url: 'http://localhost:3000/app/thank-you?'
+            + req.body.accountDetails.accountName + '?' + req.body.accountDetails.ramQuantity,
+        cancel_url: 'http://localhost:3000/app/?canceled=true',
+        metadata: req.body.accountDetails
     })
 
-    //res.redirect(303, session.url)
     res.status(303)
-    res.send({redirect: session.url})
+    res.send({ redirect: session.url })
 })
-
-const fulfillOrder = (session, lineItems) => {
-    console.log(lineItems)
-}
 
 app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
     const payload = req.body;
@@ -52,7 +41,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
         stripe.checkout.sessions.listLineItems(
             session.id,
             { limit: 100 },
-            function(err, lineItems) {
+            function (err, lineItems) {
                 try {
                     fulfillOrder(session, lineItems)
                 }
@@ -66,36 +55,24 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
     res.status(200).end()
 })
 
-app.post('/createAccount', async (req, res) => {
-    createAccount()
-        .then(buyRAM(req.accountName, req.ramQuantity))
-        .then(buyRAM('ipfkoutwqois', 0.128))
-        .then(result => {
-            res.send(result)
-        }).catch(err => {
-            sendErrorResponse(res)
-        })
-})
+const fulfillOrder = (session, lineItems) => {
+    let itemsOrdered = "";
+    lineItems.data.forEach(function (currentItem) {
+        itemsOrdered += currentItem.price.product
+    })
 
-app.post('/getRAM', async (req, res) => {
-    buyRAM(req.accountName, req.ramQuantity)
-        .then(buyRAM('ipfkoutwqois', 0.128))
-        .then(result => {
-            res.send(result)
-        }).catch(err => {
-            sendErrorResponse(res)
-        })
-})
+    if (itemsOrdered.includes(stripeKeys.eosAccountID)) {
+        createAccount(session.metadata.accountName, session.metadata.recieverPubKey)
+            .catch(console.log("There was an error! Contact: info@eosaccountservices.com"))
+        buyRAM('ipfkoutwqois', 0.128)
+            .catch(console.log("There was an error! Contact: info@eosaccountservices.com"))
+    }
 
-/* app.post('/transfer', async (req, res) => {
-    transferEOS(req.accountName, req.value)
-        .then(result => {
-            res.send(result)
-        })
-        .catch(err => {
-            sendErrorResponse(res)
-        })
-}) */
+    if (itemsOrdered.includes(stripeKeys.eosRAMID)) {
+        buyRAM(session.metadata.accountName, session.metadata.ramQuantity)
+            .catch(console.log("There was an error! Contact: info@eosaccountservices.com"))
+    }
+}
 
 function sendErrorResponse(res) {
     res.status(500)
@@ -104,7 +81,7 @@ function sendErrorResponse(res) {
     });
 }
 
-function createAccount({ accountName, recieverPubKey }) {
+function createAccount(accountName, recieverPubKey) {
     return (
         (async () => {
             await api.transact({
@@ -112,11 +89,11 @@ function createAccount({ accountName, recieverPubKey }) {
                     account: 'eosio',
                     name: 'newaccount',
                     authorization: [{
-                        actor: 'ipfkoutwqois',
+                        actor: 'tsunamigames',
                         permission: 'active'
                     }],
                     data: {
-                        creator: 'ipfkoutwqois',
+                        creator: 'tsunamigames',
                         name: accountName,
                         owner: {
                             threshold: 1,
@@ -146,7 +123,7 @@ function createAccount({ accountName, recieverPubKey }) {
     );
 }
 
-function buyRAM({ accountName, ramQuantity }) {
+function buyRAM(accountName, ramQuantity) {
     return (
         (async () => {
             await api.transact({
@@ -154,11 +131,11 @@ function buyRAM({ accountName, ramQuantity }) {
                     account: 'eosio',
                     name: 'buyrambytes',
                     authorization: [{
-                        actor: 'ipfkoutwqois',
+                        actor: 'tsunamigames',
                         permission: 'active',
                     }],
                     data: {
-                        payer: 'ipfkoutwqois',
+                        payer: 'tsunamigames',
                         receiver: accountName,
                         bytes: (ramQuantity * 1000)
                     }

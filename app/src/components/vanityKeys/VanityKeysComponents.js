@@ -17,7 +17,7 @@ export default function VanityKeysComponents({ validName, setValidName, reciever
                     <VanityTextField vanityName={vanityName} setVanityName={setVanityName} setValidName={setValidName} />
                 </Grid>
                 <Grid item xs={12}>
-                    <Box sx={{ height: '1vh' }} />
+                    <Box sx={{ height: '1.1vh' }} />
                 </Grid>
                 {!validName &&
                     <Grid item xs={12} container spacing={0}>

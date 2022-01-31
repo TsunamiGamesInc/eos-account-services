@@ -9,7 +9,7 @@ import { GenerateKey } from '../EosClient';
 import CustomAlert from '../CustomAlerts';
 
 export default function ValidNameComponentsOne({
-    ramQuantity, setRamQuantity, ramQuantityMirror, setRecieverPubKey, totalPrice }) {
+    ramQuantity, setRamQuantity, ramQuantityMirror, setRecieverPubKey, postData, totalPrice }) {
     const [keyCopied, setKeyCopied] = React.useState(false);
     const [open, setOpen] = React.useState(false);
     const [recieverPrivKey, setRecieverPrivKey] = React.useState("Error! Please do not proceed.");
@@ -33,7 +33,8 @@ export default function ValidNameComponentsOne({
                 </Grid>
             </Grid>
             <Grid item xs={12}>
-                <CustomSliders value={ramQuantity} setValue={setRamQuantity} valueMirror={ramQuantityMirror} />
+                <CustomSliders
+                    value={ramQuantity} setValue={setRamQuantity} valueMirror={ramQuantityMirror} minimum={0} maximum={10} />
             </Grid>
             <Grid item xs={12}>
                 <Box sx={{ height: '2vh' }} />
@@ -61,7 +62,7 @@ export default function ValidNameComponentsOne({
                 <CustomCheckBox keyCopied={keyCopied} setKeyCopied={setKeyCopied} label="I have saved my password and understand it cannot be recovered" />
             </Grid>
             <Grid item xs={12}>
-                <CheckoutButton keyCopied={keyCopied} setOpen={setOpen}>
+                <CheckoutButton keyCopied={keyCopied} setOpen={setOpen} postData={postData}>
                     {"Pay " + totalPrice}
                 </CheckoutButton>
             </Grid>
@@ -85,7 +86,7 @@ export function ValidNameComponentsTwo({ setRamQuantity, ramQuantityMirror }) {
                             <Box sx={{ height: '112px' }}>
                                 <Grid container spacing={4}>
                                     <Grid item xs={12}>
-                                        <SliderTextField setValue={setRamQuantity} valueMirror={ramQuantityMirror} maxValue={999} endAdornmentText="KB" />
+                                        <SliderTextField setValue={setRamQuantity} valueMirror={ramQuantityMirror} endAdornmentText="KB" />
                                     </Grid>
                                 </Grid>
                             </Box>
