@@ -1,4 +1,4 @@
-import React, { lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
@@ -79,8 +79,13 @@ function App() {
               /* content="EOS Account Creator, Premium Names, Create Custom Token, Create NFTs, Vanity Keys, Credit Card" */
               />
             </Helmet>
+            <Suspense fallback={
+              <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16, padding: '12px 0px 0px 0px' }}>
+                Loading...
+              </p>
+            }>
               <Routes>
-              <Route path="/app" element={
+                <Route path="/app" element={
                   <CreateAccount
                     accountName={accountName} setAccountName={setAccountName}
                     ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
@@ -125,6 +130,7 @@ function App() {
                   <RouteNotFound />
                 } />
               </Routes>
+            </Suspense>
           </BrowserRouter>
         </Typography>
       </ThemeProvider>

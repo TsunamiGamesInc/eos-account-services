@@ -337,5 +337,8 @@ ASALocalRun/
 client/
 build/
 
+# Catalystrc
+*.catalystrc
+
 # Text Files
 *.txt

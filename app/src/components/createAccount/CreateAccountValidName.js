@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { SliderTextField } from '../CustomTextFields';
-import CustomSliders from '../CustomSliders';
+import CustomSliders, { CustomSliderMobile } from '../CustomSliders';
 import { RecommendedButton, TooltipButtonSmall, CheckoutButton } from '../CustomButtons';
 import CustomCheckBox from '../CustomCheckbox';
 import { GenerateKey } from '../EosClient';
@@ -32,9 +32,11 @@ export default function ValidNameComponentsOne({
                     <RecommendedButton ramQuantity={ramQuantity} setRamQuantity={setRamQuantity} />
                 </Grid>
             </Grid>
-            <Grid item xs={12}>
-                <CustomSliders
-                    value={ramQuantity} setValue={setRamQuantity} valueMirror={ramQuantityMirror} minimum={0} maximum={10} />
+            <Grid item xs={12} display={{ xs: 'none', md: 'block' }}>
+                <CustomSliders value={ramQuantity} setValue={setRamQuantity} minimum={0} maximum={10} />
+            </Grid>
+            <Grid item xs={12} display={{ xs: 'block', md: 'none' }}>
+                <CustomSliderMobile value={ramQuantity} setValue={setRamQuantity} minimum={0} maximum={10} />
             </Grid>
             <Grid item xs={12}>
                 <Box sx={{ height: '2vh' }} />
@@ -81,6 +83,9 @@ export function ValidNameComponentsTwo({ setRamQuantity, ramQuantityMirror }) {
                         </Grid>
                         <Grid item xs={12}>
                             <Box sx={{ height: '85px' }} />
+                        </Grid>
+                        <Grid item xs={12} display={{ xs: 'block', md: 'none' }}>
+                            <Box sx={{ height: '20px' }} />
                         </Grid>
                         <Grid item xs={12}>
                             <Box sx={{ height: '112px' }}>

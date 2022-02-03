@@ -8,25 +8,26 @@ import { ReactComponent as CloseIconSm } from '../images/close-icon-sm.svg';
 
 const StyledButton = withStyles({
     root: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "48px",
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '48px',
         minWidth: '100%',
         maxWidth: '100%',
-        padding: "20px 50px",
-        boxSizing: "border-box",
-        borderColor: "#fff",
-        borderRadius: "10px",
-        color: "#fff",
-        transition: "background .3s,border-color .30s, color .3s",
-        fontSize: "16px",
+        padding: '20px 50px',
+        boxSizing: 'border-box',
+        borderColor: '#fff',
+        borderRadius: '10px',
+        color: '#fff',
+        transition: 'background .3s,border-color .30s, color .3s',
+        fontSize: '16px',
         "&:hover": {
-            backgroundColor: "#2DB2FF"
+            backgroundColor: '#2DB2FF'
         }
     },
     label: {
-        textTransform: "capitalize",
+        textTransform: 'capitalize',
+        overflowX: 'hidden'
     }
 })(Button);
 
@@ -189,7 +190,7 @@ export function TooltipButtonSmall(props) {
                 onClick={ChangeText}
                 style={{
                     height: '16px',
-                    padding: "16px 50px",
+                    padding: "16px 10px",
                     fontSize: "14px",
                 }}>{props.txt}</StyledButton>
         </Tooltip>
@@ -211,7 +212,7 @@ export function CheckoutButton({ children, keyCopied, setOpen, postData }) {
             })
                 .then(res => res.json())
                 .then(session => {
-                    window.location.href = session.redirect
+                    window.location.assign(session.redirect)
                 })
         }
     }

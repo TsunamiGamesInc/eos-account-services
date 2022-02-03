@@ -10,7 +10,7 @@ const stripeDetailsPath = path.resolve(__dirname, './files/stripeDetails.txt');
 const stripeHoldover = fs.readFileSync(stripeDetailsPath, 'utf-8');
 const stripeKeys = JSON.parse(stripeHoldover);
 
-const endpoint = 'https://api.testnet.eos.io';
+const endpoint = 'https://eos.greymass.com';
 const creatorKeyPath = path.resolve(__dirname, './files/creatorKey.txt');
 const keyHoldover = fs.readFileSync(creatorKeyPath, 'utf-8');
 const creatorKey = [keyHoldover];

@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
+import ResourcesComponents from '../components/resources/ResourcesComponents';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import NavBar from '../components/NavBar';
-import ResourcesComponents from '../components/resources/ResourcesComponents';
-import { Helmet } from 'react-helmet';
+import CustomDrawer from '../components/CustomDrawer';
 
 export default function Resources({ accountName, setAccountName, validName, setValidName,
     ramQuantity, setRamQuantity, totalPrice, setTotalPrice }) {
@@ -49,7 +50,7 @@ export default function Resources({ accountName, setAccountName, validName, setV
                 />
                 <meta
                     name="keywords"
-                    content="EOS RAM, Credit Card"
+                    content="Buy EOS RAM, Credit Card"
                 />
             </Helmet>
             <Grid container spacing={4} justifyContent="center">
@@ -68,6 +69,9 @@ export default function Resources({ accountName, setAccountName, validName, setV
                             postData={postData} totalPrice={totalPrice}
                         />
                     </Box>
+                </Grid>
+                <Grid item display={{ xs: 'block', lg: 'none' }}>
+                    <CustomDrawer />
                 </Grid>
             </Grid>
         </div>

@@ -1,16 +1,12 @@
 {
-  "short_name": "EOS Account Services",
   "name": "EOS Account Services",
+  "short_name": "EOS Services",
+  "description": "Get the easiest and cheapest EOS account creation, plus quick EOS RAM, all with a credit card.",
   "icons": [
     {
       "src": "eos_tsunami.ico",
-      "sizes": "512x512",
+      "sizes": "32x32",
       "type": "image/x-icon"
-    },
-    {
-      "src": "eos_tsunami_512.png",
-      "sizes": "512x512",
-      "type": "image/png"
     },
     {
       "src": "eos_tsunami_192.png",
@@ -18,10 +14,15 @@
       "type": "image/png"
     },
     {
+      "src": "eos_tsunami_512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
       "src": "eos_tsunami_mask.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
     }
   ],
   "start_url": ".",

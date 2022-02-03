@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
+import CreateAccountComponents from '../components/createAccount/CreateAccountComponents';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import NavBar from '../components/NavBar';
-import CreateAccountComponents from '../components/createAccount/CreateAccountComponents';
-import { Helmet } from 'react-helmet';
+import CustomDrawer from '../components/CustomDrawer';
 
 export default function CreateAccount({ accountName, setAccountName, validName, setValidName,
     ramQuantity, setRamQuantity, recieverPubKey, setRecieverPubKey, totalPrice, setTotalPrice }) {
@@ -89,13 +90,13 @@ export default function CreateAccount({ accountName, setAccountName, validName, 
             </Helmet>
             <Grid container spacing={4} justifyContent="center">
                 <Grid item xl={2} display={{ xs: 'none', xl: 'block' }} />
-                <Grid item display={{ xs: 'none', lg: 'block' }}>
+                <Grid item display={{ xs: 'none', md: 'block' }}>
                     <Box sx={{ width: '250px' }}>
                         <NavBar totalPrice={totalPrice} />
                     </Box>
                 </Grid>
                 <Grid item xl={6}>
-                    <Box sx={{ zoom: { xs: '55%', sm: '100%' }, width: '525px' }}>
+                    <Box sx={{ zoom: { xs: '55%', md: '100%' }, width: '525px' }}>
                         <CreateAccountComponents
                             ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
                             accountName={accountName} setAccountName={setAccountName}
@@ -105,7 +106,12 @@ export default function CreateAccount({ accountName, setAccountName, validName, 
                         />
                     </Box>
                 </Grid>
+                <Grid item display={{ xs: 'block', md: 'none' }}>
+                    <CustomDrawer />
+                </Grid>
             </Grid>
         </div>
     );
 }
+
+// <Box sx={{ width: { xs: '405px', md: '525px' } }}>

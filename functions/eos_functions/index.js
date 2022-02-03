@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 
-var declareModule = require('/JS Projects/eos-account-services/functions/eos_functions/declare');
+var declareModule = require('./declare');
 const api = declareModule.api;
 const stripeKeys = declareModule.stripeKeys;
 
@@ -12,9 +12,8 @@ app.post('/create-checkout-session', express.json(), async (req, res) => {
     const session = await stripe.checkout.sessions.create({
         line_items: req.body.lineItems,
         mode: 'payment',
-        success_url: 'http://localhost:3000/app/thank-you?'
-            + req.body.accountDetails.accountName + '?' + req.body.accountDetails.ramQuantity,
-        cancel_url: 'http://localhost:3000/app/?canceled=true',
+        success_url: stripeKeys.successURL + req.body.accountDetails.accountName + '?' + req.body.accountDetails.ramQuantity,
+        cancel_url: stripeKeys.cancelURL,
         metadata: req.body.accountDetails
     })
 
@@ -30,8 +29,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
 
     try {
         event = stripe.webhooks.constructEvent(payload, sig, endpointSecret)
-    }
-    catch (err) {
+    } catch (err) {
         sendErrorResponse(res)
     }
 
@@ -44,8 +42,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
             function (err, lineItems) {
                 try {
                     fulfillOrder(session, lineItems)
-                }
-                catch (err) {
+                } catch (err) {
                     sendErrorResponse(res)
                 }
             }
@@ -55,22 +52,20 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
     res.status(200).end()
 })
 
-const fulfillOrder = (session, lineItems) => {
+async function fulfillOrder(session, lineItems) {
     let itemsOrdered = "";
     lineItems.data.forEach(function (currentItem) {
         itemsOrdered += currentItem.price.product
     })
 
     if (itemsOrdered.includes(stripeKeys.eosAccountID)) {
-        createAccount(session.metadata.accountName, session.metadata.recieverPubKey)
-            .catch(console.log("There was an error! Contact: info@eosaccountservices.com"))
-        buyRAM('ipfkoutwqois', 0.128)
-            .catch(console.log("There was an error! Contact: info@eosaccountservices.com"))
+        await createAccount(session.metadata.accountName, session.metadata.recieverPubKey)
+            .catch(err => console.log(err))
     }
 
     if (itemsOrdered.includes(stripeKeys.eosRAMID)) {
-        buyRAM(session.metadata.accountName, session.metadata.ramQuantity)
-            .catch(console.log("There was an error! Contact: info@eosaccountservices.com"))
+        await buyRAM(session.metadata.accountName, session.metadata.ramQuantity)
+            .catch(err => console.log(err))
     }
 }
 
@@ -81,71 +76,80 @@ function sendErrorResponse(res) {
     });
 }
 
-function createAccount(accountName, recieverPubKey) {
-    return (
-        (async () => {
-            await api.transact({
-                actions: [{
-                    account: 'eosio',
-                    name: 'newaccount',
-                    authorization: [{
-                        actor: 'tsunamigames',
-                        permission: 'active'
-                    }],
-                    data: {
-                        creator: 'tsunamigames',
-                        name: accountName,
-                        owner: {
-                            threshold: 1,
-                            keys: [{
-                                key: recieverPubKey,
-                                wight: 1
-                            }],
-                            accounts: [],
-                            waits: []
-                        },
-                        active: {
-                            threshold: 1,
-                            keys: [{
-                                key: recieverPubKey,
-                                wight: 1
-                            }],
-                            accounts: [],
-                            waits: []
-                        }
+async function createAccount(accountName, recieverPubKey) {
+    (async () => {
+        await api.transact({
+            actions: [{
+                account: 'eosio',
+                name: 'newaccount',
+                authorization: [{
+                    actor: 'serveaccount',
+                    permission: 'active'
+                }],
+                data: {
+                    creator: 'serveaccount',
+                    name: accountName,
+                    owner: {
+                        threshold: 1,
+                        keys: [{
+                            key: recieverPubKey,
+                            weight: 1
+                        }],
+                        accounts: [],
+                        waits: []
+                    },
+                    active: {
+                        threshold: 1,
+                        keys: [{
+                            key: recieverPubKey,
+                            weight: 1
+                        }],
+                        accounts: [],
+                        waits: []
                     }
-                }]
-            }, {
-                blocksBehind: 3,
-                expireSeconds: 30
-            });
-        })()
-    );
+                }
+            },
+            {
+                account: 'eosio',
+                name: 'buyrambytes',
+                authorization: [{
+                    actor: 'serveaccount',
+                    permission: 'active',
+                }],
+                data: {
+                    payer: 'serveaccount',
+                    receiver: accountName,
+                    bytes: 2296
+                }
+            }]
+        }, {
+            blocksBehind: 3,
+            expireSeconds: 30
+        });
+    })();
 }
 
-function buyRAM(accountName, ramQuantity) {
-    return (
-        (async () => {
-            await api.transact({
-                actions: [{
-                    account: 'eosio',
-                    name: 'buyrambytes',
-                    authorization: [{
-                        actor: 'tsunamigames',
-                        permission: 'active',
-                    }],
-                    data: {
-                        payer: 'tsunamigames',
-                        receiver: accountName,
-                        bytes: (ramQuantity * 1000)
-                    }
-                }]
-            }, {
-                blocksBehind: 3,
-                expireSeconds: 30
-            });
-        })()
-    );
+async function buyRAM(accountName, ramQuantity) {
+    (async () => {
+        await api.transact({
+            actions: [{
+                account: 'eosio',
+                name: 'buyrambytes',
+                authorization: [{
+                    actor: 'serveaccount',
+                    permission: 'active',
+                }],
+                data: {
+                    payer: 'serveaccount',
+                    receiver: accountName,
+                    bytes: (ramQuantity * 1000)
+                }
+            }]
+        }, {
+            blocksBehind: 3,
+            expireSeconds: 30
+        });
+    })();
 }
 
 /* export function deployContract({ accountName, wasmHexString, serializedAbiHexString }) {

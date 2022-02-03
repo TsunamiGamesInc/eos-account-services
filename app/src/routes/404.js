@@ -1,8 +1,9 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import NavBar from '../components/NavBar';
-import { Helmet } from 'react-helmet';
+import CustomDrawer from '../components/CustomDrawer';
 
 export default function RouteNotFound() {
     return (
@@ -50,6 +51,9 @@ export default function RouteNotFound() {
                             </Grid>
                         </Box>
                     </Grid>
+                </Grid>
+                <Grid item display={{ xs: 'block', lg: 'none' }}>
+                    <CustomDrawer />
                 </Grid>
             </Grid>
         </div>

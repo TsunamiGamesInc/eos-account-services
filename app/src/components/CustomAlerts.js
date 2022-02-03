@@ -13,7 +13,7 @@ export default function CustomAlert({ open, setOpen, text }) {
         return (
             <Grid container>
                 <Grid item xs={1.75} />
-                <Grid item xs={10} container>
+                <Grid item xs={10}>
                     <Snackbar
                         style={{
                             position: 'inherit'
@@ -50,28 +50,57 @@ export function InfoAlert({ infoOpen, setInfoOpen, text }) {
     }
 
     return (
-        <Grid container>
-            <Grid item xs={10} container>
-                <Snackbar
+        <Snackbar
+            style={{
+                position: 'inherit'
+            }}
+            open={infoOpen}
+            onClose={handleClose}
+            autoHideDuration={5000}>
+            <Box sx={{ padding: `5px 0px 0px 0px` }}>
+                <Alert
+                    severity="info"
                     style={{
-                        position: 'inherit'
-                    }}
-                    open={infoOpen}
-                    onClose={handleClose}
-                    autoHideDuration={5000}>
-                    <Alert
-                        severity="info"
-                        style={{
-                            fontFamily: 'Calibri',
-                            borderRadius: '10px',
-                            blockSize: '20px',
-                            padding: '0px 10px 15px 10px',
-                            fontSize: '15px'
-                        }}>
-                        {text}
-                    </Alert>
-                </Snackbar>
-            </Grid>
-        </Grid>
+                        fontFamily: 'Calibri',
+                        borderRadius: '10px',
+                        blockSize: '20px',
+                        padding: '0px 10px 15px 10px',
+                        fontSize: '15px'
+                    }}>
+                    {text}
+                </Alert>
+            </Box>
+        </Snackbar>
+    );
+}
+
+export function InfoAlertMobile({ infoOpen, setInfoOpen, text }) {
+    const handleClose = (e, reason) => {
+        setInfoOpen(false)
+    }
+
+    return (
+        <Snackbar
+            anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'center'
+            }}
+            open={infoOpen}
+            onClose={handleClose}
+            autoHideDuration={5000}>
+            <Box sx={{ padding: `5px 0px 0px 0px` }}>
+                <Alert
+                    severity="info"
+                    style={{
+                        fontFamily: 'Calibri',
+                        borderRadius: '10px',
+                        blockSize: '20px',
+                        padding: '0px 10px 15px 10px',
+                        fontSize: '15px'
+                    }}>
+                    {text}
+                </Alert>
+            </Box>
+        </Snackbar>
     );
 }

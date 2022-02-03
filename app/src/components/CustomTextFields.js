@@ -69,9 +69,9 @@ export default function CustomTextField({ accountName, setAccountName, setValidN
             setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
         }
         else if ((accountName.length === 12) && (icon !== checkIconMd)) {
-            GetAccountInfo(accountName, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle)
+            GetAccountInfo(accountName.toLowerCase(), setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle)
         }
-    }, [accountName, icon, setValidName, setAccountName])
+    }, [accountName, setAccountName, setValidName, icon])
 
     const onChange = (e) => {
         const newValue = e.target.value;
@@ -184,15 +184,10 @@ export function ResourcesTextField({ accountName, setAccountName, setValidName }
             setValidName(false)
             setTooltipTitle("12 characters (a-z, 1-5) or a premium name")
         }
-        else if (((accountName.length < 12) && (!accountName.includes('.'))) && (icon !== closeIconMd)) {
-            setIcon(closeIconMd)
-            setValidName(false)
-            setTooltipTitle("12 characters (a-z, 1-5) or a premium name")
+        else {
+            CheckExistingName(accountName.toLowerCase(), setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle)
         }
-        else if (((accountName.length === 12) || (accountName.includes('.'))) && (icon !== checkIconMd)) {
-            CheckExistingName(accountName, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle)
-        }
-    }, [accountName, icon, setValidName, setAccountName])
+    }, [accountName, setAccountName, setValidName, icon])
 
 
     const onChange = (e) => {
