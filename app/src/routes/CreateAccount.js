@@ -35,7 +35,7 @@ export default function CreateAccount({ accountName, setAccountName, validName, 
             setItems(
                 [
                     {
-                        price: 'price_1KLXPhAVYdsvCkiZzOz41XOl',
+                        price: 'price_1KK7ZXAVYdsvCkiZdawW9HoX',
                         quantity: 1,
                         description: "For Account: " + accountName
                     }
@@ -51,7 +51,7 @@ export default function CreateAccount({ accountName, setAccountName, validName, 
                         description: "Account Name: " + accountName
                     },
                     {
-                        price: 'price_1KLx2tAVYdsvCkiZ6U3mHNxW',
+                        price: 'price_1KQfYuAVYdsvCkiZEVuwDThX',
                         quantity: ramQuantity
                     }
                 ]
@@ -70,7 +70,7 @@ export default function CreateAccount({ accountName, setAccountName, validName, 
             accountPrice = formatter.format(1.89) + " USD"
         }
         else {
-            accountPrice = formatter.format(1.89 + (10 * 0.3 * ramQuantity)) + " USD"
+            accountPrice = formatter.format(1.89 + (0.3 * ramQuantity)) + " USD"
         }
         setTotalPrice(accountPrice)
     }, [validName, ramQuantity, setTotalPrice])

@@ -75,7 +75,7 @@ function App() {
               />
               <meta
                 name="keywords"
-                content="EOS Account Creator, EOS RAM, Credit Card, Cheap"
+                content="EOS Account Creator, EOS RAM, Credit Card, Cheap, Blockchain"
               /* content="EOS Account Creator, Premium Names, Create Custom Token, Create NFTs, Vanity Keys, Credit Card" */
               />
             </Helmet>
