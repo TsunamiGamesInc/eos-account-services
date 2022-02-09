@@ -142,7 +142,7 @@ export function CustomButtonNoRipple(props) {
     );
 } */
 
-export function ButtonSmallNoRipple(props) {
+/* export function ButtonSmallNoRipple(props) {
     return (
         <StyledButtonNoRipple
             variant="outlined"
@@ -154,7 +154,7 @@ export function ButtonSmallNoRipple(props) {
             }}
             disableRipple>{props.txt}</StyledButtonNoRipple>
     );
-}
+} */
 
 export function TooltipButtonSmall(props) {
     const [text, setText] = React.useState("Click to copy");

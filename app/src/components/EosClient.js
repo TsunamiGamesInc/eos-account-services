@@ -1,11 +1,11 @@
-import { JsonRpc } from 'eosjs';
+/* import { JsonRpc } from 'eosjs';
 import { ecc } from 'eosjs/dist/eosjs-ecc-migration';
 
 const endpoint = 'https://eos.greymass.com';
 const rpc = new JsonRpc(endpoint);
 
 export async function GenerateKey({ setRecieverPrivKey, setRecieverPubKey }) {
-    ecc.randomKey(undefined, { secureEnv: true })
+    await ecc.randomKey(undefined, { secureEnv: true })
         .then((privateKey) => {
             setRecieverPrivKey(privateKey)
             let publicKey = ecc.privateToPublic(privateKey)
@@ -40,7 +40,7 @@ export async function GetAccountInfoNoValid(recieverName, setIcon, checkIconMd, 
 }
 
 export async function CheckExistingName(recieverName, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle) {
-    rpc.get_account(recieverName)
+    await rpc.get_account(recieverName)
         .then(() => {
             setIcon(checkIconMd)
             setValidName(true)
@@ -51,11 +51,11 @@ export async function CheckExistingName(recieverName, setIcon, checkIconMd, clos
             setValidName(false)
             setTooltipTitle("That account doesn't exist!")
         });
-}
+} */
 
 //just for testing catalyst functions without building eosjs everytime
 
-/* export async function GenerateKey({ setRecieverPrivKey, setRecieverPubKey }) {
+export async function GenerateKey({ setRecieverPrivKey, setRecieverPubKey }) {
     setRecieverPrivKey("Hello")
     setRecieverPubKey("Hello")
 }
@@ -76,4 +76,3 @@ export async function CheckExistingName(recieverName, setIcon, checkIconMd, clos
     setValidName(true)
     setTooltipTitle("Found your account!")
 }
- */

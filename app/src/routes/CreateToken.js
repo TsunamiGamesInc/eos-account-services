@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+/* import React, { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import NavBar from '../components/NavBar';
@@ -44,3 +44,4 @@ export default function CreateToken({ tokenName, setTokenName, accountName, setA
         </Grid>
     );
 }
+ */

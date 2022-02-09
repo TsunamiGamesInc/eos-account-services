@@ -77,84 +77,78 @@ function sendErrorResponse(res) {
 }
 
 async function createAccount(accountName, recieverPubKey) {
-    (async () => {
-        await api.transact({
-            actions: [{
-                account: 'eosio',
-                name: 'newaccount',
-                authorization: [{
-                    actor: 'serveaccount',
-                    permission: 'active'
-                }],
-                data: {
-                    creator: 'serveaccount',
-                    name: accountName,
-                    owner: {
-                        threshold: 1,
-                        keys: [{
-                            key: recieverPubKey,
-                            weight: 1
-                        }],
-                        accounts: [],
-                        waits: []
-                    },
-                    active: {
-                        threshold: 1,
-                        keys: [{
-                            key: recieverPubKey,
-                            weight: 1
-                        }],
-                        accounts: [],
-                        waits: []
-                    }
+    await api.transact({
+        actions: [{
+            account: 'eosio',
+            name: 'newaccount',
+            authorization: [{
+                actor: 'serveaccount',
+                permission: 'active'
+            }],
+            data: {
+                creator: 'serveaccount',
+                name: accountName,
+                owner: {
+                    threshold: 1,
+                    keys: [{
+                        key: recieverPubKey,
+                        weight: 1
+                    }],
+                    accounts: [],
+                    waits: []
+                },
+                active: {
+                    threshold: 1,
+                    keys: [{
+                        key: recieverPubKey,
+                        weight: 1
+                    }],
+                    accounts: [],
+                    waits: []
                 }
-            },
-            {
-                account: 'eosio',
-                name: 'buyrambytes',
-                authorization: [{
-                    actor: 'serveaccount',
-                    permission: 'active',
-                }],
-                data: {
-                    payer: 'serveaccount',
-                    receiver: accountName,
-                    bytes: 2296
-                }
-            }]
-        }, {
-            blocksBehind: 3,
-            expireSeconds: 30
-        });
-    })();
+            }
+        },
+        {
+            account: 'eosio',
+            name: 'buyrambytes',
+            authorization: [{
+                actor: 'serveaccount',
+                permission: 'active',
+            }],
+            data: {
+                payer: 'serveaccount',
+                receiver: accountName,
+                bytes: 2296
+            }
+        }]
+    }, {
+        blocksBehind: 3,
+        expireSeconds: 30
+    });
 }
 
 async function buyRAM(accountName, ramQuantity) {
-    (async () => {
-        await api.transact({
-            actions: [{
-                account: 'eosio',
-                name: 'buyrambytes',
-                authorization: [{
-                    actor: 'serveaccount',
-                    permission: 'active',
-                }],
-                data: {
-                    payer: 'serveaccount',
-                    receiver: accountName,
-                    bytes: (ramQuantity * 1000)
-                }
-            }]
-        }, {
-            blocksBehind: 3,
-            expireSeconds: 30
-        });
-    })();
+    await api.transact({
+        actions: [{
+            account: 'eosio',
+            name: 'buyrambytes',
+            authorization: [{
+                actor: 'serveaccount',
+                permission: 'active',
+            }],
+            data: {
+                payer: 'serveaccount',
+                receiver: accountName,
+                bytes: (ramQuantity * 1000)
+            }
+        }]
+    }, {
+        blocksBehind: 3,
+        expireSeconds: 30
+    });
 }
 
 /* export function deployContract({ accountName, wasmHexString, serializedAbiHexString }) {
-    return (
-        (async () => {
             await api.transact({
                 actions: [
                     {
@@ -193,8 +187,6 @@ async function buyRAM(accountName, ramQuantity) {
                     blocksBehind: 3,
                     expireSeconds: 30
                 });
-        })()
-    );
 }
 
 export function createToken({ accountName, maxTokenSupply, tokenName }) {

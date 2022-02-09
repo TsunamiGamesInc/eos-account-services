@@ -18,9 +18,8 @@ const Resources = lazy(() => import('./routes/Resources'));
 const ThankYou = lazy(() => import('./routes/ThankYou'));
 const RouteNotFound = lazy(() => import('./routes/404')); */
 
-
-import CreateAccount from './routes/CreateAccount';
-import Resources from './routes/Resources';
+const CreateAccount = lazy(() => import('./routes/CreateAccount'));
+const Resources = lazy(() => import('./routes/Resources'));
 const ThankYou = lazy(() => import('./routes/ThankYou'));
 const RouteNotFound = lazy(() => import('./routes/404'));
 
@@ -36,19 +35,10 @@ const theme = createTheme({
   typography: {
     fontFamily: [
       'Calibri'
-    ],
-    h4: {
-      fontWeight: 600,
-      fontSize: 28,
-      lineHeight: '2rem',
-    },
-    h5: {
-      fontWeight: 100,
-      lineHeight: '2rem',
-    },
-    shape: {
-      borderRadius: '10px'
-    }
+    ]
+  },
+  shape: {
+    borderRadius: '10px'
   }
 });
 
@@ -79,11 +69,7 @@ function App() {
               /* content="EOS Account Creator, Premium Names, Create Custom Token, Create NFTs, Vanity Keys, Credit Card" */
               />
             </Helmet>
-            <Suspense fallback={
-              <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16, padding: '12px 0px 0px 0px' }}>
-                Loading...
-              </p>
-            }>
+            <Suspense fallback={<div></div>}>
               <Routes>
                 <Route path="/app" element={
                   <CreateAccount

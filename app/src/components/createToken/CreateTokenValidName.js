@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+/* import React, { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { TokenAccountTextField } from '../CustomTextFields';
@@ -92,3 +92,4 @@ export default function TokenValidNameComponent({
         </>
     );
 }
+ */

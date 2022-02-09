@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { TextField } from '@material-ui/core';
 import { SvgIcon } from '@mui/material';
@@ -6,7 +6,7 @@ import { ReactComponent as CheckIconMd } from '../images/check-icon-md.svg';
 import { ReactComponent as CloseIconMd } from '../images/close-icon-md.svg';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
-import GetAccountInfo, { CheckExistingName, GetAccountInfoNoValid } from './EosClient';
+import GetAccountInfo, { CheckExistingName } from './EosClient';
 
 const StyledTextField = withStyles({
     root: {
@@ -63,15 +63,15 @@ export default function CustomTextField({ accountName, setAccountName, setValidN
             setValidName(false)
             setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
         }
-        else if ((accountName.length < 12) && (icon !== closeIconMd)) {
+        else if (accountName.length < 12) {
             setIcon(closeIconMd)
             setValidName(false)
             setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
         }
-        else if ((accountName.length === 12) && (icon !== checkIconMd)) {
+        else if (accountName.length === 12) {
             GetAccountInfo(accountName.toLowerCase(), setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle)
         }
-    }, [accountName, setAccountName, setValidName, icon])
+    }, [accountName, setAccountName, setValidName])
 
     const onChange = (e) => {
         const newValue = e.target.value;
@@ -111,7 +111,7 @@ export default function CustomTextField({ accountName, setAccountName, setValidN
     )
 }
 
-export function TokenAccountTextField({ accountName, setAccountName }) {
+/* export function TokenAccountTextField({ accountName, setAccountName }) {
     const [error, setError] = useState("");
     const [icon, setIcon] = useState(null);
     const [tooltipTitle, setTooltipTitle] = useState("Exactly 12 characters (a-z, 1-5)");
@@ -171,24 +171,26 @@ export function TokenAccountTextField({ accountName, setAccountName }) {
             </Box>
         </Tooltip>
     )
-}
+} */
 
 export function ResourcesTextField({ accountName, setAccountName, setValidName }) {
     const [error, setError] = useState("");
     const [icon, setIcon] = useState(null);
     const [tooltipTitle, setTooltipTitle] = useState("Type your account name!");
+    const nameTimer = useRef(null);
 
     useEffect(() => {
         if (accountName.length === 0) {
+            clearTimeout(nameTimer.current)
             setIcon(null)
             setValidName(false)
             setTooltipTitle("12 characters (a-z, 1-5) or a premium name")
         }
         else {
-            CheckExistingName(accountName.toLowerCase(), setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle)
+            clearTimeout(nameTimer.current)
+            nameTimer.current = setTimeout(() => CheckExistingName(accountName.toLowerCase(), setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle), 1250)
         }
-    }, [accountName, setAccountName, setValidName, icon])
-
+    }, [accountName, setAccountName, setValidName, nameTimer])
 
     const onChange = (e) => {
         const newValue = e.target.value;
@@ -258,7 +260,7 @@ export function SliderTextField({ setValue, valueMirror, endAdornmentText }) {
     );
 }
 
-export function TokenTextField({ tokenName, setTokenName, setValidName }) {
+/* export function TokenTextField({ tokenName, setTokenName, setValidName }) {
     const [error, setError] = useState("");
     const [icon, setIcon] = useState(null);
     const [tooltipTitle, setTooltipTitle] = useState("3 to 7 characters, a-z only");
@@ -371,4 +373,4 @@ export function VanityTextField({ vanityName, setVanityName, setValidName }) {
             </Box>
         </Tooltip>
     )
-}
+} */
