@@ -2,21 +2,20 @@ import React, { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { SliderTextField } from '../CustomTextFields';
-import CustomSliders, { CustomSliderMobile } from '../CustomSliders';
+import CustomSliders from '../CustomSliders';
 import { RecommendedButton, TooltipButtonSmall, CheckoutButton } from '../CustomButtons';
 import CustomCheckBox from '../CustomCheckbox';
 import { GenerateKey } from '../EosClient';
 import CustomAlert from '../CustomAlerts';
 
 export default function ValidNameComponentsOne({
-    ramQuantity, setRamQuantity, ramQuantityMirror, setRecieverPubKey, postData, totalPrice }) {
+    ramQuantity, setRamQuantity, receiverPrivKey, setReceiverPrivKey, setReceiverPubKey, postData, totalPrice }) {
     const [keyCopied, setKeyCopied] = React.useState(false);
     const [open, setOpen] = React.useState(false);
-    const [recieverPrivKey, setRecieverPrivKey] = React.useState("Error! Please do not proceed.");
 
     useEffect(() => {
-        GenerateKey({ setRecieverPrivKey, setRecieverPubKey })
-    }, [setRecieverPrivKey, setRecieverPubKey])
+        GenerateKey({ setReceiverPrivKey, setReceiverPubKey })
+    }, [setReceiverPrivKey, setReceiverPubKey])
 
     return (
         <>
@@ -32,11 +31,9 @@ export default function ValidNameComponentsOne({
                     <RecommendedButton ramQuantity={ramQuantity} setRamQuantity={setRamQuantity} />
                 </Grid>
             </Grid>
-            <Grid item xs={12} display={{ xs: 'none', md: 'block' }}>
-                <CustomSliders value={ramQuantity} setValue={setRamQuantity} minimum={0} maximum={10} />
-            </Grid>
-            <Grid item xs={12} display={{ xs: 'block', md: 'none' }}>
-                <CustomSliderMobile value={ramQuantity} setValue={setRamQuantity} minimum={0} maximum={10} />
+            <Grid item xs={12}>
+                <CustomSliders
+                    value={ramQuantity} setValue={setRamQuantity} minimum={0} maximum={10} />
             </Grid>
             <Grid item xs={12}>
                 <Box sx={{ height: '2vh' }} />
@@ -45,7 +42,7 @@ export default function ValidNameComponentsOne({
                 <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}> Private Key/Password </p>
             </Grid>
             <Grid item xs={12}>
-                <TooltipButtonSmall txt={recieverPrivKey} />
+                <TooltipButtonSmall txt={receiverPrivKey} />
             </Grid>
             <Grid item xs={12}>
                 <Box sx={{ height: '1vh' }} />
@@ -57,11 +54,17 @@ export default function ValidNameComponentsOne({
             }
             {open &&
                 <Grid item xs={12}>
-                    <CustomAlert open={open} setOpen={setOpen} text={"Save this key - it cannot be recovered!"} />
+                    <CustomAlert
+                        open={open} setOpen={setOpen}
+                        label="Save this key - it cannot be recovered!"
+                        labelMobile="Save this key, it's important!" />
                 </Grid>
             }
             <Grid item xs={12}>
-                <CustomCheckBox keyCopied={keyCopied} setKeyCopied={setKeyCopied} label="I have saved my password and understand it cannot be recovered" />
+                <CustomCheckBox
+                    keyCopied={keyCopied} setKeyCopied={setKeyCopied}
+                    label="I have saved my password and understand it cannot be recovered"
+                    labelMobile="I saved my password knowing it cannot be recovered" />
             </Grid>
             <Grid item xs={12}>
                 <CheckoutButton keyCopied={keyCopied} setOpen={setOpen} postData={postData}>
@@ -75,7 +78,7 @@ export default function ValidNameComponentsOne({
 export function ValidNameComponentsTwo({ setRamQuantity, ramQuantityMirror }) {
     return (
         <>
-            <Grid item xs={2.5} container>
+            <Grid item xs={2.5} container display={{ xs: 'none', md: 'block' }}>
                 <Box sx={{ width: '90px' }}>
                     <Grid container>
                         <Grid item xs={12}>

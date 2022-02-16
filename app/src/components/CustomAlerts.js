@@ -4,7 +4,7 @@ import Alert from '@mui/material/Alert';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-export default function CustomAlert({ open, setOpen, text }) {
+export default function CustomAlert({ open, setOpen, label, labelMobile }) {
     const handleClose = (e, reason) => {
         setOpen(false)
     }
@@ -30,7 +30,14 @@ export default function CustomAlert({ open, setOpen, text }) {
                                 padding: '0px 10px 15px 10px',
                                 fontSize: '15px'
                             }}>
-                            {text}
+                            {<div>
+                                <Box display={{ xs: 'none', md: 'block' }}>
+                                    {label}
+                                </Box>
+                                <Box display={{ xs: 'block', md: 'none' }}>
+                                    {labelMobile}
+                                </Box>
+                            </div>}
                         </Alert>
                     </Snackbar>
                 </Grid>
@@ -44,7 +51,7 @@ export default function CustomAlert({ open, setOpen, text }) {
     }
 }
 
-export function InfoAlert({ infoOpen, setInfoOpen, text }) {
+export function InfoAlert({ infoOpen, setInfoOpen, label }) {
     const handleClose = (e, reason) => {
         setInfoOpen(false)
     }
@@ -67,14 +74,14 @@ export function InfoAlert({ infoOpen, setInfoOpen, text }) {
                         padding: '0px 10px 15px 10px',
                         fontSize: '15px'
                     }}>
-                    {text}
+                    {label}
                 </Alert>
             </Box>
         </Snackbar>
     );
 }
 
-export function InfoAlertMobile({ infoOpen, setInfoOpen, text }) {
+export function InfoAlertMobile({ infoOpen, setInfoOpen, label }) {
     const handleClose = (e, reason) => {
         setInfoOpen(false)
     }
@@ -98,7 +105,7 @@ export function InfoAlertMobile({ infoOpen, setInfoOpen, text }) {
                         padding: '0px 10px 15px 10px',
                         fontSize: '15px'
                     }}>
-                    {text}
+                    {label}
                 </Alert>
             </Box>
         </Snackbar>

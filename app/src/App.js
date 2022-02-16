@@ -5,21 +5,9 @@ import { Typography } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
 import './App.css';
 
-/*
-import CreateNFT from './routes/CreateNFT';
-const CreateToken = lazy(() => import('./routes/CreateToken'));
-const VanityKeys = lazy(() => import('./routes/VanityKeys'));
-import VanityKeys from './routes/VanityKeys';
-import CreateToken from './routes/CreateToken';
-*/
-
-/* const CreateAccount = lazy(() => import('./routes/CreateAccount'));
-const Resources = lazy(() => import('./routes/Resources'));
-const ThankYou = lazy(() => import('./routes/ThankYou'));
-const RouteNotFound = lazy(() => import('./routes/404')); */
-
 const CreateAccount = lazy(() => import('./routes/CreateAccount'));
 const Resources = lazy(() => import('./routes/Resources'));
+const VanityKeys = lazy(() => import('./routes/VanityKeys'));
 const ThankYou = lazy(() => import('./routes/ThankYou'));
 const RouteNotFound = lazy(() => import('./routes/404'));
 
@@ -47,7 +35,8 @@ function App() {
   const [accountName, setAccountName] = React.useState("");
   //const [tokenName, setTokenName] = React.useState("");
   const [validName, setValidName] = React.useState(false);
-  const [recieverPubKey, setRecieverPubKey] = React.useState("Error, please do not proceed.");
+  const [receiverPrivKey, setReceiverPrivKey] = React.useState("Your Private Key Will Be Displayed Here.");
+  const [receiverPubKey, setReceiverPubKey] = React.useState("Your Public Key Will Be Displayed Here.");
   const [totalPrice, setTotalPrice] = React.useState(0);
 
   return (
@@ -76,7 +65,8 @@ function App() {
                     accountName={accountName} setAccountName={setAccountName}
                     ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
                     validName={validName} setValidName={setValidName}
-                    recieverPubKey={recieverPubKey} setRecieverPubKey={setRecieverPubKey}
+                    receiverPrivKey={receiverPrivKey} setReceiverPrivKey={setReceiverPrivKey}
+                    receiverPubKey={receiverPubKey} setReceiverPubKey={setReceiverPubKey}
                     totalPrice={totalPrice} setTotalPrice={setTotalPrice} />
                 } />
                 <Route path="/app/create-account.html" element={
@@ -84,7 +74,8 @@ function App() {
                     accountName={accountName} setAccountName={setAccountName}
                     ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
                     validName={validName} setValidName={setValidName}
-                    recieverPubKey={recieverPubKey} setRecieverPubKey={setRecieverPubKey}
+                    receiverPrivKey={receiverPrivKey} setReceiverPrivKey={setReceiverPrivKey}
+                    receiverPubKey={receiverPubKey} setReceiverPubKey={setReceiverPubKey}
                     totalPrice={totalPrice} setTotalPrice={setTotalPrice} />
                 } />
                 <Route path="/app/resources.html" element={
@@ -93,22 +84,22 @@ function App() {
                     ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
                     validName={validName} setValidName={setValidName}
                     totalPrice={totalPrice} setTotalPrice={setTotalPrice} />} />
-                {/* <Route path="/app/create-token" element={
+                {/*                 <Route path="/app/create-token" element={
                   <CreateToken
                     tokenName={tokenName} setTokenName={setTokenName}
                     accountName={accountName} setAccountName={setAccountName}
                     validName={validName} setValidName={setValidName}
-                    setRecieverPubKey={setRecieverPubKey}
+                    setReceiverPubKey={setReceiverPubKey}
                     totalPrice={totalPrice} setTotalPrice={setTotalPrice} />} />
-                <Route path="/create-nft" element={<CreateNFT />} />
-                <Route path="/app/vanity-keys" element={
+                <Route path="/create-nft" element={<CreateNFT />} /> */}
+                <Route path="/app/vanity-keys.html" element={
                   <VanityKeys
-                    ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
                     accountName={accountName} setAccountName={setAccountName}
                     validName={validName} setValidName={setValidName}
-                    recieverPubKey={recieverPubKey} setRecieverPubKey={setRecieverPubKey}
+                    receiverPrivKey={receiverPrivKey} setReceiverPrivKey={setReceiverPrivKey}
+                    receiverPubKey={receiverPubKey} setReceiverPubKey={setReceiverPubKey}
                     totalPrice={totalPrice} setTotalPrice={setTotalPrice} />
-                } /> */}
+                } />
                 <Route path="/app/thank-you.html" element={
                   <ThankYou />
                 } />

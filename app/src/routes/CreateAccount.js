@@ -6,8 +6,8 @@ import Box from '@mui/material/Box';
 import NavBar from '../components/NavBar';
 import CustomDrawer from '../components/CustomDrawer';
 
-export default function CreateAccount({ accountName, setAccountName, validName, setValidName,
-    ramQuantity, setRamQuantity, recieverPubKey, setRecieverPubKey, totalPrice, setTotalPrice }) {
+export default function CreateAccount({ accountName, setAccountName, validName, setValidName, ramQuantity, setRamQuantity,
+    receiverPrivKey, setReceiverPrivKey, receiverPubKey, setReceiverPubKey, totalPrice, setTotalPrice }) {
     const [items, setItems] = React.useState(
         [
             {
@@ -25,7 +25,7 @@ export default function CreateAccount({ accountName, setAccountName, validName, 
         accountDetails: {
             accountName: accountName,
             ramQuantity: ramQuantity,
-            recieverPubKey: recieverPubKey,
+            receiverPubKey: receiverPubKey,
         },
         lineItems: items
     };
@@ -96,12 +96,13 @@ export default function CreateAccount({ accountName, setAccountName, validName, 
                     </Box>
                 </Grid>
                 <Grid item xl={6}>
-                    <Box sx={{ zoom: { xs: '55%', md: '100%' }, width: '525px' }}>
+                    <Box sx={{ width: { xs: '410px', md: '525px' }}}>
                         <CreateAccountComponents
                             ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
                             accountName={accountName} setAccountName={setAccountName}
                             validName={validName} setValidName={setValidName}
-                            setRecieverPubKey={setRecieverPubKey}
+                            receiverPrivKey={receiverPrivKey} setReceiverPrivKey={setReceiverPrivKey}
+                            setReceiverPubKey={setReceiverPubKey}
                             postData={postData} totalPrice={totalPrice}
                         />
                     </Box>

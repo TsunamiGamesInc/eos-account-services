@@ -2,13 +2,12 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { SliderTextField } from '../CustomTextFields';
-import CustomSliders, { CustomSliderMobile } from '../CustomSliders';
+import CustomSliders from '../CustomSliders';
 import { RecommendedButton, CheckoutButton } from '../CustomButtons';
 import CustomCheckBox from '../CustomCheckbox';
 import CustomAlert from '../CustomAlerts';
 
-export default function ResourcesValidNameComponentsOne({
-    ramQuantity, setRamQuantity, ramQuantityMirror, postData, totalPrice }) {
+export default function ResourcesValidNameComponentsOne({ ramQuantity, setRamQuantity, postData, totalPrice }) {
     const [keyCopied, setKeyCopied] = React.useState(false);
     const [open, setOpen] = React.useState(false);
 
@@ -26,12 +25,9 @@ export default function ResourcesValidNameComponentsOne({
                     <RecommendedButton ramQuantity={ramQuantity} setRamQuantity={setRamQuantity} />
                 </Grid>
             </Grid>
-            <Grid item xs={12} display={{ xs: 'none', md: 'block' }}>
+            <Grid item xs={12}>
                 <CustomSliders
                     value={ramQuantity} setValue={setRamQuantity} minimum={1} maximum={30} />
-            </Grid>
-            <Grid item xs={12} display={{ xs: 'block', md: 'none' }}>
-                <CustomSliderMobile value={ramQuantity} setValue={setRamQuantity} minimum={1} maximum={30} />
             </Grid>
             <Grid item xs={12}>
                 <Box sx={{ height: '1vh' }} />
@@ -43,14 +39,17 @@ export default function ResourcesValidNameComponentsOne({
             }
             {open &&
                 <Grid item xs={12}>
-                    <CustomAlert open={open} setOpen={setOpen} text={"Check you typed the name correctly!"} />
+                    <CustomAlert
+                        open={open} setOpen={setOpen}
+                        label="Check you typed the name correctly!"
+                        labelMobile="Ensure the name is correct!" />
                 </Grid>
             }
-            <Grid item xs={12} display={{ xs: 'none', md: 'block' }}>
-                <CustomCheckBox keyCopied={keyCopied} setKeyCopied={setKeyCopied} label="My account name is correct and I understand this can't be refunded" />
-            </Grid>
-            <Grid item xs={12} display={{ xs: 'block', md: 'none' }}>
-                <CustomCheckBox keyCopied={keyCopied} setKeyCopied={setKeyCopied} label="I'm certain my account name is correct" />
+            <Grid item xs={12}>
+                <CustomCheckBox
+                    keyCopied={keyCopied} setKeyCopied={setKeyCopied}
+                    label="My account name is correct and I understand this can't be refunded"
+                    labelMobile="My account name is correct, this can't be refunded" />
             </Grid>
             <Grid item xs={12}>
                 <CheckoutButton keyCopied={keyCopied} setOpen={setOpen} postData={postData}>
@@ -64,7 +63,7 @@ export default function ResourcesValidNameComponentsOne({
 export function ResourcesValidNameComponentsTwo({ setRamQuantity, ramQuantityMirror }) {
     return (
         <>
-            <Grid item xs={2.5} container>
+            <Grid item xs={2.5} container display={{ xs: 'none', md: 'block' }}>
                 <Box sx={{ width: '90px' }}>
                     <Grid container>
                         <Grid item xs={12}>

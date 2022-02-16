@@ -120,15 +120,33 @@ export function CustomButtonNoRipple(props) {
     );
 }
 
-/* export function VanityButtonSmall({ vanityName, recieverPrivKey, setRecieverPrivKey, setRecieverPubKey }) {
-    const [vanityText, setVanityText] = React.useState("Generate Vanity Key");
-    const [keysCreated, setKeysCreated] = React.useState(0);
-
+let timer;
+let counter = 0;
+export function VanityButtonSmall({ accountName, vkWorker }) {
     function handleClick() {
-        let testers = "Searching... " + keysCreated + " keys created";
-        setVanityText(testers)
-        //GenerateVanityKey(vanityName, { keysCreated, setKeysCreated, setVanityText, setRecieverPrivKey, setRecieverPubKey })
+        clearInterval(timer)
+        counter = 0
+        document.getElementById("wait").innerHTML = "Searching..."
+        timer = setInterval(displayTimer, 1000)
+
+        function displayTimer() {
+            if (document.getElementById("wait").innerHTML.startsWith("F")) {
+                clearInterval(timer)
+            }
+            else {
+                counter++
+                document.getElementById("wait").innerHTML = "Search time: " + counter + " second(s)."
+            }
+        }
+
+        for (var i = 0; i < 6; i++) {
+            vkWorker[i].postMessage({ accountName: accountName })
+        }
     }
+
+    useEffect(() => () => {
+        clearInterval(timer)
+    }, [])
 
     return (
         <StyledButton
@@ -136,11 +154,14 @@ export function CustomButtonNoRipple(props) {
             onClick={handleClick}
             style={{
                 height: '16px',
-                padding: "16px 50px",
+                minWidth: '180px',
+                maxWidth: '180px',
+                padding: "16px 10px",
                 fontSize: "14px",
-            }}>{vanityText}</StyledButton>
+                backgroundColor: '#2DB2FF'
+            }}>Generate Vanity Key</StyledButton>
     );
-} */
+}
 
 /* export function ButtonSmallNoRipple(props) {
     return (

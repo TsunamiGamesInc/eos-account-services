@@ -36,16 +36,16 @@ export default function NavBar({ totalPrice }) {
                         <CustomButtonNoTopBorder txt="Get RAM" />
                     </Link>
                 </Grid>
-                {/*                 <Grid item xs={12}>
+{/*                 <Grid item xs={12}>
                     <Link to="/app/create-token" style={{ textDecoration: 'none' }}>
                         <CustomButtonNoTopBorder txt="Create Custom Token" />
                     </Link>
-                </Grid>
+                </Grid> */}
                 <Grid item xs={12}>
-                    <Link to="/app/vanity-keys" style={{ textDecoration: 'none' }}>
+                    <Link to="/app/vanity-keys.html" style={{ textDecoration: 'none' }}>
                         <CustomButtonNoTopBorder txt="Vanity Keys" />
                     </Link>
-                </Grid> */}
+                </Grid>
                 <Grid item xs={12}>
                     <Box sx={{ height: '5vh' }} />
                 </Grid>
@@ -86,7 +86,7 @@ export default function NavBar({ totalPrice }) {
                 </Grid>
                 <Grid item xs={12}>
                     <InfoAlert
-                        infoOpen={infoOpen} setInfoOpen={setInfoOpen} text={"info@eosaccountservices.com"}
+                        infoOpen={infoOpen} setInfoOpen={setInfoOpen} label={"info@eosaccountservices.com"}
                     />
                 </Grid>
             </Grid>
@@ -159,7 +159,7 @@ export function NavBarMobile() {
                 </Grid>
                 <Grid item xs={12}>
                     <InfoAlertMobile
-                        infoOpen={infoOpen} setInfoOpen={setInfoOpen} text={"info@eosaccountservices.com"}
+                        infoOpen={infoOpen} setInfoOpen={setInfoOpen} label={"info@eosaccountservices.com"}
                     />
                 </Grid>
             </Grid>

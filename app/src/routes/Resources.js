@@ -11,8 +11,7 @@ export default function Resources({ accountName, setAccountName, validName, setV
     let postData = {
         accountDetails: {
             accountName: accountName,
-            ramQuantity: ramQuantity,
-            recieverPubKey: undefined,
+            ramQuantity: ramQuantity
         },
         lineItems:
             [
@@ -59,13 +58,13 @@ export default function Resources({ accountName, setAccountName, validName, setV
             </Helmet>
             <Grid container spacing={4} justifyContent="center">
                 <Grid item xl={2} display={{ xs: 'none', xl: 'block' }} />
-                <Grid item display={{ xs: 'none', lg: 'block' }}>
+                <Grid item display={{ xs: 'none', md: 'block' }}>
                     <Box sx={{ width: '250px' }}>
                         <NavBar totalPrice={totalPrice} />
                     </Box>
                 </Grid>
                 <Grid item xl={6}>
-                    <Box sx={{ zoom: { xs: '55%', sm: '100%' }, width: '525px' }}>
+                    <Box sx={{ width: { xs: '410px', md: '525px' }}}>
                         <ResourcesComponents
                             ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
                             accountName={accountName} setAccountName={setAccountName}
@@ -74,7 +73,7 @@ export default function Resources({ accountName, setAccountName, validName, setV
                         />
                     </Box>
                 </Grid>
-                <Grid item display={{ xs: 'block', lg: 'none' }}>
+                <Grid item display={{ xs: 'block', md: 'none' }}>
                     <CustomDrawer />
                 </Grid>
             </Grid>

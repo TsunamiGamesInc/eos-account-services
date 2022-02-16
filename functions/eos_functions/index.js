@@ -12,7 +12,7 @@ app.post('/create-checkout-session', express.json(), async (req, res) => {
     const session = await stripe.checkout.sessions.create({
         line_items: req.body.lineItems,
         mode: 'payment',
-        success_url: stripeKeys.successURL + req.body.accountDetails.accountName + '?' + req.body.accountDetails.ramQuantity,
+        success_url: stripeKeys.successURL + req.body.accountDetails.accountName + '?' + req.body.accountDetails.ramQuantity + '?' + req.body.accountDetails.receiverPrivKeyEnd,
         cancel_url: stripeKeys.cancelURL,
         metadata: req.body.accountDetails
     })
@@ -59,7 +59,7 @@ async function fulfillOrder(session, lineItems) {
     })
 
     if (itemsOrdered.includes(stripeKeys.eosAccountID)) {
-        await createAccount(session.metadata.accountName, session.metadata.recieverPubKey)
+        await createAccount(session.metadata.accountName, session.metadata.receiverPubKey)
             .catch(err => console.log(err))
     }
 
@@ -76,7 +76,7 @@ function sendErrorResponse(res) {
     });
 }
 
-async function createAccount(accountName, recieverPubKey) {
+async function createAccount(accountName, receiverPubKey) {
     await api.transact({
         actions: [{
             account: 'eosio',
@@ -91,7 +91,7 @@ async function createAccount(accountName, recieverPubKey) {
                 owner: {
                     threshold: 1,
                     keys: [{
-                        key: recieverPubKey,
+                        key: receiverPubKey,
                         weight: 1
                     }],
                     accounts: [],
@@ -100,7 +100,7 @@ async function createAccount(accountName, recieverPubKey) {
                 active: {
                     threshold: 1,
                     keys: [{
-                        key: recieverPubKey,
+                        key: receiverPubKey,
                         weight: 1
                     }],
                     accounts: [],

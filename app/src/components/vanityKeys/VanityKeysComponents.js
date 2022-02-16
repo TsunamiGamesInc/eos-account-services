@@ -1,11 +1,11 @@
-/* import React, { useState } from 'react';
+import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { VanityTextField } from '../CustomTextFields';
 import VanityKeysValidName from './VanityKeysValidName.js'
 
-export default function VanityKeysComponents({ validName, setValidName, recieverPubKey, setRecieverPubKey, totalPrice }) {
-    const [vanityName, setVanityName] = useState("")
+export default function VanityKeysComponents({ accountName, setAccountName, validName, setValidName,
+    receiverPrivKey, receiverPubKey, vkWorker, postData, totalPrice }) {
 
     return (
         <Grid container spacing={3}>
@@ -14,7 +14,7 @@ export default function VanityKeysComponents({ validName, setValidName, reciever
                     <Box sx={{ height: '15vh', backgroundColor: 'transparent' }} />
                 </Grid>
                 <Grid item xs={12}>
-                    <VanityTextField vanityName={vanityName} setVanityName={setVanityName} setValidName={setValidName} />
+                    <VanityTextField accountName={accountName} setAccountName={setAccountName} setValidName={setValidName} />
                 </Grid>
                 <Grid item xs={12}>
                     <Box sx={{ height: '1.1vh' }} />
@@ -23,12 +23,12 @@ export default function VanityKeysComponents({ validName, setValidName, reciever
                     <Grid item xs={12} container spacing={0}>
                         <Grid item xs={12}>
                             <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16, padding: '12px 0px 0px 0px' }}>
-                                Customize your public key with anything you'd like!
+                                Customize your public key with any prefix!
                             </p>
                         </Grid>
                         <Grid item xs={12}>
                             <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
-                                Up to 5 characters (A through Z, 1 through 9).
+                                Up to 5 characters (a through Z, 1 through 9).
                             </p>
                         </Grid>
                         <Grid item xs={12}>
@@ -40,10 +40,11 @@ export default function VanityKeysComponents({ validName, setValidName, reciever
                 }
                 {validName &&
                     <VanityKeysValidName
-                        vanityName={vanityName} recieverPubKey={recieverPubKey} setRecieverPubKey={setRecieverPubKey} totalPrice={totalPrice}
+                        accountName={accountName}
+                        receiverPrivKey={receiverPrivKey} receiverPubKey={receiverPubKey}
+                        vkWorker={vkWorker} postData={postData} totalPrice={totalPrice}
                     />}
             </Grid>
         </Grid >
     );
 }
- */

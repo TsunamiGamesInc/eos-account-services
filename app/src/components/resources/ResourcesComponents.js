@@ -24,7 +24,7 @@ export default function ResourcesComponents({ accountName, setAccountName, valid
                     <Grid item xs={12} container spacing={0}>
                         <Grid item xs={12}>
                             <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16, padding: '12px 0px 0px 0px' }}>
-                                Getting RAM is as easy as typing your account name.
+                                Getting RAM is as easy as typing your name.
                             </p>
                         </Grid>
                         <Grid item xs={12}>
@@ -37,7 +37,6 @@ export default function ResourcesComponents({ accountName, setAccountName, valid
                 {validName &&
                     <ResourcesValidName
                         ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
-                        ramQuantityMirror={ramQuantityMirror}
                         postData={postData} totalPrice={totalPrice}
                     />}
             </Grid>

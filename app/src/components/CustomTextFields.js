@@ -63,15 +63,15 @@ export default function CustomTextField({ accountName, setAccountName, setValidN
             setValidName(false)
             setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
         }
-        else if (accountName.length < 12) {
+        else if ((accountName.length < 12) && (icon !== closeIconMd)) {
             setIcon(closeIconMd)
             setValidName(false)
             setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
         }
-        else if (accountName.length === 12) {
+        else if ((accountName.length === 12)  && (icon !== checkIconMd)) {
             GetAccountInfo(accountName.toLowerCase(), setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle)
         }
-    }, [accountName, setAccountName, setValidName])
+    }, [accountName, setAccountName, setValidName, icon])
 
     const onChange = (e) => {
         const newValue = e.target.value;
@@ -188,9 +188,13 @@ export function ResourcesTextField({ accountName, setAccountName, setValidName }
         }
         else {
             clearTimeout(nameTimer.current)
-            nameTimer.current = setTimeout(() => CheckExistingName(accountName.toLowerCase(), setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle), 1250)
+            nameTimer.current = setTimeout(() => CheckExistingName(accountName.toLowerCase(), setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle), 1000)
         }
     }, [accountName, setAccountName, setValidName, nameTimer])
+
+    useEffect(() => () => {
+        clearTimeout(nameTimer.current)
+    }, [])
 
     const onChange = (e) => {
         const newValue = e.target.value;
@@ -319,35 +323,40 @@ export function SliderTextField({ setValue, valueMirror, endAdornmentText }) {
             </Box>
         </Tooltip>
     )
-}
+} */
 
-export function VanityTextField({ vanityName, setVanityName, setValidName }) {
+export function VanityTextField({ accountName, setAccountName, setValidName }) {
     const [error, setError] = useState("");
     const [icon, setIcon] = useState(null);
-    const [tooltipTitle, setTooltipTitle] = useState("1 to 5 characters (a-z, 0-9)");
+    const [tooltipTitle, setTooltipTitle] = useState("1 to 5 characters (a-z, 1-9)");
 
     useEffect(() => {
-        if (vanityName.length === 0) {
+        if (accountName.length > 5) {
+            let truncName = accountName.substring(0, 5)
+            setAccountName(truncName)
+        }
+
+        if (accountName.length === 0) {
             setIcon(null)
             setValidName(false)
-            setTooltipTitle("1 to 5 characters (a-z, 0-9)")
+            setTooltipTitle("1 to 5 characters (a-z, 1-9)")
         }
-        else if ((vanityName.length > 0) && (icon !== checkIconMd)) {
+        else if ((accountName.length > 0) && (icon !== checkIconMd)) {
             setIcon(checkIconMd)
             setValidName(true)
             setTooltipTitle("Matching keys available!")
         }
-    }, [vanityName, icon, setValidName, setVanityName])
+    }, [accountName, setValidName, setAccountName, icon])
 
     const onChange = (e) => {
         const newValue = e.target.value;
 
-        if ((!newValue.match(/[a-zA-Z1-5]/)) || (newValue === "")) {
+        if ((newValue.slice(-1).match(/[a-zA-Z1-9]/)) || (newValue === "")) {
             setError("")
-            setVanityName(newValue)
+            setAccountName(newValue)
         }
         else {
-            setError("a-z, 0-9 only")
+            setError("a-z, 1-9 only")
         }
     };
 
@@ -358,7 +367,7 @@ export function VanityTextField({ vanityName, setVanityName, setValidName }) {
                     variant="outlined"
                     aria-label="Choose a prefix!"
                     label="Choose a prefix!"
-                    value={vanityName}
+                    value={accountName}
                     onChange={onChange}
                     helperText={error}
                     error={!!error}
@@ -373,4 +382,4 @@ export function VanityTextField({ vanityName, setVanityName, setValidName }) {
             </Box>
         </Tooltip>
     )
-} */
+}

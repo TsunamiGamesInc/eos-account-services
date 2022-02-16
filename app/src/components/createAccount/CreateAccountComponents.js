@@ -5,7 +5,7 @@ import CustomTextField from '../CustomTextFields';
 import ValidName, { ValidNameComponentsTwo } from './CreateAccountValidName.js'
 
 export default function CreateAccountComponents({ accountName, setAccountName, validName, setValidName,
-    ramQuantity, setRamQuantity, setRecieverPubKey, postData, totalPrice }) {
+    ramQuantity, setRamQuantity, receiverPrivKey, setReceiverPrivKey, setReceiverPubKey, postData, totalPrice }) {
     let ramQuantityMirror = ramQuantity;
 
     return (
@@ -42,8 +42,8 @@ export default function CreateAccountComponents({ accountName, setAccountName, v
                 {validName &&
                     <ValidName
                         ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
-                        ramQuantityMirror={ramQuantityMirror}
-                        setRecieverPubKey={setRecieverPubKey}
+                        receiverPrivKey={receiverPrivKey} setReceiverPrivKey={setReceiverPrivKey}
+                        setReceiverPubKey={setReceiverPubKey}
                         postData={postData} totalPrice={totalPrice}
                     />}
             </Grid>
