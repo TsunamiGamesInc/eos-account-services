@@ -11,13 +11,13 @@ export default function ThankYou() {
     const blokURL = 'https://bloks.io/account/' + thankYouArray[1];
     const purchasedItems = [false, false, false, false];
 
-    if (thankYouArray[1] !== undefined) {
+    if (thankYouArray[1] !== "undefined") {
         purchasedItems[1] = true
     }
-    if (thankYouArray[2] !== 0) {
+    if (thankYouArray[2] !== "undefined") {
         purchasedItems[2] = true
     }
-    if (thankYouArray[3] !== undefined) {
+    if (thankYouArray[3] !== "undefined") {
         purchasedItems[3] = true
     }
 
@@ -42,46 +42,72 @@ export default function ThankYou() {
                     </Box>
                 </Grid>
                 <Grid item xl={6}>
-                    <Grid item xs={12}>
-                        <Box sx={{ height: '15vh' }} />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Box sx={{ width: '400px' }}>
+                    <Box sx={{ width: '300px' }}>
+                        <Grid item xs={12}>
+                            <Box sx={{ height: '15vh' }} />
+                        </Grid>
+                        <Grid item xs={12}>
                             <Grid container>
                                 <Grid item xs={12}>
                                     <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
                                         Success! Thank you.
                                     </p>
                                 </Grid>
-                                <Grid item xs={12}>
-                                    {purchasedItems[1] &&
+                                {purchasedItems[1] &&
+                                    <Grid item xs={12}>
                                         <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
                                             You can view your account <a href={blokURL}>here.</a>
                                         </p>
-                                    }
-                                </Grid>
-                                <Grid item xs={12}>
-                                    {purchasedItems[2] &&
+                                    </Grid>
+                                }
+                                {purchasedItems[2] &&
+                                    <Grid item xs={12}>
                                         <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
                                             Enjoy your {thankYouArray[2]} KB of RAM!
                                         </p>
-                                    }
-                                </Grid>
-                                <Grid item xs={12}>
-                                    {purchasedItems[3] &&
-                                        <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
-                                            Replace "--" with "{thankYouArray[3]}" at the end of your saved private key.
-                                        </p>
-                                    }
-                                </Grid>
+                                    </Grid>
+                                }
+                                {purchasedItems[3] &&
+                                    <VanityKeyInstructions thankYouArray={thankYouArray} />
+                                }
                             </Grid>
-                        </Box>
-                    </Grid>
+                        </Grid>
+                    </Box>
                 </Grid>
                 <Grid item display={{ xs: 'block', md: 'none' }}>
                     <CustomDrawer />
                 </Grid>
             </Grid>
         </div>
+    );
+}
+
+function VanityKeyInstructions({ thankYouArray }) {
+    const saltLetter = thankYouArray[3].substring(0, 1);
+    const letterPlacement = (Number(thankYouArray[3].substring(1)) + 1);
+
+    return (
+        <Grid item xs={12} container spacing={0.25}>
+            <Grid item xs={12}>
+                <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
+                    1. Count <b style={{ color: '#0083FF' }}>{letterPlacement}</b> characters into your private key
+                </p>
+            </Grid>
+            <Grid item xs={12}>
+                <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
+                    2. You will arrive at <b style={{ color: '#0083FF' }}>{saltLetter}</b>
+                </p>
+            </Grid>
+            <Grid item xs={12}>
+                <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
+                    3. Delete <b style={{ color: '#0083FF' }}>{saltLetter}</b>
+                </p>
+            </Grid>
+            <Grid item xs={12}>
+                <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
+                    4. Your private key is now valid
+                </p>
+            </Grid>
+        </Grid>
     );
 }

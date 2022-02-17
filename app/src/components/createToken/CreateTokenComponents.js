@@ -1,4 +1,4 @@
-/* import React from 'react';
+import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { TokenTextField } from '../CustomTextFields';
@@ -48,4 +48,3 @@ export default function CreateTokenComponents({ tokenName, setTokenName, account
         </Grid >
     );
 }
- */

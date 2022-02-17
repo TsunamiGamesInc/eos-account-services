@@ -10,22 +10,6 @@ import Worker from 'worker-loader!../components/vanityKeys/VanityKeyWorker.js';
 
 export default function VanityKeys({ accountName, setAccountName, validName, setValidName,
     receiverPrivKey, setReceiverPrivKey, receiverPubKey, setReceiverPubKey, totalPrice, setTotalPrice }) {
-    let receiverPrivKeyEnd = receiverPrivKey.substring(49, 51); //only the last two characters ever leave the browser
-    let postData = {
-        accountDetails: {
-            receiverPrivKeyEnd: receiverPrivKeyEnd,
-            receiverPubKey: receiverPubKey,
-        },
-        lineItems:
-            [
-                {
-                    price: 'price_1KTbKoAVYdsvCkiZSQlyplsF',
-                    quantity: 1,
-                    description: "Vanity Key: " + receiverPubKey
-                }
-            ]
-    };
-
     const vkWorker = [];
 
     for (var i = 0; i < 6; i++) {
@@ -65,6 +49,43 @@ export default function VanityKeys({ accountName, setAccountName, validName, set
         setTotalPrice(accountPrice)
     }, [validName, setTotalPrice])
 
+    let salt;
+    let placement;
+    let saltedPrivKey;
+    if (!receiverPrivKey.startsWith("Y")) {
+        salt = (Math.random() + 1).toString(36).substring(3, 4)
+        if ((salt === "0") || (salt === "o")) {
+            salt = "j"
+        }
+    
+        const capitalize = Math.random()
+        if (capitalize > 0.5) {
+            salt = salt.toUpperCase()
+        }
+    
+        placement = (Math.floor(Math.random() * 47) + 4)
+        saltedPrivKey = [receiverPrivKey.slice(0, placement), salt, receiverPrivKey.slice(placement)].join('')
+        salt = (salt + placement)
+    }
+    else {
+        saltedPrivKey = receiverPrivKey
+    }
+
+    let postData = {
+        accountDetails: {
+            salt: salt,
+            receiverPubKey: receiverPubKey,
+        },
+        lineItems:
+            [
+                {
+                    price: 'price_1KTbKoAVYdsvCkiZSQlyplsF',
+                    quantity: 1,
+                    description: "Vanity Key: " + receiverPubKey
+                }
+            ]
+    };
+
     return (
         <div>
             <Helmet>
@@ -90,8 +111,9 @@ export default function VanityKeys({ accountName, setAccountName, validName, set
                         <VanityKeysComponents
                             accountName={accountName} setAccountName={setAccountName}
                             validName={validName} setValidName={setValidName}
-                            receiverPrivKey={receiverPrivKey} receiverPubKey={receiverPubKey}
-                            vkWorker={vkWorker} postData={postData} totalPrice={totalPrice}
+                            receiverPubKey={receiverPubKey}
+                            saltedPrivKey={saltedPrivKey} vkWorker={vkWorker}
+                            postData={postData} totalPrice={totalPrice}
                         />
                     </Box>
                 </Grid>

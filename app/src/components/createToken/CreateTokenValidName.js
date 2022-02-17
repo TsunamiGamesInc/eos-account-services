@@ -1,11 +1,10 @@
-/* import React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { TokenAccountTextField } from '../CustomTextFields';
 import { TooltipButtonSmall, CheckoutButton } from '../CustomButtons';
 import CustomCheckBox from '../CustomCheckbox';
 import { GenerateKey } from '../EosClient';
-import ConditionalLink from '../ConditionalLink';
 import CustomAlert from '../CustomAlerts';
 
 export default function TokenValidNameComponent({
@@ -83,13 +82,10 @@ export default function TokenValidNameComponent({
                 <CustomCheckBox keyCopied={keyCopied} setKeyCopied={setKeyCopied} label="I have saved my password and understand it cannot be recovered" />
             </Grid>
             <Grid item xs={12}>
-                <ConditionalLink to="/app/checkout" condition={keyCopied}>
-                    <CheckoutButton keyCopied={keyCopied} setOpen={setOpen}>
-                        {"Pay " + totalPrice}
-                    </CheckoutButton>
-                </ConditionalLink>
+                <CheckoutButton keyCopied={keyCopied} setOpen={setOpen}>
+                    {"Pay " + totalPrice}
+                </CheckoutButton>
             </Grid>
         </>
     );
 }
- */

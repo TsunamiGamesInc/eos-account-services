@@ -224,6 +224,7 @@ export function CheckoutButton({ children, keyCopied, setOpen, postData }) {
             setOpen(true)
         }
         else {
+            children = "Processing..."
             fetch('/server/eos_functions/create-checkout-session', {
                 method: 'POST',
                 headers: {

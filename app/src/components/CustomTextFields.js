@@ -6,7 +6,7 @@ import { ReactComponent as CheckIconMd } from '../images/check-icon-md.svg';
 import { ReactComponent as CloseIconMd } from '../images/close-icon-md.svg';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
-import GetAccountInfo, { CheckExistingName } from './EosClient';
+import GetAccountInfo, { CheckExistingName, GetAccountInfoNoValid } from './EosClient';
 
 const StyledTextField = withStyles({
     root: {
@@ -111,7 +111,7 @@ export default function CustomTextField({ accountName, setAccountName, setValidN
     )
 }
 
-/* export function TokenAccountTextField({ accountName, setAccountName }) {
+export function TokenAccountTextField({ accountName, setAccountName }) {
     const [error, setError] = useState("");
     const [icon, setIcon] = useState(null);
     const [tooltipTitle, setTooltipTitle] = useState("Exactly 12 characters (a-z, 1-5)");
@@ -171,7 +171,7 @@ export default function CustomTextField({ accountName, setAccountName, setValidN
             </Box>
         </Tooltip>
     )
-} */
+}
 
 export function ResourcesTextField({ accountName, setAccountName, setValidName }) {
     const [error, setError] = useState("");
@@ -264,7 +264,7 @@ export function SliderTextField({ setValue, valueMirror, endAdornmentText }) {
     );
 }
 
-/* export function TokenTextField({ tokenName, setTokenName, setValidName }) {
+export function TokenTextField({ tokenName, setTokenName, setValidName }) {
     const [error, setError] = useState("");
     const [icon, setIcon] = useState(null);
     const [tooltipTitle, setTooltipTitle] = useState("3 to 7 characters, a-z only");
@@ -323,7 +323,7 @@ export function SliderTextField({ setValue, valueMirror, endAdornmentText }) {
             </Box>
         </Tooltip>
     )
-} */
+}
 
 export function VanityTextField({ accountName, setAccountName, setValidName }) {
     const [error, setError] = useState("");

@@ -6,7 +6,7 @@ import CustomCheckBox from '../CustomCheckbox';
 import CustomAlert from '../CustomAlerts';
 
 export default function VanityKeysValidNameComponent({
-    accountName, receiverPrivKey, receiverPubKey, vkWorker, postData, totalPrice }) {
+    accountName, receiverPubKey, saltedPrivKey, vkWorker, postData, totalPrice }) {
     const [keyCopied, setKeyCopied] = React.useState(false);
     const [open, setOpen] = React.useState(false);
 
@@ -34,7 +34,7 @@ export default function VanityKeysValidNameComponent({
                 </p>
             </Grid>
             <Grid item xs={12}>
-                <DisplayPrivKey receiverPrivKey={receiverPrivKey} />
+                <TooltipButtonSmall txt={saltedPrivKey} />
             </Grid>
             <Grid item xs={12}>
                 <Box sx={{ height: '1vh' }} />
@@ -116,19 +116,6 @@ function DisplayPubKey({ accountName, receiverPubKey }) {
                     </p>
                 </Box>
             </>
-        );
-    }
-}
-
-function DisplayPrivKey({ receiverPrivKey }) {
-    if (receiverPrivKey.startsWith("Y")) {
-        return (
-            <TooltipButtonSmall txt={receiverPrivKey} />
-        );
-    }
-    else {
-        return (
-            <TooltipButtonSmall txt={receiverPrivKey.substring(0, 49) + "--"} />
         );
     }
 }

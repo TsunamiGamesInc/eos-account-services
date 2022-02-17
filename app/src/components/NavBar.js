@@ -36,14 +36,14 @@ export default function NavBar({ totalPrice }) {
                         <CustomButtonNoTopBorder txt="Get RAM" />
                     </Link>
                 </Grid>
-{/*                 <Grid item xs={12}>
-                    <Link to="/app/create-token" style={{ textDecoration: 'none' }}>
-                        <CustomButtonNoTopBorder txt="Create Custom Token" />
-                    </Link>
-                </Grid> */}
                 <Grid item xs={12}>
                     <Link to="/app/vanity-keys.html" style={{ textDecoration: 'none' }}>
                         <CustomButtonNoTopBorder txt="Vanity Keys" />
+                    </Link>
+                </Grid>
+                <Grid item xs={12}>
+                    <Link to="/app/create-token.html" style={{ textDecoration: 'none' }}>
+                        <CustomButtonNoTopBorder txt="Create Custom Token" />
                     </Link>
                 </Grid>
                 <Grid item xs={12}>

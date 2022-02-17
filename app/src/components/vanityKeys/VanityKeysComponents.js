@@ -5,7 +5,7 @@ import { VanityTextField } from '../CustomTextFields';
 import VanityKeysValidName from './VanityKeysValidName.js'
 
 export default function VanityKeysComponents({ accountName, setAccountName, validName, setValidName,
-    receiverPrivKey, receiverPubKey, vkWorker, postData, totalPrice }) {
+    receiverPubKey, saltedPrivKey, vkWorker, postData, totalPrice }) {
 
     return (
         <Grid container spacing={3}>
@@ -41,8 +41,9 @@ export default function VanityKeysComponents({ accountName, setAccountName, vali
                 {validName &&
                     <VanityKeysValidName
                         accountName={accountName}
-                        receiverPrivKey={receiverPrivKey} receiverPubKey={receiverPubKey}
-                        vkWorker={vkWorker} postData={postData} totalPrice={totalPrice}
+                        receiverPubKey={receiverPubKey}
+                        saltedPrivKey={saltedPrivKey} vkWorker={vkWorker}
+                        postData={postData} totalPrice={totalPrice}
                     />}
             </Grid>
         </Grid >

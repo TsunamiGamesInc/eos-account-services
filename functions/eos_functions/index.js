@@ -12,7 +12,10 @@ app.post('/create-checkout-session', express.json(), async (req, res) => {
     const session = await stripe.checkout.sessions.create({
         line_items: req.body.lineItems,
         mode: 'payment',
-        success_url: stripeKeys.successURL + req.body.accountDetails.accountName + '?' + req.body.accountDetails.ramQuantity + '?' + req.body.accountDetails.receiverPrivKeyEnd,
+        success_url:
+            stripeKeys.successURL + req.body.accountDetails.accountName
+            + '?' + req.body.accountDetails.ramQuantity
+            + '?' + req.body.accountDetails.salt,
         cancel_url: stripeKeys.cancelURL,
         metadata: req.body.accountDetails
     })

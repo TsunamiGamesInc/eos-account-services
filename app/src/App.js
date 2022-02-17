@@ -8,6 +8,7 @@ import './App.css';
 const CreateAccount = lazy(() => import('./routes/CreateAccount'));
 const Resources = lazy(() => import('./routes/Resources'));
 const VanityKeys = lazy(() => import('./routes/VanityKeys'));
+const CreateToken = lazy(() => import('./routes/CreateToken'));
 const ThankYou = lazy(() => import('./routes/ThankYou'));
 const RouteNotFound = lazy(() => import('./routes/404'));
 
@@ -33,7 +34,7 @@ const theme = createTheme({
 function App() {
   const [ramQuantity, setRamQuantity] = React.useState(5);
   const [accountName, setAccountName] = React.useState("");
-  //const [tokenName, setTokenName] = React.useState("");
+  const [tokenName, setTokenName] = React.useState("");
   const [validName, setValidName] = React.useState(false);
   const [receiverPrivKey, setReceiverPrivKey] = React.useState("Your Private Key Will Be Displayed Here.");
   const [receiverPubKey, setReceiverPubKey] = React.useState("Your Public Key Will Be Displayed Here.");
@@ -84,14 +85,14 @@ function App() {
                     ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
                     validName={validName} setValidName={setValidName}
                     totalPrice={totalPrice} setTotalPrice={setTotalPrice} />} />
-                {/*                 <Route path="/app/create-token" element={
+                <Route path="/app/create-token.html" element={
                   <CreateToken
                     tokenName={tokenName} setTokenName={setTokenName}
                     accountName={accountName} setAccountName={setAccountName}
                     validName={validName} setValidName={setValidName}
                     setReceiverPubKey={setReceiverPubKey}
                     totalPrice={totalPrice} setTotalPrice={setTotalPrice} />} />
-                <Route path="/create-nft" element={<CreateNFT />} /> */}
+                {/*<Route path="/create-nft" element={<CreateNFT />} /> */}
                 <Route path="/app/vanity-keys.html" element={
                   <VanityKeys
                     accountName={accountName} setAccountName={setAccountName}
