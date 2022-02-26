@@ -24,8 +24,8 @@ export default function CreateAccount({ accountName, setAccountName, validName, 
     let postData = {
         accountDetails: {
             accountName: accountName,
-            ramQuantity: ramQuantity,
             receiverPubKey: receiverPubKey,
+            ramQuantity: ramQuantity,
         },
         lineItems: items
     };
@@ -81,11 +81,11 @@ export default function CreateAccount({ accountName, setAccountName, validName, 
                 <title>Create Account</title>
                 <meta
                     name="description"
-                    content="The easiest and cheapest EOS account creation."
+                    content="The easiest and cheapest EOS account creation by credit card."
                 />
                 <meta
                     name="keywords"
-                    content="EOS Account Creator, Cheap, Easy, Credit Card"
+                    content="EOS Account Creator, Blockchain, Cheap, Easy, Credit Card"
                 />
             </Helmet>
             <Grid container spacing={4} justifyContent="center">
@@ -114,5 +114,3 @@ export default function CreateAccount({ accountName, setAccountName, validName, 
         </div>
     );
 }
-
-// <Box sx={{ width: { xs: '405px', md: '525px' } }}>

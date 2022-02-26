@@ -10,7 +10,7 @@ const stripeDetailsPath = path.resolve(__dirname, './files/stripeDetails.txt');
 const stripeHoldover = fs.readFileSync(stripeDetailsPath, 'utf-8');
 const stripeKeys = JSON.parse(stripeHoldover);
 
-const endpoint = 'https://eos.greymass.com';
+const endpoint = 'https://jungle3.greymass.com';
 const creatorKeyPath = path.resolve(__dirname, './files/creatorKey.txt');
 const keyHoldover = fs.readFileSync(creatorKeyPath, 'utf-8');
 const creatorKey = [keyHoldover];
@@ -18,6 +18,16 @@ const creatorKey = [keyHoldover];
 const signatureProvider = new JsSignatureProvider(creatorKey);
 const rpc = new eosjs_jsonrpc.JsonRpc(endpoint, { fetch });
 const api = new Api({ rpc, signatureProvider });
+
+export default function genRecAPI(serverPrivKey) {
+    const recSignatureProvider = new JsSignatureProvider(serverPrivKey);
+    const recRpc = new eosjs_jsonrpc.JsonRpc(endpoint, { fetch });
+    const recApi = new Api({ recRpc, recSignatureProvider });
+
+    return (
+        recApi
+    );
+}
 
 const wasmFilePath = path.resolve(__dirname, './files/eosio.token.wasm');
 const wasmHexString = fs.readFileSync(wasmFilePath).toString('hex');

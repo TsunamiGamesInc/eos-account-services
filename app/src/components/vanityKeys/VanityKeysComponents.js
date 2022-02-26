@@ -11,7 +11,8 @@ export default function VanityKeysComponents({ accountName, setAccountName, vali
         <Grid container spacing={3}>
             <Grid item xs={9.5} container>
                 <Grid item xs={12}>
-                    <Box sx={{ height: '15vh', backgroundColor: 'transparent' }} />
+                    <Box sx={{ height: '15vh' }} display={{ xs: 'none', md: 'block' }} />
+                    <Box sx={{ height: '1vh' }} display={{ xs: 'block', md: 'none' }} />
                 </Grid>
                 <Grid item xs={12}>
                     <VanityTextField accountName={accountName} setAccountName={setAccountName} setValidName={setValidName} />
@@ -20,22 +21,12 @@ export default function VanityKeysComponents({ accountName, setAccountName, vali
                     <Box sx={{ height: '1.1vh' }} />
                 </Grid>
                 {!validName &&
-                    <Grid item xs={12} container spacing={0}>
-                        <Grid item xs={12}>
-                            <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16, padding: '12px 0px 0px 0px' }}>
-                                Customize your public key with any prefix!
-                            </p>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
-                                Up to 5 characters (a through Z, 1 through 9).
-                            </p>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
-                                Vanity keys are 100% random and 100% secure.
-                            </p>
-                        </Grid>
+                    <Grid item xs={12}>
+                        <p style={{ color: 'white', lineHeight: 2, fontWeight: 'normal', fontSize: 16 }}>
+                            Customize your public key with any prefix!
+                            <br />Up to 5 characters (a through Z, 1 through 9).
+                            <br />Vanity keys are 100% random and 100% secure.
+                        </p>
                     </Grid>
                 }
                 {validName &&

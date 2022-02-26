@@ -4,14 +4,15 @@ import Box from '@mui/material/Box';
 import { TokenTextField } from '../CustomTextFields';
 import CreateTokenValidName from './CreateTokenValidName.js'
 
-export default function CreateTokenComponents({ tokenName, setTokenName, accountName, setAccountName,
-    validName, setValidName, setRecieverPubKey, totalPrice }) {
+export default function CreateTokenComponents({ tokenName, setTokenName, accountName, setAccountName, validName, setValidName,
+    receiverPrivKey, setReceiverPrivKey, receiverPubKey, setReceiverPubKey, totalPrice }) {
 
     return (
         <Grid container spacing={3}>
             <Grid item xs={9.5} container>
                 <Grid item xs={12}>
-                    <Box sx={{ height: '15vh', backgroundColor: 'transparent' }} />
+                    <Box sx={{ height: '15vh' }} display={{ xs: 'none', md: 'block' }} />
+                    <Box sx={{ height: '1vh' }} display={{ xs: 'block', md: 'none' }} />
                 </Grid>
                 <Grid item xs={12}>
                     <TokenTextField tokenName={tokenName} setTokenName={setTokenName} setValidName={setValidName} />
@@ -20,29 +21,21 @@ export default function CreateTokenComponents({ tokenName, setTokenName, account
                     <Box sx={{ height: '1.1vh' }} />
                 </Grid>
                 {!validName &&
-                    <Grid item xs={12} container spacing={0}>
-                        <Grid item xs={12}>
-                            <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16, padding: '12px 0px 0px 0px' }}>
-                                Getting started is as easy as choosing your token name.
-                            </p>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
-                                EOS token names are 3 to 7 characters long (A through Z only).
-                            </p>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
-                                Don't worry, the textbox will help you along.
-                            </p>
-                        </Grid>
+                    <Grid item xs={12}>
+                        <p style={{ color: 'white', lineHeight: 2, fontWeight: 'normal', fontSize: 16 }}>
+                            Getting started is as easy as choosing a name.
+                            <br />Token names are 3-7 characters long (A-Z only).
+                            <br />Don't worry, the textbox will help you along.
+                        </p>
                     </Grid>
                 }
                 {validName &&
                     <CreateTokenValidName
                         tokenName={tokenName}
                         accountName={accountName} setAccountName={setAccountName}
-                        setRecieverPubKey={setRecieverPubKey} totalPrice={totalPrice}
+                        receiverPrivKey={receiverPrivKey} setReceiverPrivKey={setReceiverPrivKey}
+                        receiverPubKey={receiverPubKey} setReceiverPubKey={setReceiverPubKey}
+                        totalPrice={totalPrice}
                     />}
             </Grid>
         </Grid >

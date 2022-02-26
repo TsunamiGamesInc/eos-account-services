@@ -53,7 +53,7 @@ export default function Resources({ accountName, setAccountName, validName, setV
                 />
                 <meta
                     name="keywords"
-                    content="Buy EOS RAM, Credit Card"
+                    content="Buy EOS RAM, Simple, Credit Card"
                 />
             </Helmet>
             <Grid container spacing={4} justifyContent="center">

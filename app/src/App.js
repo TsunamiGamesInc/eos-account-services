@@ -90,7 +90,8 @@ function App() {
                     tokenName={tokenName} setTokenName={setTokenName}
                     accountName={accountName} setAccountName={setAccountName}
                     validName={validName} setValidName={setValidName}
-                    setReceiverPubKey={setReceiverPubKey}
+                    receiverPrivKey={receiverPrivKey} setReceiverPrivKey={setReceiverPrivKey}
+                    receiverPubKey={receiverPubKey} setReceiverPubKey={setReceiverPubKey}
                     totalPrice={totalPrice} setTotalPrice={setTotalPrice} />} />
                 {/*<Route path="/create-nft" element={<CreateNFT />} /> */}
                 <Route path="/app/vanity-keys.html" element={

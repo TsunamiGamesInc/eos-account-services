@@ -9,6 +9,9 @@ export default function ThankYou() {
     let thankYouURL = window.location.href;
     let thankYouArray = thankYouURL.split('?');
     const blokURL = 'https://bloks.io/account/' + thankYouArray[1];
+    const tokenURL = 'https://bloks.io/account/' + thankYouArray[1] + '?loadContract=true&tab=Actions';
+    const powerupURL = 'https://eospowerup.io/free';
+    const ramURL = 'https://eosaccountservices.com/app/resources.html';
     const purchasedItems = [false, false, false, false];
 
     if (thankYouArray[1] !== "undefined") {
@@ -19,6 +22,11 @@ export default function ThankYou() {
     }
     if (thankYouArray[3] !== "undefined") {
         purchasedItems[3] = true
+    }
+    if (thankYouArray[4] !== "undefined") {
+        purchasedItems[1] = false
+        purchasedItems[2] = false
+        purchasedItems[4] = true
     }
 
     return (
@@ -70,6 +78,19 @@ export default function ThankYou() {
                                 {purchasedItems[3] &&
                                     <VanityKeyInstructions thankYouArray={thankYouArray} />
                                 }
+                                {purchasedItems[4] &&
+                                    <Grid item xs={12}>
+                                        <p style={{ color: 'white', lineHeight: 2, fontWeight: 'normal', fontSize: 16 }}>
+                                            You can preform token actions <a href={tokenURL}>here.</a>
+                                            <br />Simply use the interface and a cypto wallet!
+                                            <br />Start by issuing/minting tokens.
+                                            <br />Then, try a transfer!
+                                            <br />If you run into issues:
+                                            <br />You may need to <a href={powerupURL}>PowerUp.</a>
+                                            <br />Or, <a href={ramURL}>Get RAM.</a>
+                                        </p>
+                                    </Grid>
+                                }
                             </Grid>
                         </Grid>
                     </Box>
@@ -87,27 +108,13 @@ function VanityKeyInstructions({ thankYouArray }) {
     const letterPlacement = (Number(thankYouArray[3].substring(1)) + 1);
 
     return (
-        <Grid item xs={12} container spacing={0.25}>
-            <Grid item xs={12}>
-                <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
+        <Grid item xs={12}>
+                <p style={{ color: 'white', lineHeight: 2, fontWeight: 'normal', fontSize: 16 }}>
                     1. Count <b style={{ color: '#0083FF' }}>{letterPlacement}</b> characters into your private key
+                    <br />2. You will arrive at <b style={{ color: '#0083FF' }}>{saltLetter}</b>
+                    <br />3. Delete <b style={{ color: '#0083FF' }}>{saltLetter}</b>
+                    <br />4. Your private key is now valid
                 </p>
-            </Grid>
-            <Grid item xs={12}>
-                <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
-                    2. You will arrive at <b style={{ color: '#0083FF' }}>{saltLetter}</b>
-                </p>
-            </Grid>
-            <Grid item xs={12}>
-                <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
-                    3. Delete <b style={{ color: '#0083FF' }}>{saltLetter}</b>
-                </p>
-            </Grid>
-            <Grid item xs={12}>
-                <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
-                    4. Your private key is now valid
-                </p>
-            </Grid>
         </Grid>
     );
 }

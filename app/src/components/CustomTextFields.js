@@ -63,15 +63,15 @@ export default function CustomTextField({ accountName, setAccountName, setValidN
             setValidName(false)
             setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
         }
-        else if ((accountName.length < 12) && (icon !== closeIconMd)) {
+        else if (accountName.length < 12) {
             setIcon(closeIconMd)
             setValidName(false)
             setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
         }
-        else if ((accountName.length === 12)  && (icon !== checkIconMd)) {
+        else if (accountName.length === 12) {
             GetAccountInfo(accountName.toLowerCase(), setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle)
         }
-    }, [accountName, setAccountName, setValidName, icon])
+    }, [accountName, setAccountName, setValidName])
 
     const onChange = (e) => {
         const newValue = e.target.value;
@@ -100,68 +100,6 @@ export default function CustomTextField({ accountName, setAccountName, setValidN
                     }}
                     inputProps={{
                         'aria-label': 'Choose an account name!',
-                        maxLength: 12,
-                        style: {
-                            textTransform: 'lowercase',
-                        }
-                    }}
-                />
-            </Box>
-        </Tooltip>
-    )
-}
-
-export function TokenAccountTextField({ accountName, setAccountName }) {
-    const [error, setError] = useState("");
-    const [icon, setIcon] = useState(null);
-    const [tooltipTitle, setTooltipTitle] = useState("Exactly 12 characters (a-z, 1-5)");
-
-    useEffect(() => {
-        if (accountName.includes(".")) {
-            let removeDot = accountName.replace('.', '')
-            setAccountName(removeDot)
-        }
-
-        if (accountName.length === 0) {
-            setIcon(null)
-            setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
-        }
-        else if ((accountName.length < 12) && (icon !== closeIconMd)) {
-            setIcon(closeIconMd)
-            setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
-        }
-        else if ((accountName.length === 12) && (icon !== checkIconMd)) {
-            GetAccountInfoNoValid(accountName, setIcon, checkIconMd, closeIconMd, setTooltipTitle)
-        }
-    }, [accountName, icon, setAccountName])
-
-    const onChange = (e) => {
-        const newValue = e.target.value;
-
-        if ((newValue.slice(-1).match(/[a-zA-Z1-5]/)) || (newValue === "")) {
-            setError("")
-            setAccountName(newValue)
-        }
-        else {
-            setError("a-z, 1-5, and . only")
-        }
-    };
-
-    return (
-        <Tooltip title={tooltipTitle} placement="right">
-            <Box sx={{ height: '50px' }}>
-                <StyledTextField
-                    variant="outlined"
-                    label="Choose a Super Admin name!"
-                    value={accountName}
-                    onChange={onChange}
-                    helperText={error}
-                    error={!!error}
-                    InputProps={{
-                        endAdornment: icon,
-                    }}
-                    inputProps={{
-                        'aria-label': 'Choose a Super Admin name!',
                         maxLength: 12,
                         style: {
                             textTransform: 'lowercase',
@@ -264,67 +202,6 @@ export function SliderTextField({ setValue, valueMirror, endAdornmentText }) {
     );
 }
 
-export function TokenTextField({ tokenName, setTokenName, setValidName }) {
-    const [error, setError] = useState("");
-    const [icon, setIcon] = useState(null);
-    const [tooltipTitle, setTooltipTitle] = useState("3 to 7 characters, a-z only");
-
-    useEffect(() => {
-        if (tokenName.length === 0) {
-            setIcon(null)
-            setValidName(false)
-            setTooltipTitle("3 to 7 characters, a-z only")
-        }
-        else if ((tokenName.length < 3) && (icon !== closeIconMd)) {
-            setIcon(closeIconMd)
-            setValidName(false)
-            setTooltipTitle("3 to 7 characters, a-z only")
-        }
-        else if ((tokenName.length >= 3) && (icon !== checkIconMd)) {
-            setIcon(checkIconMd)
-            setValidName(true)
-            setTooltipTitle("Token name available!")
-        }
-    }, [tokenName, icon, setValidName, setTokenName])
-
-    const onChange = (e) => {
-        const newValue = e.target.value;
-
-        if ((!newValue.match(/[a-zA-Z]/)) || (newValue === "")) {
-            setError("")
-            setTokenName(newValue)
-        }
-        else {
-            setError("a-z only")
-        }
-    };
-
-    return (
-        <Tooltip title={tooltipTitle} placement="right">
-            <Box sx={{ height: '50px' }}>
-                <StyledTextField
-                    variant="outlined"
-                    label="Choose a token name!"
-                    value={tokenName}
-                    onChange={onChange}
-                    helperText={error}
-                    error={!!error}
-                    InputProps={{
-                        endAdornment: icon,
-                    }}
-                    inputProps={{
-                        'aria-label': 'Choose a token name!',
-                        maxLength: 7,
-                        style: {
-                            textTransform: 'lowercase',
-                        }
-                    }}
-                />
-            </Box>
-        </Tooltip>
-    )
-}
-
 export function VanityTextField({ accountName, setAccountName, setValidName }) {
     const [error, setError] = useState("");
     const [icon, setIcon] = useState(null);
@@ -377,6 +254,237 @@ export function VanityTextField({ accountName, setAccountName, setValidName }) {
                     inputProps={{
                         'aria-label': 'Choose a prefix!',
                         maxLength: 5,
+                    }}
+                />
+            </Box>
+        </Tooltip>
+    )
+}
+
+export function TokenTextField({ tokenName, setTokenName, setValidName }) {
+    const [error, setError] = useState("");
+    const [icon, setIcon] = useState(null);
+    const [tooltipTitle, setTooltipTitle] = useState("3 to 7 characters, A-Z only");
+
+    useEffect(() => {
+        if (tokenName.length === 0) {
+            setIcon(null)
+            setValidName(false)
+            setTooltipTitle("3 to 7 characters, A-Z only")
+        }
+        else if ((tokenName.length < 3) && (icon !== closeIconMd)) {
+            setIcon(closeIconMd)
+            setValidName(false)
+            setTooltipTitle("3 to 7 characters, A-Z only")
+        }
+        else if ((tokenName.length >= 3) && (icon !== checkIconMd)) {
+            setIcon(checkIconMd)
+            setValidName(true)
+            setTooltipTitle("Token name available!")
+        }
+    }, [tokenName, setValidName, icon])
+
+    const onChange = (e) => {
+        const newValue = e.target.value;
+
+        if ((newValue.slice(-1).match(/[a-zA-Z]/)) || (newValue === "")) {
+            setError("")
+            setTokenName(newValue)
+        }
+        else {
+            setError("A-Z only")
+        }
+    };
+
+    return (
+        <Tooltip title={tooltipTitle} placement="right">
+            <Box sx={{ height: '50px' }}>
+                <StyledTextField
+                    variant="outlined"
+                    label="Choose a token name!"
+                    value={tokenName}
+                    onChange={onChange}
+                    helperText={error}
+                    error={!!error}
+                    InputProps={{
+                        endAdornment: icon,
+                    }}
+                    inputProps={{
+                        'aria-label': 'Choose a token name!',
+                        maxLength: 7,
+                        style: {
+                            textTransform: 'uppercase',
+                        }
+                    }}
+                />
+            </Box>
+        </Tooltip>
+    )
+}
+
+export function TokenAccountTextField({ accountName, setAccountName }) {
+    const [error, setError] = useState("");
+    const [icon, setIcon] = useState(null);
+    const [tooltipTitle, setTooltipTitle] = useState("Exactly 12 characters (a-z, 1-5)");
+
+    useEffect(() => {
+        if (accountName.includes(".")) {
+            let removeDot = accountName.replace('.', '')
+            setAccountName(removeDot)
+        }
+
+        if (accountName.length === 0) {
+            setIcon(null)
+            setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
+        }
+        else if (accountName.length < 12) {
+            setIcon(closeIconMd)
+            setTooltipTitle("Exactly 12 characters (a-z, 1-5)")
+        }
+        else if (accountName.length === 12) {
+            GetAccountInfoNoValid(accountName.toLowerCase(), setIcon, checkIconMd, closeIconMd, setTooltipTitle)
+        }
+    }, [accountName, setAccountName])
+
+    const onChange = (e) => {
+        const newValue = e.target.value;
+
+        if ((newValue.slice(-1).match(/[a-zA-Z1-5]/)) || (newValue === "")) {
+            setError("")
+            setAccountName(newValue)
+        }
+        else {
+            setError("a-z, 1-5 only")
+        }
+    };
+
+    return (
+        <Tooltip title={tooltipTitle} placement="right">
+            <Box sx={{ height: '50px' }}>
+                <StyledTextField
+                    variant="outlined"
+                    label="Choose a Super Admin name!"
+                    value={accountName}
+                    onChange={onChange}
+                    helperText={error}
+                    error={!!error}
+                    InputProps={{
+                        endAdornment: icon,
+                    }}
+                    inputProps={{
+                        'aria-label': 'Choose a Super Admin name!',
+                        maxLength: 12,
+                        style: {
+                            textTransform: 'lowercase',
+                        }
+                    }}
+                />
+            </Box>
+        </Tooltip>
+    )
+}
+
+export function TokenSupplyTextField({ maxTokenSupply, setMaxTokenSupply }) {
+    const [error, setError] = useState("");
+    const [icon, setIcon] = useState(checkIconMd);
+    const [tooltipTitle, setTooltipTitle] = useState("1 to 999 trillion");
+
+    useEffect(() => {
+        if (maxTokenSupply.length === 0) {
+            setIcon(null)
+            setTooltipTitle("1 to 999 trillion")
+        }
+        else if ((maxTokenSupply.length >= 1) && (icon !== checkIconMd)) {
+            setIcon(checkIconMd)
+            setTooltipTitle("Good choice!")
+        }
+    }, [maxTokenSupply, icon])
+
+    const onChange = (e) => {
+        const newValue = e.target.value;
+
+        if ((newValue.slice(-1).match(/[0-9]/) || (newValue === ""))) {
+            setError("")
+            setMaxTokenSupply(newValue)
+        }
+        else {
+            setError("0-9 only")
+        }
+    };
+
+    return (
+        <Tooltip title={tooltipTitle} placement="right">
+            <Box sx={{ height: '50px' }}>
+                <StyledTextField
+                    variant="outlined"
+                    label="Maximum token supply"
+                    value={maxTokenSupply}
+                    onChange={onChange}
+                    helperText={error}
+                    error={!!error}
+                    InputProps={{
+                        endAdornment: icon,
+                    }}
+                    inputProps={{
+                        'aria-label': 'Maximum token supply',
+                        maxLength: 15,
+                    }}
+                />
+            </Box>
+        </Tooltip>
+    )
+}
+
+export function PrecisionTextField({ precision, setPrecision }) {
+    const [error, setError] = useState("");
+    const [icon, setIcon] = useState(checkIconMd);
+    const [tooltipTitle, setTooltipTitle] = useState("0 to 15 decimals");
+
+    useEffect(() => {
+        if (precision.length === 0) {
+            setIcon(null)
+            setTooltipTitle("0 to 15 decimals")
+        }
+        else if ((precision.length >= 1) && (icon !== checkIconMd)) {
+            setIcon(checkIconMd)
+            setTooltipTitle("Good choice!")
+        }
+    }, [precision, icon])
+
+    const onChange = (e) => {
+        const newValue = e.target.value;
+
+        if ((newValue.slice(-1).match(/[0-9]/) || (newValue === ""))) {
+            setError("")
+
+            if (newValue > 15) {
+                setPrecision(15)
+            }
+            else {
+                setPrecision(newValue)
+            }
+        }
+        else {
+            setError("0-9 only")
+        }
+    };
+
+    return (
+        <Tooltip title={tooltipTitle} placement="right">
+            <Box sx={{ height: '50px' }}>
+                <StyledTextField
+                    variant="outlined"
+                    label="Decimal precision"
+                    value={precision}
+                    onChange={onChange}
+                    helperText={error}
+                    error={!!error}
+                    InputProps={{
+                        endAdornment: icon,
+                    }}
+                    inputProps={{
+                        'aria-label': 'Decimal precision',
+                        maxLength: 2,
                     }}
                 />
             </Box>

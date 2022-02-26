@@ -38,14 +38,7 @@ export default function VanityKeys({ accountName, setAccountName, validName, set
             style: 'currency',
             currency: 'USD'
         });
-        let accountPrice;
-
-        if (!validName) {
-            accountPrice = formatter.format(3.99) + " USD"
-        }
-        else {
-            accountPrice = formatter.format(3.99) + " USD"
-        }
+        let accountPrice = formatter.format(3.99) + " USD";
         setTotalPrice(accountPrice)
     }, [validName, setTotalPrice])
 
@@ -92,11 +85,11 @@ export default function VanityKeys({ accountName, setAccountName, validName, set
                 <title>Vanity Keys</title>
                 <meta
                     name="description"
-                    content="Get EOS Vanity Keys."
+                    content="Get EOS Vanity Keys with a credit card."
                 />
                 <meta
                     name="keywords"
-                    content="EOS Vanity Keys, EOS Pay to Key"
+                    content="EOS Vanity Keys, EOS Pay to Key, Blockchain, Credit Card, Safe"
                 />
             </Helmet>
             <Grid container spacing={4} justifyContent="center">

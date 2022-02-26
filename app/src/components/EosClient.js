@@ -1,7 +1,7 @@
 import { JsonRpc } from 'eosjs';
 import { ecc } from 'eosjs/dist/eosjs-ecc-migration';
 
-const endpoint = 'https://eos.greymass.com';
+const endpoint = 'https://jungle3.greymass.com';
 const rpc = new JsonRpc(endpoint);
 
 export async function GenerateKey({ setReceiverPrivKey, setReceiverPubKey }) {
@@ -10,6 +10,15 @@ export async function GenerateKey({ setReceiverPrivKey, setReceiverPubKey }) {
             setReceiverPrivKey(privateKey)
             let publicKey = ecc.privateToPublic(privateKey)
             setReceiverPubKey(publicKey)
+        })
+}
+
+export async function GenerateServerKey({ setServerPrivKey, setServerPubKey }) {
+    await ecc.randomKey(undefined, { secureEnv: true })
+        .then((privateKey) => {
+            setServerPrivKey(privateKey)
+            let publicKey = ecc.privateToPublic(privateKey)
+            setServerPubKey(publicKey)
         })
 }
 
