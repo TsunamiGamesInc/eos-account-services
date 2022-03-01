@@ -7,7 +7,6 @@
     "source": "functions"
   },
   "client": {
-    "source": "app",
-    "plugin": "zcatalyst-cli-plugin-react"
+    "source": "app/build"
   }
 }

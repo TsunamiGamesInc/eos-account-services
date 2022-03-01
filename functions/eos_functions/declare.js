@@ -19,7 +19,7 @@ const signatureProvider = new JsSignatureProvider(creatorKey);
 const rpc = new eosjs_jsonrpc.JsonRpc(endpoint, { fetch });
 const api = new Api({ rpc, signatureProvider });
 
-export default function genRecAPI(serverPrivKey) {
+function genRecAPI(serverPrivKey) {
     const recSignatureProvider = new JsSignatureProvider(serverPrivKey);
     const recRpc = new eosjs_jsonrpc.JsonRpc(endpoint, { fetch });
     const recApi = new Api({ recRpc, recSignatureProvider });
@@ -50,6 +50,8 @@ abiDefinitions.serialize(buffer, abiJSON)
 const serializedAbiHexString = Buffer.from(buffer.asUint8Array()).toString('hex');
 
 exports.stripeKeys = stripeKeys;
+exports.rpc = rpc;
 exports.api = api;
 exports.wasmHexString = wasmHexString;
 exports.serializedAbiHexString = serializedAbiHexString;
+exports.genRecAPI = genRecAPI;

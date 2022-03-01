@@ -289,7 +289,7 @@ export function TokenTextField({ tokenName, setTokenName, setValidName }) {
 
         if ((newValue.slice(-1).match(/[a-zA-Z]/)) || (newValue === "")) {
             setError("")
-            setTokenName(newValue)
+            setTokenName(newValue.toUpperCase())
         }
         else {
             setError("A-Z only")

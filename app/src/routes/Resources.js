@@ -16,13 +16,9 @@ export default function Resources({ accountName, setAccountName, validName, setV
         lineItems:
             [
                 {
-                    price: 'price_1KQfYuAVYdsvCkiZEVuwDThX',
+                    price: 'price_1KLx2tAVYdsvCkiZ6U3mHNxW', //'price_1KQfYuAVYdsvCkiZEVuwDThX',
                     quantity: ramQuantity,
                     description: "For Account: " + accountName
-                },
-                {
-                    price: 'price_1KQfnWAVYdsvCkiZr1myAAHW',
-                    quantity: 1
                 }
             ]
     };
@@ -38,7 +34,7 @@ export default function Resources({ accountName, setAccountName, validName, setV
             resourcesPrice = formatter.format(0) + " USD"
         }
         else {
-            resourcesPrice = formatter.format(1 + (0.3 * ramQuantity)) + " USD"
+            resourcesPrice = formatter.format(0.4 * ramQuantity) + " USD"
         }
         setTotalPrice(resourcesPrice)
     }, [validName, ramQuantity, setTotalPrice])

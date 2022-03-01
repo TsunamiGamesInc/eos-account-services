@@ -31,7 +31,7 @@ export default function TokenValidNameComponent({ tokenName, accountName, setAcc
             {
                 price: 'price_1KWnWbAVYdsvCkiZHsu5Odgg',
                 quantity: 1,
-                description: "Token Name: " + tokenName + "\nAccount Name: " + accountName
+                description: "Token Name: " + tokenName + " Account Name: " + accountName
             }
         ]
     };
@@ -40,21 +40,22 @@ export default function TokenValidNameComponent({ tokenName, accountName, setAcc
         GenerateKey({ setReceiverPrivKey, setReceiverPubKey })
         GenerateServerKey({ setServerPrivKey, setServerPubKey })
         let suggestedName;
+        let formatTokenName = tokenName.toLowerCase();
         switch (tokenName.length) {
             case 4:
-                suggestedName = tokenName + "tokenact"
+                suggestedName = formatTokenName + "tokenact"
                 break;
             case 5:
-                suggestedName = tokenName + "tknacct"
+                suggestedName = formatTokenName + "tknacct"
                 break;
             case 6:
-                suggestedName = tokenName + "tknact"
+                suggestedName = formatTokenName + "tknact"
                 break;
             case 7:
-                suggestedName = tokenName + "tknac"
+                suggestedName = formatTokenName + "tknac"
                 break;
             default:
-                suggestedName = tokenName + "tokenacct"
+                suggestedName = formatTokenName + "tokenacct"
         }
         setAccountName(suggestedName)
     }, [setReceiverPrivKey, setReceiverPubKey, tokenName, setAccountName])

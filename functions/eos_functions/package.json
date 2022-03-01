@@ -6,8 +6,8 @@
 	"dependencies": {
 		"eosjs": "^22.1.0",
 		"express": "^4.17.2",
-		"node-fetch": "^2.6.1",
 		"stripe": "^8.203.0",
+		"node-fetch": "2.6.1",
 		"zcatalyst-sdk-node": "latest"
 	}
 }
