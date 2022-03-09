@@ -24,7 +24,10 @@ export async function GenerateServerKey({ setServerPrivKey, setServerPubKey }) {
 
 export default async function GetAccountInfo(receiverName, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle) {
     await rpc.get_account(receiverName)
-        .then(() => {
+        .then((data) => {
+            console.log("CPU: " + data.cpu_limit.available)
+            console.log("NET: " + data.net_limit.available)
+            console.log("RAM: " + (data.ram_quota - data.ram_usage))
             setIcon(closeIconMd)
             setValidName(false)
             setTooltipTitle("Name is taken!")

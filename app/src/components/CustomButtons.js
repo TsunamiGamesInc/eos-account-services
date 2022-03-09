@@ -245,3 +245,43 @@ export function CheckoutButton({ children, keyCopied, setOpen, postData }) {
         </StyledButton>
     );
 }
+
+export function UploadButton() {
+    const [text, setText] = React.useState("Click to upload");
+    const [canClick, setCanClick] = React.useState(true);
+    const timer = useRef();
+
+    function ChangeText() {
+        if (canClick) {
+            setCanClick(false)
+            setText("Uploaded")
+            timer.current = setTimeout(RevertText, 8000)
+        }
+    }
+
+    function RevertText() {
+        setText("Click to upload")
+        setCanClick(true)
+    }
+
+    useEffect(() => {
+        return () => {
+            clearTimeout(timer.current)
+        }
+    }, [])
+
+    return (
+        <Tooltip
+            title={text}
+            placement="top-end">
+            <StyledButton
+                variant="outlined"
+                onClick={ChangeText}
+                style={{
+                    height: '16px',
+                    padding: "16px 5px",
+                    fontSize: "14px",
+                }}>Upload Media (img/video/song: 200MB Max)</StyledButton>
+        </Tooltip>
+    );
+}

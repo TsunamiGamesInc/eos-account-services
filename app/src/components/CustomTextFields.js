@@ -491,3 +491,85 @@ export function PrecisionTextField({ precision, setPrecision }) {
         </Tooltip>
     )
 }
+
+export function NFTTitleTextField({ nftTitle, setNftTitle }) {
+    const [icon, setIcon] = useState(null);
+    const [tooltipTitle, setTooltipTitle] = useState("Up to 64 characters");
+
+    useEffect(() => {
+        if (nftTitle.length === 0) {
+            setIcon(null)
+            setTooltipTitle("Up to 64 characters")
+        }
+        else {
+            setIcon(checkIconMd)
+            setTooltipTitle("Good choice!")
+        }
+    }, [nftTitle, setNftTitle])
+
+    const onChange = (e) => {
+        const newValue = e.target.value;
+        setNftTitle(newValue)
+    };
+
+    return (
+        <Tooltip title={tooltipTitle} placement="right">
+            <Box sx={{ height: '50px' }}>
+                <StyledTextField
+                    variant="outlined"
+                    label="Choose your NFT Title!"
+                    value={nftTitle}
+                    onChange={onChange}
+                    InputProps={{
+                        endAdornment: icon,
+                    }}
+                    inputProps={{
+                        'aria-label': 'Choose your NFT Title!',
+                        maxLength: 64
+                    }}
+                />
+            </Box>
+        </Tooltip>
+    )
+}
+
+export function NFTDescTextField({ nftDesc, setNftDesc }) {
+    const [icon, setIcon] = useState(null);
+    const [tooltipTitle, setTooltipTitle] = useState("Up to 280 characters");
+
+    useEffect(() => {
+        if (nftDesc.length === 0) {
+            setIcon(null)
+            setTooltipTitle("Up to 280 characters")
+        }
+        else {
+            setIcon(checkIconMd)
+            setTooltipTitle("Good choice!")
+        }
+    }, [nftDesc, setNftDesc])
+
+    const onChange = (e) => {
+        const newValue = e.target.value;
+        setNftDesc(newValue)
+    };
+
+    return (
+        <Tooltip title={tooltipTitle} placement="right">
+            <Box sx={{ height: '50px' }}>
+                <StyledTextField
+                    variant="outlined"
+                    label="Next, describe your NFT..."
+                    value={nftDesc}
+                    onChange={onChange}
+                    InputProps={{
+                        endAdornment: icon
+                    }}
+                    inputProps={{
+                        'aria-label': 'Next, describe your NFT...',
+                        maxLength: 280
+                    }}
+                />
+            </Box>
+        </Tooltip>
+    )
+}

@@ -74,30 +74,34 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
 async function fulfillOrder(session, lineItems) {
     checkResources('serveaccount')
 
-    let itemsOrdered = "";
-    lineItems.data.forEach(function (currentItem) {
-        itemsOrdered += currentItem.price.product
-    })
+    setTimeout(eosFulfill, 500)
 
-    if (itemsOrdered.includes(stripeKeys.eosAccountID)) {
-        await createAccount(session.metadata.accountName, session.metadata.receiverPubKey)
-            .catch(err => console.log(err))
-    }
-
-    if (itemsOrdered.includes(stripeKeys.eosRAMID)) {
-        await buyRAM(session.metadata.accountName, session.metadata.ramQuantity)
-            .catch(err => console.log(err))
-    }
-
-    if (itemsOrdered.includes(stripeKeys.customTokenID)) {
-        await createAccount(session.metadata.accountName, session.metadata.serverPubKey)
-            .then(async () => await buyRAM(session.metadata.accountName, session.metadata.ramQuantity))
-            .then(async () => await checkResources(session.metadata.accountName))
-            .then(() => console.log(session.metadata.serverPrivKey)) // intentionally expose the old private key to the server in case the create token function fails before changing account authorizations
-            .then(async () => await createToken(
-                session.metadata.accountName, session.metadata.serverPrivKey, session.metadata.tokenName,
-                session.metadata.maxTokenSupply, session.metadata.precision, session.metadata.receiverPubKey))
-            .catch(err => console.log(err))
+    async function eosFulfill() {
+        let itemsOrdered = "";
+        lineItems.data.forEach(function (currentItem) {
+            itemsOrdered += currentItem.price.product
+        })
+    
+        if (itemsOrdered.includes(stripeKeys.eosAccountID)) {
+            await createAccount(session.metadata.accountName, session.metadata.receiverPubKey)
+                .catch(err => console.log(err))
+        }
+    
+        if (itemsOrdered.includes(stripeKeys.eosRAMID)) {
+            await buyRAM(session.metadata.accountName, session.metadata.ramQuantity)
+                .catch(err => console.log(err))
+        }
+    
+        if (itemsOrdered.includes(stripeKeys.customTokenID)) {
+            await createAccount(session.metadata.accountName, session.metadata.serverPubKey)
+                .then(async () => await buyRAM(session.metadata.accountName, session.metadata.ramQuantity))
+                .then(async () => await checkResources(session.metadata.accountName))
+                .then(() => console.log(session.metadata.serverPrivKey)) // intentionally expose the old private key to the server in case the create token function fails before changing account authorizations
+                .then(async () => await createToken(
+                    session.metadata.accountName, session.metadata.serverPrivKey, session.metadata.tokenName,
+                    session.metadata.maxTokenSupply, session.metadata.precision, session.metadata.receiverPubKey))
+                .catch(err => console.log(err))
+        }
     }
 }
 
@@ -134,8 +138,8 @@ async function powerup(accountName) {
                 payer: 'serveaccount',
                 receiver: accountName,
                 days: 1,
-                cpu_frac: 3000000,
-                net_frac: 340000,
+                cpu_frac: 600000,
+                net_frac: 340000, //68000
                 max_payment: '0.0500 EOS'
             }
         }]
@@ -290,8 +294,8 @@ async function createToken(accountName, serverPrivKey, tokenName, maxTokenSupply
     })
         .then(
             async () =>  {
-                setTimeout(createAction, 2000)
-                setTimeout(updateAuth, 3000)
+                setTimeout(createAction, 1000)
+                setTimeout(updateAuth, 1500)
             }
         )
 

@@ -27,22 +27,27 @@ export default function NavBar({ totalPrice }) {
                     <Box sx={{ height: '15vh' }} />
                 </Grid>
                 <Grid item xs={12}>
-                    <Link to="/app/create-account.html" style={{ textDecoration: 'none' }}>
+                    <Link to="/create-account.html" style={{ textDecoration: 'none' }}>
                         <CustomButtons txt="Create Account" />
                     </Link>
                 </Grid>
                 <Grid item xs={12}>
-                    <Link to="/app/resources.html" style={{ textDecoration: 'none' }}>
+                    <Link to="/resources.html" style={{ textDecoration: 'none' }}>
                         <CustomButtonNoTopBorder txt="Get RAM" />
                     </Link>
                 </Grid>
                 <Grid item xs={12}>
-                    <Link to="/app/vanity-keys.html" style={{ textDecoration: 'none' }}>
+                    <Link to="/vanity-keys.html" style={{ textDecoration: 'none' }}>
                         <CustomButtonNoTopBorder txt="Vanity Keys" />
                     </Link>
                 </Grid>
                 <Grid item xs={12}>
-                    <Link to="/app/create-token.html" style={{ textDecoration: 'none' }}>
+                    <Link to="/create-nft.html" style={{ textDecoration: 'none' }}>
+                        <CustomButtonNoTopBorder txt="Create NFT" />
+                    </Link>
+                </Grid>
+                <Grid item xs={12}>
+                    <Link to="/create-token.html" style={{ textDecoration: 'none' }}>
                         <CustomButtonNoTopBorder txt="Create Custom Token" />
                     </Link>
                 </Grid>
@@ -113,7 +118,7 @@ export function NavBarMobile() {
                     <Box sx={{ height: '4vh', backgroundColor: 'transparent' }} />
                 </Grid>
                 <Grid item xs={8}>
-                    <Link to="/app/create-account.html" style={{ textDecoration: 'none' }}>
+                    <Link to="/create-account.html" style={{ textDecoration: 'none' }}>
                         <CustomButtons txt="Create Account" />
                     </Link>
                 </Grid>
@@ -121,7 +126,7 @@ export function NavBarMobile() {
                     <Box sx={{ height: '4vh', backgroundColor: 'transparent' }} />
                 </Grid>
                 <Grid item xs={8}>
-                    <Link to="/app/resources.html" style={{ textDecoration: 'none' }}>
+                    <Link to="/resources.html" style={{ textDecoration: 'none' }}>
                         <CustomButtons txt="Get RAM" />
                     </Link>
                 </Grid>
