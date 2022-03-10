@@ -43,7 +43,7 @@ export default function NavBar({ totalPrice }) {
                 </Grid>
                 <Grid item xs={12}>
                     <Link to="/create-nft.html" style={{ textDecoration: 'none' }}>
-                        <CustomButtonNoTopBorder txt="Create NFT" />
+                        <CustomButtonNoTopBorder txt="Create NFTs" />
                     </Link>
                 </Grid>
                 <Grid item xs={12}>

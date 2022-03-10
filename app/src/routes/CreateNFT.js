@@ -6,18 +6,23 @@ import Box from '@mui/material/Box';
 import NavBar from '../components/NavBar';
 import CustomDrawer from '../components/CustomDrawer';
 
-export default function CreateNFT({ accountName, setAccountName, nftTitle, setNftTitle, nftDesc, setNftDesc,
-    validName, setValidName, setReceiverPrivKey, setReceiverPubKey, totalPrice, setTotalPrice }) {
+export default function CreateNFT({ accountName, setAccountName, validName, setValidName,
+    setReceiverPrivKey, setReceiverPubKey, totalPrice, setTotalPrice }) {
+    const [nftTitle, setNftTitle] = React.useState("");
+    const [nftDesc, setNftDesc] = React.useState("");
+    const [nftFile, setNftFile] = React.useState(undefined);
+
     let postData = {
         accountDetails: {
             accountName: accountName,
             nftTitle: nftTitle,
-            nftDesc: nftDesc
+            nftDesc: nftDesc,
+            nftFile: nftFile
         },
         lineItems:
             [
                 {
-                    price: 'price_1KLx2tAVYdsvCkiZ6U3mHNxW', //'price_1KQfYuAVYdsvCkiZEVuwDThX',
+                    price: 'price_1KbYyNAVYdsvCkiZwrO2yCJU',
                     quantity: 1,
                     description: "NFT Creation for Account: " + accountName
                 }
@@ -29,7 +34,7 @@ export default function CreateNFT({ accountName, setAccountName, nftTitle, setNf
             style: 'currency',
             currency: 'USD'
         });
-        let tokenPrice = formatter.format(9.99) + " USD";
+        let tokenPrice = formatter.format(12.99) + " USD";
         setTotalPrice(tokenPrice)
     }, [validName, setTotalPrice])
 
@@ -59,6 +64,7 @@ export default function CreateNFT({ accountName, setAccountName, nftTitle, setNf
                             accountName={accountName} setAccountName={setAccountName}
                             nftTitle={nftTitle} setNftTitle={setNftTitle}
                             nftDesc={nftDesc} setNftDesc={setNftDesc}
+                            setNftFile={setNftFile}
                             validName={validName} setValidName={setValidName}
                             setReceiverPrivKey={setReceiverPrivKey}
                             setReceiverPubKey={setReceiverPubKey}

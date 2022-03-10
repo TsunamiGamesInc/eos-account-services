@@ -36,8 +36,6 @@ function App() {
   const [ramQuantity, setRamQuantity] = React.useState(5);
   const [accountName, setAccountName] = React.useState("");
   const [tokenName, setTokenName] = React.useState("");
-  const [nftTitle, setNftTitle] = React.useState("");
-  const [nftDesc, setNftDesc] = React.useState("");
   const [validName, setValidName] = React.useState(false);
   const [receiverPrivKey, setReceiverPrivKey] = React.useState("Your Private Key Will Be Displayed Here.");
   const [receiverPubKey, setReceiverPubKey] = React.useState("Your Public Key Will Be Displayed Here.");
@@ -105,8 +103,6 @@ function App() {
                 <Route path="/create-nft.html" element={
                   <CreateNFT
                     accountName={accountName} setAccountName={setAccountName}
-                    nftTitle={nftTitle} setNftTitle={setNftTitle}
-                    nftDesc={nftDesc} setNftDesc={setNftDesc}
                     validName={validName} setValidName={setValidName}
                     setReceiverPrivKey={setReceiverPrivKey}
                     setReceiverPubKey={setReceiverPubKey}

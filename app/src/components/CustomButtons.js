@@ -69,6 +69,12 @@ const StyledButtonNoRipple = withStyles({
     }
 })(StyledButton);
 
+const StyledButtonNoTransform = withStyles({
+    label: {
+        textTransform: 'none'
+    }
+})(StyledButton);
+
 export default function CustomButton(props) {
     return (
         <StyledButton variant="outlined">{props.txt}</StyledButton>
@@ -211,10 +217,39 @@ export function TooltipButtonSmall(props) {
                 onClick={ChangeText}
                 style={{
                     height: '16px',
-                    padding: "16px 10px",
-                    fontSize: "14px",
+                    padding: '16px 10px',
+                    fontSize: '14px'
                 }}>{props.txt}</StyledButton>
         </Tooltip>
+    );
+}
+
+export function UploadButton({ setNftFile }) {
+    const [buttonText, setButtonText] = React.useState("Upload Media (Img/Video/Song: 200MB Max)");
+
+    const onChange = file => {
+        if (file.target.files[0].size < 209715200.1) {
+            setNftFile(file.target.files[0])
+            setButtonText(file.target.files[0].name)
+        }
+        else {
+            setButtonText("File too large. Upload Media (200MB Max)")
+        }
+    }
+
+    return (
+        <StyledButtonNoTransform
+            variant="outlined"
+            component="label"
+            style={{
+                height: '16px',
+                padding: '16px 5px',
+                fontSize: '14px',
+                textTransform: 'none'
+            }}>
+            {buttonText}
+            <input type="file" hidden onChange={onChange} />
+        </StyledButtonNoTransform>
     );
 }
 
@@ -243,45 +278,5 @@ export function CheckoutButton({ children, keyCopied, setOpen, postData }) {
         <StyledButton variant="outlined" style={{ backgroundColor: '#0083FF' }} onClick={handleClick}>
             {children}
         </StyledButton>
-    );
-}
-
-export function UploadButton() {
-    const [text, setText] = React.useState("Click to upload");
-    const [canClick, setCanClick] = React.useState(true);
-    const timer = useRef();
-
-    function ChangeText() {
-        if (canClick) {
-            setCanClick(false)
-            setText("Uploaded")
-            timer.current = setTimeout(RevertText, 8000)
-        }
-    }
-
-    function RevertText() {
-        setText("Click to upload")
-        setCanClick(true)
-    }
-
-    useEffect(() => {
-        return () => {
-            clearTimeout(timer.current)
-        }
-    }, [])
-
-    return (
-        <Tooltip
-            title={text}
-            placement="top-end">
-            <StyledButton
-                variant="outlined"
-                onClick={ChangeText}
-                style={{
-                    height: '16px',
-                    padding: "16px 5px",
-                    fontSize: "14px",
-                }}>Upload Media (img/video/song: 200MB Max)</StyledButton>
-        </Tooltip>
     );
 }

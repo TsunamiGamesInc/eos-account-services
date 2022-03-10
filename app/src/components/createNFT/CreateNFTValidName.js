@@ -7,7 +7,7 @@ import CustomCheckBox from '../CustomCheckbox';
 import { GenerateKey } from '../EosClient';
 import CustomAlert from '../CustomAlerts';
 
-export default function NFTValidNameComponent({ nftTitle, setNftTitle, nftDesc, setNftDesc,
+export default function NFTValidNameComponent({ nftTitle, setNftTitle, nftDesc, setNftDesc, setNftFile,
     setReceiverPrivKey, setReceiverPubKey, postData, totalPrice }) {
     const [keyCopied, setKeyCopied] = React.useState(false);
     const [open, setOpen] = React.useState(false);
@@ -36,7 +36,7 @@ export default function NFTValidNameComponent({ nftTitle, setNftTitle, nftDesc, 
                 <Box sx={{ height: '3vh' }} />
             </Grid>
             <Grid item xs={12}>
-                <UploadButton />
+                <UploadButton setNftFile={setNftFile} />
             </Grid>
             <Grid item xs={12}>
                 <p style={{ color: 'white', lineHeight: 1.25, fontWeight: 'normal', fontSize: 11 }}>
