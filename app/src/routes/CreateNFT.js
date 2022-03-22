@@ -10,14 +10,14 @@ export default function CreateNFT({ accountName, setAccountName, validName, setV
     setReceiverPrivKey, setReceiverPubKey, totalPrice, setTotalPrice }) {
     const [nftTitle, setNftTitle] = React.useState("");
     const [nftDesc, setNftDesc] = React.useState("");
-    const [nftFile, setNftFile] = React.useState(undefined);
+    const [nftHash, setNftHash] = React.useState(undefined);
 
     let postData = {
         accountDetails: {
             accountName: accountName,
             nftTitle: nftTitle,
             nftDesc: nftDesc,
-            nftFile: nftFile
+            nftHash: nftHash
         },
         lineItems:
             [
@@ -64,7 +64,7 @@ export default function CreateNFT({ accountName, setAccountName, validName, setV
                             accountName={accountName} setAccountName={setAccountName}
                             nftTitle={nftTitle} setNftTitle={setNftTitle}
                             nftDesc={nftDesc} setNftDesc={setNftDesc}
-                            setNftFile={setNftFile}
+                            setNftHash={setNftHash}
                             validName={validName} setValidName={setValidName}
                             setReceiverPrivKey={setReceiverPrivKey}
                             setReceiverPubKey={setReceiverPubKey}

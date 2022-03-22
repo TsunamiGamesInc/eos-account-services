@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import { ResourcesTextField } from '../CustomTextFields';
 import CreateNFTValidName from './CreateNFTValidName.js'
 
-export default function CreateNFTComponents({ accountName, setAccountName, nftTitle, setNftTitle, nftDesc, setNftDesc, setNftFile,
+export default function CreateNFTComponents({ accountName, setAccountName, nftTitle, setNftTitle, nftDesc, setNftDesc, setNftHash,
     validName, setValidName, setReceiverPrivKey, setReceiverPubKey, postData, totalPrice }) {
 
     return (
@@ -32,7 +32,7 @@ export default function CreateNFTComponents({ accountName, setAccountName, nftTi
                     <CreateNFTValidName
                         nftTitle={nftTitle} setNftTitle={setNftTitle}
                         nftDesc={nftDesc} setNftDesc={setNftDesc}
-                        setNftFile={setNftFile}
+                        setNftHash={setNftHash}
                         setReceiverPrivKey={setReceiverPrivKey}
                         setReceiverPubKey={setReceiverPubKey}
                         postData={postData} totalPrice={totalPrice}

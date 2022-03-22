@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+/* const fetch = require('node-fetch');
 const fs = require('fs');
 const path = require('path');
 
@@ -55,3 +55,4 @@ exports.api = api;
 exports.wasmHexString = wasmHexString;
 exports.serializedAbiHexString = serializedAbiHexString;
 exports.genRecAPI = genRecAPI;
+ */

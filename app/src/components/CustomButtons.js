@@ -5,6 +5,7 @@ import { Button } from '@material-ui/core';
 import { SvgIcon } from '@mui/material';
 import { ReactComponent as CheckIconSm } from '../images/check-icon-sm.svg';
 import { ReactComponent as CloseIconSm } from '../images/close-icon-sm.svg';
+import * as IPFS from 'ipfs-core';
 
 const StyledButton = withStyles({
     root: {
@@ -71,6 +72,7 @@ const StyledButtonNoRipple = withStyles({
 
 const StyledButtonNoTransform = withStyles({
     label: {
+        whiteSpace: 'nowrap',
         textTransform: 'none'
     }
 })(StyledButton);
@@ -169,20 +171,6 @@ export function VanityButtonSmall({ accountName, vkWorker }) {
     );
 }
 
-/* export function ButtonSmallNoRipple(props) {
-    return (
-        <StyledButtonNoRipple
-            variant="outlined"
-            onClick={null}
-            style={{
-                height: '16px',
-                padding: "16px 50px",
-                fontSize: "14px",
-            }}
-            disableRipple>{props.txt}</StyledButtonNoRipple>
-    );
-} */
-
 export function TooltipButtonSmall(props) {
     const [text, setText] = React.useState("Click to copy");
     const [canClick, setCanClick] = React.useState(true);
@@ -224,12 +212,19 @@ export function TooltipButtonSmall(props) {
     );
 }
 
-export function UploadButton({ setNftFile }) {
+export function UploadButton({ setNftHash }) {
     const [buttonText, setButtonText] = React.useState("Upload Media (Img/Video/Song: 200MB Max)");
 
     const onChange = file => {
         if (file.target.files[0].size < 209715200.1) {
-            setNftFile(file.target.files[0])
+            const reader = new FileReader();
+            reader.readAsArrayBuffer(file.target.files[0])
+            reader.onload = async () => {
+                const ipfs = await IPFS.create();
+                const { cid } = await ipfs.add(reader.result);
+
+                setNftHash(cid)
+            }
             setButtonText(file.target.files[0].name)
         }
         else {
@@ -244,8 +239,7 @@ export function UploadButton({ setNftFile }) {
             style={{
                 height: '16px',
                 padding: '16px 5px',
-                fontSize: '14px',
-                textTransform: 'none'
+                fontSize: '14px'
             }}>
             {buttonText}
             <input type="file" hidden onChange={onChange} />
