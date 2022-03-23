@@ -11,4 +11,4 @@ if (rootElement.hasChildNodes()) {
   render(<App />, rootElement)
 }
 
-serviceWorkerRegistration.register()
+serviceWorkerRegistration.unregister()

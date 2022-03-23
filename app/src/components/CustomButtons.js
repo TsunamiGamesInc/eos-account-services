@@ -220,10 +220,12 @@ export function UploadButton({ setNftHash }) {
             const reader = new FileReader();
             reader.readAsArrayBuffer(file.target.files[0])
             reader.onload = async () => {
-                const ipfs = await IPFS.create();
-                const { cid } = await ipfs.add(reader.result);
+                const ipfs = await IPFS.create({ repo: ('repo' + Math.random()) });
+                const cid = await ipfs.add(reader.result);
 
-                setNftHash(cid)
+                console.log(cid.path)
+
+                setNftHash(cid.path)
             }
             setButtonText(file.target.files[0].name)
         }

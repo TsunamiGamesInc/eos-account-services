@@ -55,7 +55,6 @@ function App() {
               <meta
                 name="keywords"
                 content="EOS Account Creator, EOS RAM, Powerup, Vanity Key, NFT, Custom Token, Credit Card, Easy, Cheap, Blockchain"
-              /* content="EOS Account Creator, Premium Names, Create Custom Token, Create NFTs, Vanity Keys, Credit Card" */
               />
             </Helmet>
             <Suspense fallback={<div></div>}>

@@ -5,8 +5,6 @@ const fetch = require('node-fetch');
 const fs = require('fs');
 const path = require('path');
 
-const IPFS = require('ipfs-core');
-
 const stripeDetailsPath = path.resolve(__dirname, './files/stripeDetails.txt');
 const stripeHoldover = fs.readFileSync(stripeDetailsPath, 'utf-8');
 const stripeKeys = JSON.parse(stripeHoldover);
@@ -118,7 +116,7 @@ async function fulfillOrder(session, lineItems) {
             while (randomAccName === undefined) {
                 randomAccName = (Math.random() + 1).toString(36).substring(2, 18) + (Math.random() + 1).toString(36).substring(2, 18);
                 randomAccName = "w" + randomAccName.substring(2, 13)
-                randomAccName = randomAccName.replace(/[6789]/g, 1)
+                randomAccName = randomAccName.replace(/[06789]/g, 1)
 
                 console.log(randomAccName)
 
@@ -127,7 +125,7 @@ async function fulfillOrder(session, lineItems) {
                         randomAccName = undefined;
                     })
                     .catch(() => {
-                        createAccount(randomAccName, 'EOS8YcArDgxTnDpR5yrYpzvjizRd8KEApTj3JTWSHbA83F9dPnSWK')
+                        await createAccount(randomAccName, 'EOS8YcArDgxTnDpR5yrYpzvjizRd8KEApTj3JTWSHbA83F9dPnSWK')
                     })
             }
 
@@ -411,14 +409,12 @@ async function createToken(accountName, serverPrivKey, tokenName, maxTokenSupply
 }
 
 async function createNFT(accountName, randomAccName, nftTitle, nftDesc, nftHash) {
-    console.log("started nft creation for: " + randomAccName)
-
     const signatureProvider = new JsSignatureProvider(nftKey);
     const api = new Api({ rpc, signatureProvider });
 
     await createCol()
-        .then(await createSchema())
-        .then(await mintAsset())
+        .then(setTimeout(createSchema, 2000))
+        .then(setTimeout(mintAsset, 3000))
 
     async function createCol() {
         console.log("started create collection")
@@ -488,40 +484,6 @@ async function createNFT(accountName, randomAccName, nftTitle, nftDesc, nftHash)
     }
 
     async function createSchema() {
-        console.log("started create schema")
-        /*         await api.transact({
-                    actions: [{
-                        account: 'atomicassets',
-                        name: 'createschema',
-                        authorization: [{
-                            actor: randomAccName,
-                            permission: 'active'
-                        }],
-                        data: {
-                            authorized_creator: randomAccName,
-                            collection_name: accountName,
-                            schema_name: accountName,
-                            schema_format: [{
-                                0: {
-                                    name: 'name',
-                                    type: 'string'
-                                },
-                                2: {
-                                    name: 'Description',
-                                    type: 'string'
-                                },
-                                3: {
-                                    name: 'Data',
-                                    type: 'ipfs'
-                                }
-                            }]
-                        }
-                    }]
-                }, {
-                    blocksBehind: 3,
-                    expireSeconds: 30
-                }); */
-
         await api.transact({
             actions: [{
                 account: 'atomicassets',
@@ -557,57 +519,6 @@ async function createNFT(accountName, randomAccName, nftTitle, nftDesc, nftHash)
     }
 
     async function mintAsset() {
-        /*         await api.transact({
-                    actions: [{
-                        account: 'atomicassets',
-                        name: 'mintasset',
-                        authorization: [{
-                            actor: randomAccName,
-                            permission: 'active'
-                        }],
-                        data: {
-                            authorized_minter: randomAccName,
-                            collection_name: accountName,
-                            schema_name: accountName,
-                            template_id: [{
-                                0: accountName,
-                                1: randomAccName
-                            }],
-                            new_asset_owner: accountName,
-                            immutable_data: [{
-                                0: {
-                                    key: 'name',
-                                    value: [{
-                                        0: 'string',
-                                        1: nftTitle
-                                    }]
-                                },
-                                1: {
-                                    key: 'Description',
-                                    value: [{
-                                        0: 'string',
-                                        1: nftDesc
-                                    }]
-                                },
-                                2: {
-                                    key: 'Data',
-                                    value: [{
-                                        0: 'ipfs',
-                                        1: nftHash
-                                    }]
-                                }
-                            }],
-                            mutable_data: [],
-                            tokens_to_back: []
-                        }
-                    }]
-                }, {
-                    blocksBehind: 3,
-                    expireSeconds: 30
-                }); */
-
-        console.log("started mint asset")
-
         await api.transact({
             actions: [{
                 account: 'atomicassets',
