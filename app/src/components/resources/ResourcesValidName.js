@@ -52,9 +52,7 @@ export default function ResourcesValidNameComponentsOne({ ramQuantity, setRamQua
                     labelMobile="My account name is correct, this can't be refunded" />
             </Grid>
             <Grid item xs={12}>
-                <CheckoutButton keyCopied={keyCopied} setOpen={setOpen} postData={postData}>
-                    {"Pay " + totalPrice}
-                </CheckoutButton>
+                <CheckoutButton keyCopied={keyCopied} setOpen={setOpen} postData={postData} totalPrice={totalPrice} />
             </Grid>
         </>
     );

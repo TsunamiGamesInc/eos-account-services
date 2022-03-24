@@ -45,9 +45,6 @@ export default function NFTValidNameComponent({ nftTitle, setNftTitle, nftDesc, 
                     <br />NSFW and copyright content is strictly prohibited.
                 </p>
             </Grid>
-            <Grid item xs={12}>
-                <Box sx={{ height: '1vh' }} />
-            </Grid>
             {!open &&
                 <Grid item xs={12}>
                     <Box sx={{ height: '35px' }} />
@@ -57,20 +54,18 @@ export default function NFTValidNameComponent({ nftTitle, setNftTitle, nftDesc, 
                 <Grid item xs={12}>
                     <CustomAlert
                         open={open} setOpen={setOpen}
-                        label="Save this key - it cannot be recovered!"
-                        labelMobile="Save this key, it's important!" />
+                        label="It's important to read the disclaimers!"
+                        labelMobile="Read the disclaimers above!" />
                 </Grid>
             }
             <Grid item xs={12}>
                 <CustomCheckBox
                     keyCopied={keyCopied} setKeyCopied={setKeyCopied}
-                    label="I have saved my password and understand it cannot be recovered"
-                    labelMobile="I saved my password knowing it cannot be recovered" />
+                    label="I have read the disclaimers and understand this can't be refunded"
+                    labelMobile="I read the disclaimers knowing this can't be refunded" />
             </Grid>
             <Grid item xs={12}>
-                <CheckoutButton keyCopied={keyCopied} setOpen={setOpen} postData={postData}>
-                    {"Pay " + totalPrice}
-                </CheckoutButton>
+                <CheckoutButton keyCopied={keyCopied} setOpen={setOpen} postData={postData} totalPrice={totalPrice} />
             </Grid>
         </>
     );

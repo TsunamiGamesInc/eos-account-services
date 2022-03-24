@@ -76,7 +76,10 @@ export default function CustomTextField({ accountName, setAccountName, setValidN
     const onChange = (e) => {
         const newValue = e.target.value;
 
-        if ((newValue.slice(-1).match(/[a-zA-Z1-5]/)) || (newValue === "")) {
+        if (!(newValue.match(/[a-zA-Z]/)) && (newValue.length === 1)) {
+            setError("First character must be a-z")
+        }
+        else if ((newValue.slice(-1).match(/[a-zA-Z1-5]/)) || (newValue === "")) {
             setError("")
             setAccountName(newValue)
         }

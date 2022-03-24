@@ -217,6 +217,7 @@ export function UploadButton({ setNftHash }) {
 
     const onChange = file => {
         if (file.target.files[0].size < 209715200.1) {
+            setButtonText("Processing... Please Wait.")
             const reader = new FileReader();
             reader.readAsArrayBuffer(file.target.files[0])
             reader.onload = async () => {
@@ -226,8 +227,8 @@ export function UploadButton({ setNftHash }) {
                 console.log(cid.path)
 
                 setNftHash(cid.path)
+                setButtonText(file.target.files[0].name)
             }
-            setButtonText(file.target.files[0].name)
         }
         else {
             setButtonText("File too large. Upload Media (200MB Max)")
@@ -249,13 +250,18 @@ export function UploadButton({ setNftHash }) {
     );
 }
 
-export function CheckoutButton({ children, keyCopied, setOpen, postData }) {
+export function CheckoutButton({ keyCopied, setOpen, postData, totalPrice }) {
+    const [buttonText, setButtonText] = React.useState("Pay ");
+    const [showPrice, setShowPrice] = React.useState(true);
+
     const handleClick = () => {
         if (!keyCopied) {
             setOpen(true)
         }
         else {
-            children = "Processing..."
+            setButtonText("Processing...")
+            setShowPrice(false)
+
             fetch('/server/eos_functions/create-checkout-session', {
                 method: 'POST',
                 headers: {
@@ -272,7 +278,7 @@ export function CheckoutButton({ children, keyCopied, setOpen, postData }) {
 
     return (
         <StyledButton variant="outlined" style={{ backgroundColor: '#0083FF' }} onClick={handleClick}>
-            {children}
+            {buttonText} {showPrice && totalPrice}
         </StyledButton>
     );
 }

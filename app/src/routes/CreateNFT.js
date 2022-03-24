@@ -10,7 +10,7 @@ export default function CreateNFT({ accountName, setAccountName, validName, setV
     setReceiverPrivKey, setReceiverPubKey, totalPrice, setTotalPrice }) {
     const [nftTitle, setNftTitle] = React.useState("");
     const [nftDesc, setNftDesc] = React.useState("");
-    const [nftHash, setNftHash] = React.useState(undefined);
+    const [nftHash, setNftHash] = React.useState('QmeMiJQ8jjmhk5Xznu7cuEKUPaEDLdjGu9omdud83NQqAu');
 
     let postData = {
         accountDetails: {
@@ -34,8 +34,8 @@ export default function CreateNFT({ accountName, setAccountName, validName, setV
             style: 'currency',
             currency: 'USD'
         });
-        let tokenPrice = formatter.format(12.99) + " USD";
-        setTotalPrice(tokenPrice)
+        let nftPrice = formatter.format(12.99) + " USD";
+        setTotalPrice(nftPrice)
     }, [validName, setTotalPrice])
 
     return (

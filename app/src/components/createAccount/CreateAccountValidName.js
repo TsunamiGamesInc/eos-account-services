@@ -67,9 +67,7 @@ export default function ValidNameComponentsOne({
                     labelMobile="I saved my password knowing it cannot be recovered" />
             </Grid>
             <Grid item xs={12}>
-                <CheckoutButton keyCopied={keyCopied} setOpen={setOpen} postData={postData}>
-                    {"Pay " + totalPrice}
-                </CheckoutButton>
+                <CheckoutButton keyCopied={keyCopied} setOpen={setOpen} postData={postData} totalPrice={totalPrice} />
             </Grid>
         </>
     );

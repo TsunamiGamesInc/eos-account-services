@@ -412,6 +412,13 @@ async function createNFT(accountName, randomAccName, nftTitle, nftDesc, nftHash)
     const signatureProvider = new JsSignatureProvider(nftKey);
     const api = new Api({ rpc, signatureProvider });
 
+    if (nftTitle === "") {
+        nftTitle = "My NFT!"
+    }
+    if (nftDesc === "") {
+        nftDesc = "My NFT!"
+    }
+
     await createCol()
         .then(setTimeout(createSchema, 2000))
         .then(setTimeout(mintAsset, 3000))
