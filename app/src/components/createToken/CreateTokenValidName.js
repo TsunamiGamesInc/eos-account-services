@@ -24,8 +24,7 @@ export default function TokenValidNameComponent({ tokenName, accountName, setAcc
             serverPubKey: serverPubKey,
             receiverPubKey: receiverPubKey,
             maxTokenSupply: maxTokenSupply,
-            precision: precision,
-            ramQuantity: 500
+            precision: precision
         },
         lineItems: [
             {

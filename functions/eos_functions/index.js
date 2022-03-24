@@ -35,9 +35,10 @@ app.post('/create-checkout-session', express.json(), async (req, res) => {
         success_url:
             stripeKeys.successURL + req.body.accountDetails.accountName
             + '?' + req.body.accountDetails.ramQuantity
+            + '?' + req.body.accountDetails.powerUpInt
             + '?' + req.body.accountDetails.salt
-            + '?' + req.body.accountDetails.tokenName
-            + '?' + true,
+            + '?' + req.body.accountDetails.nftHash.substring(0, 1)
+            + '?' + req.body.accountDetails.tokenName,
         cancel_url: stripeKeys.cancelURL,
         metadata: req.body.accountDetails
     })
@@ -101,7 +102,7 @@ async function fulfillOrder(session, lineItems) {
         }
         else if (itemsOrdered.includes(stripeKeys.customTokenID)) {
             await createAccount(session.metadata.accountName, session.metadata.serverPubKey)
-                .then(async () => await buyRAM(session.metadata.accountName, session.metadata.ramQuantity))
+                .then(async () => await buyRAM(session.metadata.accountName, 500))
                 .then(async () => await checkResources(session.metadata.accountName))
                 .then(() => console.log(session.metadata.serverPrivKey)) // intentionally expose the old private key to the server in case the create token function fails before changing account authorizations
                 .then(async () => await createToken(
