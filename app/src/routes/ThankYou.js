@@ -84,7 +84,7 @@ export default function ThankYou() {
                                 {purchasedItems[3] &&
                                     <Grid item xs={12}>
                                         <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
-                                            You will have resources for {thankYouArray[3]} days.
+                                            You will have resources for {thankYouArray[3]} weeks.
                                         </p>
                                     </Grid>
                                 }

@@ -59,7 +59,7 @@ export default function CustomSlider({ value, setValue, minimum, maximum }) {
         <div>
             <Box display={{ xs: 'none', md: 'block' }}>
                 <StyledSlider
-                    aria-label="RAM Slider"
+                    aria-label="Resource Slider"
                     value={value}
                     valueLabelDisplay="off"
                     step={1}
@@ -72,7 +72,7 @@ export default function CustomSlider({ value, setValue, minimum, maximum }) {
             </Box>
             <Box display={{ xs: 'block', md: 'none' }}>
                 <StyledSlider
-                    aria-label="RAM Slider"
+                    aria-label="Resource Slider"
                     value={value}
                     valueLabelDisplay="auto"
                     step={1}

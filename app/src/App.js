@@ -33,12 +33,13 @@ const theme = createTheme({
 });
 
 function App() {
-  const [ramQuantity, setRamQuantity] = React.useState(5);
   const [accountName, setAccountName] = React.useState("");
-  const [tokenName, setTokenName] = React.useState("");
+  const [ramQuantity, setRamQuantity] = React.useState(5);
+  const [pUWeeks, setPUWeeks] = React.useState(5);
   const [validName, setValidName] = React.useState(false);
   const [receiverPrivKey, setReceiverPrivKey] = React.useState("Your Private Key Will Be Displayed Here.");
   const [receiverPubKey, setReceiverPubKey] = React.useState("Your Public Key Will Be Displayed Here.");
+  const [tokenName, setTokenName] = React.useState("");
   const [totalPrice, setTotalPrice] = React.useState(0);
 
   return (
@@ -63,6 +64,7 @@ function App() {
                   <CreateAccount
                     accountName={accountName} setAccountName={setAccountName}
                     ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
+                    pUWeeks={pUWeeks} setPUWeeks={setPUWeeks}
                     validName={validName} setValidName={setValidName}
                     receiverPrivKey={receiverPrivKey} setReceiverPrivKey={setReceiverPrivKey}
                     receiverPubKey={receiverPubKey} setReceiverPubKey={setReceiverPubKey}
@@ -72,6 +74,7 @@ function App() {
                   <CreateAccount
                     accountName={accountName} setAccountName={setAccountName}
                     ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
+                    pUWeeks={pUWeeks} setPUWeeks={setPUWeeks}
                     validName={validName} setValidName={setValidName}
                     receiverPrivKey={receiverPrivKey} setReceiverPrivKey={setReceiverPrivKey}
                     receiverPubKey={receiverPubKey} setReceiverPubKey={setReceiverPubKey}
@@ -81,6 +84,7 @@ function App() {
                   <Resources
                     accountName={accountName} setAccountName={setAccountName}
                     ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
+                    pUWeeks={pUWeeks} setPUWeeks={setPUWeeks}
                     validName={validName} setValidName={setValidName}
                     totalPrice={totalPrice} setTotalPrice={setTotalPrice} />} />
                 <Route path="/vanity-keys.html" element={

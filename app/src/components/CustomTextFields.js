@@ -199,7 +199,7 @@ export function SliderTextField({ setValue, valueMirror, endAdornmentText }) {
             }}
             inputProps={{
                 'aria-label': 'RAM Quantity',
-                maxLength: 3,
+                maxLength: 3
             }}
         />
     );

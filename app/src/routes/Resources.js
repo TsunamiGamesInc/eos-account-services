@@ -7,11 +7,12 @@ import NavBar from '../components/NavBar';
 import CustomDrawer from '../components/CustomDrawer';
 
 export default function Resources({ accountName, setAccountName, validName, setValidName,
-    ramQuantity, setRamQuantity, totalPrice, setTotalPrice }) {
+    ramQuantity, setRamQuantity, pUWeeks, setPUWeeks, totalPrice, setTotalPrice }) {
     let postData = {
         accountDetails: {
             accountName: accountName,
-            ramQuantity: ramQuantity
+            ramQuantity: ramQuantity,
+            pUWeeks: pUWeeks
         },
         lineItems:
             [
@@ -19,6 +20,11 @@ export default function Resources({ accountName, setAccountName, validName, setV
                     price: 'price_1KLx2tAVYdsvCkiZ6U3mHNxW', //'price_1KQfYuAVYdsvCkiZEVuwDThX',
                     quantity: ramQuantity,
                     description: "For Account: " + accountName
+                },
+                {
+                    price: 'price_1KgzriAVYdsvCkiZ0EW9azxR',
+                    quantity: pUWeeks,
+                    description: "3ms CPU & 2KB NET Daily for " + pUWeeks + " weeks"
                 }
             ]
     };
@@ -34,22 +40,22 @@ export default function Resources({ accountName, setAccountName, validName, setV
             resourcesPrice = formatter.format(0) + " USD"
         }
         else {
-            resourcesPrice = formatter.format(0.4 * ramQuantity) + " USD"
+            resourcesPrice = formatter.format((0.4 * ramQuantity) + (7 * pUWeeks)) + " USD"
         }
         setTotalPrice(resourcesPrice)
-    }, [validName, ramQuantity, setTotalPrice])
+    }, [validName, ramQuantity, pUWeeks, setTotalPrice])
 
     return (
         <div>
             <Helmet>
-                <title>Get RAM</title>
+                <title>Resources</title>
                 <meta
                     name="description"
-                    content="Buy EOS RAM with a credit card."
+                    content="Get EOS RAM and PowerUps with a credit card."
                 />
                 <meta
                     name="keywords"
-                    content="Buy EOS RAM, Simple, Credit Card"
+                    content="EOS RAM, PowerUp, Simple, Credit Card"
                 />
             </Helmet>
             <Grid container spacing={4} justifyContent="center">
@@ -62,8 +68,9 @@ export default function Resources({ accountName, setAccountName, validName, setV
                 <Grid item xl={6}>
                     <Box sx={{ width: { xs: '410px', md: '525px' }}}>
                         <ResourcesComponents
-                            ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
                             accountName={accountName} setAccountName={setAccountName}
+                            ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
+                            pUWeeks={pUWeeks} setPUWeeks={setPUWeeks}
                             validName={validName} setValidName={setValidName}
                             postData={postData} totalPrice={totalPrice}
                         />

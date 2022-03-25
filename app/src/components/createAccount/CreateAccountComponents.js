@@ -5,8 +5,10 @@ import CustomTextField from '../CustomTextFields';
 import ValidName, { ValidNameComponentsTwo } from './CreateAccountValidName.js'
 
 export default function CreateAccountComponents({ accountName, setAccountName, validName, setValidName,
-    ramQuantity, setRamQuantity, receiverPrivKey, setReceiverPrivKey, setReceiverPubKey, postData, totalPrice }) {
+    ramQuantity, setRamQuantity, pUWeeks, setPUWeeks, receiverPrivKey, setReceiverPrivKey,
+    setReceiverPubKey, postData, totalPrice }) {
     let ramQuantityMirror = ramQuantity;
+    let pUWeeksMirror = pUWeeks;
 
     return (
         <Grid container spacing={3}>
@@ -33,6 +35,7 @@ export default function CreateAccountComponents({ accountName, setAccountName, v
                 {validName &&
                     <ValidName
                         ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
+                        pUWeeks={pUWeeks} setPUWeeks={setPUWeeks}
                         receiverPrivKey={receiverPrivKey} setReceiverPrivKey={setReceiverPrivKey}
                         setReceiverPubKey={setReceiverPubKey}
                         postData={postData} totalPrice={totalPrice}
@@ -42,6 +45,8 @@ export default function CreateAccountComponents({ accountName, setAccountName, v
                 <ValidNameComponentsTwo
                     ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
                     ramQuantityMirror={ramQuantityMirror}
+                    pUWeeks={pUWeeks} setPUWeeks={setPUWeeks}
+                    pUWeeksMirror={pUWeeksMirror}
                 />}
         </Grid >
     );

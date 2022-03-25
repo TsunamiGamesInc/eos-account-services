@@ -5,8 +5,9 @@ import { ResourcesTextField } from '../CustomTextFields';
 import ResourcesValidName, { ResourcesValidNameComponentsTwo } from './ResourcesValidName.js'
 
 export default function ResourcesComponents({ accountName, setAccountName, validName, setValidName,
-    ramQuantity, setRamQuantity, postData, totalPrice }) {
+    ramQuantity, setRamQuantity, pUWeeks, setPUWeeks, postData, totalPrice }) {
     let ramQuantityMirror = ramQuantity;
+    let pUWeeksMirror = pUWeeks;
 
     return (
         <Grid container spacing={3}>
@@ -24,7 +25,7 @@ export default function ResourcesComponents({ accountName, setAccountName, valid
                 {!validName &&
                     <Grid item xs={12}>
                         <p style={{ color: 'white', lineHeight: 2, fontWeight: 'normal', fontSize: 16 }}>
-                            Getting RAM is as easy as typing your name.
+                            Getting resources is as easy as typing your name.
                             <br />Don't worry, the textbox will help you along.
                         </p>
                     </Grid>
@@ -32,6 +33,7 @@ export default function ResourcesComponents({ accountName, setAccountName, valid
                 {validName &&
                     <ResourcesValidName
                         ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
+                        pUWeeks={pUWeeks} setPUWeeks={setPUWeeks}
                         postData={postData} totalPrice={totalPrice}
                     />}
             </Grid>
@@ -39,6 +41,8 @@ export default function ResourcesComponents({ accountName, setAccountName, valid
                 <ResourcesValidNameComponentsTwo
                     ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
                     ramQuantityMirror={ramQuantityMirror}
+                    pUWeeks={pUWeeks} setPUWeeks={setPUWeeks}
+                    pUWeeksMirror={pUWeeksMirror}
                 />}
         </Grid >
     );

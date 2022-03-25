@@ -89,7 +89,7 @@ export function CustomButtonNoTopBorder(props) {
     );
 }
 
-export function RecommendedButton({ ramQuantity, setRamQuantity }) {
+export function RecommendedButton({ ramQuantity, setRamQuantity, pUWeeks, setPUWeeks }) {
     let recommendedIcon = null;
     let checkIcon =
         <SvgIcon>
@@ -100,7 +100,7 @@ export function RecommendedButton({ ramQuantity, setRamQuantity }) {
             <CloseIconSm />
         </SvgIcon>;
 
-    if (ramQuantity < 5) {
+    if ((ramQuantity < 5) || (pUWeeks < 5)) {
         recommendedIcon = closeIcon
     }
     else {
@@ -109,6 +109,7 @@ export function RecommendedButton({ ramQuantity, setRamQuantity }) {
 
     function setRecommended() {
         setRamQuantity(5)
+        setPUWeeks(5)
         recommendedIcon = checkIcon
     }
 
