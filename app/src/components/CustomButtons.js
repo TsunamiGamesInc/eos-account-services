@@ -41,22 +41,22 @@ const StyledButtonNoTopBorder = withStyles({
 
 const StyledRecommendedButton = withStyles({
     root: {
-        display: "flex",
-        alignItems: "center",
+        display: 'flex',
+        alignItems: 'center',
         justifyContent: "center",
-        height: "16px",
+        height: '16px',
         minWidth: '100%',
         padding: '18.25px 0px 0px 0px',
-        boxSizing: "border-box",
-        color: "#0937FF",
-        transition: "background .3s,border-color .30s, color .3s",
+        boxSizing: 'border-box',
+        color: '#0937FF',
+        transition: 'background .3s,border-color .30s, color .3s',
         "&:hover": {
-            backgroundColor: "transparent"
+            backgroundColor: 'transparent'
         },
-        fontSize: "16px"
+        fontSize: '16px'
     },
     label: {
-        textTransform: "capitalize",
+        textTransform: 'capitalize',
     }
 })(Button);
 
@@ -77,6 +77,13 @@ const StyledButtonNoTransform = withStyles({
     }
 })(StyledButton);
 
+const StyledButtonLearn = withStyles({
+    root: {
+        height: '10px',
+        padding: '10px 20px'
+    }
+})(StyledButton);
+
 export default function CustomButton(props) {
     return (
         <StyledButton variant="outlined">{props.txt}</StyledButton>
@@ -89,7 +96,13 @@ export function CustomButtonNoTopBorder(props) {
     );
 }
 
-export function RecommendedButton({ ramQuantity, setRamQuantity, pUWeeks, setPUWeeks }) {
+export function LearnButton() {
+    return (
+        <StyledButtonLearn variant="outlined">Learn</StyledButtonLearn>
+    );
+}
+
+export function RecommendedButton({ ramQuantity, setRamQuantity }) {
     let recommendedIcon = null;
     let checkIcon =
         <SvgIcon>
@@ -100,7 +113,7 @@ export function RecommendedButton({ ramQuantity, setRamQuantity, pUWeeks, setPUW
             <CloseIconSm />
         </SvgIcon>;
 
-    if ((ramQuantity < 5) || (pUWeeks < 5)) {
+    if (ramQuantity < 5) {
         recommendedIcon = closeIcon
     }
     else {
@@ -109,7 +122,6 @@ export function RecommendedButton({ ramQuantity, setRamQuantity, pUWeeks, setPUW
 
     function setRecommended() {
         setRamQuantity(5)
-        setPUWeeks(5)
         recommendedIcon = checkIcon
     }
 

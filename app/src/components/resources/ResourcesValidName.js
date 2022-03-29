@@ -3,13 +3,11 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { SliderTextField } from '../CustomTextFields';
 import CustomSliders from '../CustomSliders';
-import Tooltip from '@mui/material/Tooltip';
 import { RecommendedButton, CheckoutButton } from '../CustomButtons';
 import CustomCheckBox from '../CustomCheckbox';
 import CustomAlert from '../CustomAlerts';
 
-export default function ResourcesValidNameComponentsOne({ ramQuantity, setRamQuantity,
-    pUWeeks, setPUWeeks, postData, totalPrice }) {
+export default function ResourcesValidNameComponentsOne({ ramQuantity, setRamQuantity, postData, totalPrice }) {
     const [keyCopied, setKeyCopied] = React.useState(false);
     const [open, setOpen] = React.useState(false);
 
@@ -24,9 +22,7 @@ export default function ResourcesValidNameComponentsOne({ ramQuantity, setRamQua
                     <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 18 }}>RAM</p>
                 </Grid>
                 <Grid item xs={5.0568}>
-                    <RecommendedButton
-                        ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
-                        pUWeeks={pUWeeks} setPUWeeks={setPUWeeks} />
+                    <RecommendedButton ramQuantity={ramQuantity} setRamQuantity={setRamQuantity} />
                 </Grid>
             </Grid>
             <Grid item xs={12}>
@@ -34,15 +30,9 @@ export default function ResourcesValidNameComponentsOne({ ramQuantity, setRamQua
                     value={ramQuantity} setValue={setRamQuantity} minimum={1} maximum={30} />
             </Grid>
             <Grid item xs={12}>
-                <Tooltip
-                    title={"3ms CPU & 2KB NET Daily for x Weeks"}
-                    placement="top">
-                    <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 18 }}>PowerUp</p>
-                </Tooltip>
-            </Grid>
-            <Grid item xs={12}>
-                <CustomSliders
-                    value={pUWeeks} setValue={setPUWeeks} minimum={1} maximum={30} />
+                <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 12 }}>
+                    Includes a Free EOS PowerUp!
+                </p>
             </Grid>
             <Grid item xs={12}>
                 <Box sx={{ height: '1vh' }} />
@@ -73,7 +63,7 @@ export default function ResourcesValidNameComponentsOne({ ramQuantity, setRamQua
     );
 }
 
-export function ResourcesValidNameComponentsTwo({ setRamQuantity, ramQuantityMirror, setPUWeeks, pUWeeksMirror }) {
+export function ResourcesValidNameComponentsTwo({ setRamQuantity, ramQuantityMirror }) {
     return (
         <>
             <Grid item xs={2.5} container display={{ xs: 'none', md: 'block' }}>
@@ -90,13 +80,8 @@ export function ResourcesValidNameComponentsTwo({ setRamQuantity, ramQuantityMir
                         </Grid>
                         <Grid item xs={12}>
                             <Box sx={{ height: '112px' }}>
-                                <Grid container spacing={4}>
-                                    <Grid item xs={12}>
-                                        <SliderTextField setValue={setRamQuantity} valueMirror={ramQuantityMirror} endAdornmentText="KB" />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <SliderTextField setValue={setPUWeeks} valueMirror={pUWeeksMirror} endAdornmentText="Weeks" />
-                                    </Grid>
+                                <Grid item xs={12}>
+                                    <SliderTextField setValue={setRamQuantity} valueMirror={ramQuantityMirror} endAdornmentText="KB" />
                                 </Grid>
                             </Box>
                         </Grid>

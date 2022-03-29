@@ -11,7 +11,12 @@ const VanityKeys = lazy(() => import('./routes/VanityKeys'));
 const CreateNFT = lazy(() => import('./routes/CreateNFT'));
 const CreateToken = lazy(() => import('./routes/CreateToken'));
 const ThankYou = lazy(() => import('./routes/ThankYou'));
+const Learn = lazy(() => import('./routes/Learn'));
 const RouteNotFound = lazy(() => import('./routes/404'));
+
+// Articles
+
+const CheapToken = lazy(() => import('./components/learn/CheapToken'));
 
 const theme = createTheme({
   palette: {
@@ -110,8 +115,14 @@ function App() {
                     setReceiverPrivKey={setReceiverPrivKey}
                     setReceiverPubKey={setReceiverPubKey}
                     totalPrice={totalPrice} setTotalPrice={setTotalPrice} />} />
+                <Route path="/learn.html" element={
+                  <Learn />
+                } />
                 <Route path="/thank-you.html" element={
                   <ThankYou />
+                } />
+                <Route path="/cheap-token.html" element={
+                  <CheapToken />
                 } />
                 <Route path="*" element={
                   <RouteNotFound />

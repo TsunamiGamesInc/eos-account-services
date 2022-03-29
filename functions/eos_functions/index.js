@@ -35,7 +35,6 @@ app.post('/create-checkout-session', express.json(), async (req, res) => {
         success_url:
             stripeKeys.successURL + req.body.accountDetails.accountName
             + '?' + req.body.accountDetails.ramQuantity
-            + '?' + req.body.accountDetails.pUWeeks
             + '?' + req.body.accountDetails.salt
             + '?' + req.body.accountDetails.nftHash
             + '?' + req.body.accountDetails.tokenName,
@@ -93,24 +92,23 @@ async function fulfillOrder(session, lineItems) {
 
         if (itemsOrdered.includes(stripeKeys.eosAccountID)) {
             await createAccount(session.metadata.accountName, session.metadata.receiverPubKey)
+                .then(
+                    setTimeout(async () => {
+                        await powerUp(session.metadata.accountName)
+                    }, 2000)
+                )
                 .catch(err => console.log(err))
         }
 
         if (itemsOrdered.includes(stripeKeys.eosRAMID)) {
             setTimeout(async () => {
                 await buyRAM(session.metadata.accountName, session.metadata.ramQuantity)
+                    .then(await powerUp(session.metadata.accountName))
                     .catch(err => console.log(err))
             }, 1000)
         }
 
-        if (itemsOrdered.includes(stripeKeys.powerUpID)) {
-            console.log("powerup")
-            setTimeout(async () => {
-                await powerUp(session.metadata.accountName, session.metadata.pUWeeks)
-                    .catch(err => console.log(err))
-            }, 1000)
-        }
-        else if (itemsOrdered.includes(stripeKeys.customTokenID)) {
+        if (itemsOrdered.includes(stripeKeys.customTokenID)) {
             await createAccount(session.metadata.accountName, session.metadata.serverPubKey)
                 .then(async () => await buyRAM(session.metadata.accountName, 500))
                 .then(async () => await checkResources(session.metadata.accountName))
@@ -173,16 +171,7 @@ async function checkResources(accountName) {
         })
 }
 
-async function powerUp(accountName, pUWeeks) {
-    let days;
-
-    if (pUWeeks === undefined) {
-        days = 1;
-    }
-    else {
-        days = pUWeeks * 7;
-    }
-
+async function powerUp(accountName) {
     await api.transact({
         actions: [{
             account: 'eosio',
@@ -194,10 +183,10 @@ async function powerUp(accountName, pUWeeks) {
             data: {
                 payer: 'serveaccount',
                 receiver: accountName,
-                days: 14,
+                days: 1,
                 cpu_frac: 600000,
                 net_frac: 340000, //68000
-                max_payment: '5.0000 EOS'
+                max_payment: '0.0500 EOS'
             }
         }]
     }, {

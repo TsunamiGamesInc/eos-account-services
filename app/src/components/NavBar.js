@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import CustomButtons, { CustomButtonNoTopBorder, CustomButtonNoRipple } from './CustomButtons';
+import CustomButtons, { CustomButtonNoTopBorder, LearnButton, CustomButtonNoRipple } from './CustomButtons';
 import IconButton from '@mui/material/IconButton';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -33,7 +33,7 @@ export default function NavBar({ totalPrice }) {
                 </Grid>
                 <Grid item xs={12}>
                     <Link to="/resources.html" style={{ textDecoration: 'none' }}>
-                        <CustomButtonNoTopBorder txt="Resources" />
+                        <CustomButtonNoTopBorder txt="Get RAM" />
                     </Link>
                 </Grid>
                 <Grid item xs={12}>
@@ -61,7 +61,14 @@ export default function NavBar({ totalPrice }) {
                     <Box sx={{ height: '0.2vh' }} />
                 </Grid>
                 <Grid item xs={12} container>
-                    <Grid item xs={9} />
+                    <Grid item xs={4}>
+                        <Box sx={{ padding: '3.1px 0px 0px 0px' }}>
+                            <Link to="/learn.html" style={{ textDecoration: 'none' }}>
+                                <LearnButton />
+                            </Link>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={5} />
                     <Grid item xs={1.25}>
                         <IconButton
                             aria-label="Questions?"
@@ -122,19 +129,39 @@ export function NavBarMobile() {
                         <CustomButtons txt="Create Account" />
                     </Link>
                 </Grid>
-                <Grid item xs={12}>
-                    <Box sx={{ height: '4vh', backgroundColor: 'transparent' }} />
-                </Grid>
                 <Grid item xs={8}>
                     <Link to="/resources.html" style={{ textDecoration: 'none' }}>
-                        <CustomButtons txt="Get RAM" />
+                        <CustomButtonNoTopBorder txt="Get RAM" />
                     </Link>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={8}>
+                    <Link to="/vanity-keys.html" style={{ textDecoration: 'none' }}>
+                        <CustomButtonNoTopBorder txt="Vanity Keys" />
+                    </Link>
+                </Grid>
+                <Grid item xs={8}>
+                    <Link to="/create-nft.html" style={{ textDecoration: 'none' }}>
+                        <CustomButtonNoTopBorder txt="Create NFTs" />
+                    </Link>
+                </Grid>
+                <Grid item xs={8}>
+                    <Link to="/create-token.html" style={{ textDecoration: 'none' }}>
+                        <CustomButtonNoTopBorder txt="Custom Token" />
+                    </Link>
+                </Grid>
+                <Grid item xs={8}>
                     <Box sx={{ height: '0.25vh', backgroundColor: 'transparent' }} />
                 </Grid>
                 <Grid item xs={12} container>
-                    <Grid item xs={7.9} />
+                    <Grid item xs={2} />
+                    <Grid item xs={4}>
+                        <Box sx={{ padding: '3.1px 0px 0px 0px' }}>
+                            <Link to="/learn.html" style={{ textDecoration: 'none' }}>
+                                <LearnButton />
+                            </Link>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={2} />
                     <Grid item xs={1}>
                         <IconButton
                             aria-label="Questions?"

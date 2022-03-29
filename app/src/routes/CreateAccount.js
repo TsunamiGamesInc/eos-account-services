@@ -7,8 +7,8 @@ import NavBar from '../components/NavBar';
 import CustomDrawer from '../components/CustomDrawer';
 
 export default function CreateAccount({ accountName, setAccountName, validName, setValidName,
-    ramQuantity, setRamQuantity, pUWeeks, setPUWeeks, receiverPrivKey, setReceiverPrivKey,
-    receiverPubKey, setReceiverPubKey, totalPrice, setTotalPrice }) {
+ramQuantity, setRamQuantity, receiverPrivKey, setReceiverPrivKey,
+receiverPubKey, setReceiverPubKey, totalPrice, setTotalPrice }) {
     const [items, setItems] = React.useState(
         [
             {
@@ -19,11 +19,6 @@ export default function CreateAccount({ accountName, setAccountName, validName, 
             {
                 price: 'price_1KLx2tAVYdsvCkiZ6U3mHNxW', //'price_1KQfYuAVYdsvCkiZEVuwDThX',
                 quantity: ramQuantity
-            },
-            {
-                price: 'price_1KgzriAVYdsvCkiZ0EW9azxR',
-                quantity: pUWeeks,
-                description: "3ms CPU & 2KB NET Daily for " + pUWeeks + " weeks"
             }
         ]
     );
@@ -31,51 +26,19 @@ export default function CreateAccount({ accountName, setAccountName, validName, 
         accountDetails: {
             accountName: accountName,
             receiverPubKey: receiverPubKey,
-            ramQuantity: ramQuantity,
-            pUWeeks: pUWeeks
+            ramQuantity: ramQuantity
         },
         lineItems: items
     };
 
     useEffect(() => {
-        if ((ramQuantity === 0) && (pUWeeks === 0)) {
+        if (ramQuantity === 0) {
             setItems(
                 [
                     {
                         price: 'price_1KLXPhAVYdsvCkiZzOz41XOl',
                         quantity: 1,
                         description: "For Account: " + accountName
-                    }
-                ]
-            )
-        }
-        else if (!(ramQuantity === 0) && (pUWeeks === 0)) {
-            setItems(
-                [
-                    {
-                        price: 'price_1KLXPhAVYdsvCkiZzOz41XOl',
-                        quantity: 1,
-                        description: "For Account: " + accountName
-                    },
-                    {
-                        price: 'price_1KLx2tAVYdsvCkiZ6U3mHNxW', //'price_1KQfYuAVYdsvCkiZEVuwDThX',
-                        quantity: ramQuantity
-                    }
-                ]
-            )
-        }
-        else if ((ramQuantity === 0) && !(pUWeeks === 0)) {
-            setItems(
-                [
-                    {
-                        price: 'price_1KLXPhAVYdsvCkiZzOz41XOl',
-                        quantity: 1,
-                        description: "For Account: " + accountName
-                    },
-                    {
-                        price: 'price_1KgzriAVYdsvCkiZ0EW9azxR',
-                        quantity: pUWeeks,
-                        description: "3ms CPU & 2KB NET Daily for " + pUWeeks + " for account " + accountName
                     }
                 ]
             )
@@ -91,16 +54,11 @@ export default function CreateAccount({ accountName, setAccountName, validName, 
                     {
                         price: 'price_1KLx2tAVYdsvCkiZ6U3mHNxW',
                         quantity: ramQuantity
-                    },
-                    {
-                        price: 'price_1KgzriAVYdsvCkiZ0EW9azxR',
-                        quantity: pUWeeks,
-                        description: "3ms CPU & 2KB NET Daily for " + pUWeeks + " weeks"
                     }
                 ]
             )
         }
-    }, [accountName, ramQuantity, pUWeeks, setItems])
+    }, [accountName, ramQuantity, setItems])
 
     useEffect(() => {
         const formatter = new Intl.NumberFormat('en-US', {
@@ -113,10 +71,10 @@ export default function CreateAccount({ accountName, setAccountName, validName, 
             accountPrice = formatter.format(4.00) + " USD"
         }
         else {
-            accountPrice = formatter.format(4.00 + (0.4 * ramQuantity) + (7 * pUWeeks)) + " USD"
+            accountPrice = formatter.format(4.00 + (0.4 * ramQuantity)) + " USD"
         }
         setTotalPrice(accountPrice)
-    }, [validName, ramQuantity, pUWeeks, setTotalPrice])
+    }, [validName, ramQuantity, setTotalPrice])
 
     return (
         <div>
@@ -143,7 +101,6 @@ export default function CreateAccount({ accountName, setAccountName, validName, 
                         <CreateAccountComponents
                             accountName={accountName} setAccountName={setAccountName}
                             ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
-                            pUWeeks={pUWeeks} setPUWeeks={setPUWeeks}
                             validName={validName} setValidName={setValidName}
                             receiverPrivKey={receiverPrivKey} setReceiverPrivKey={setReceiverPrivKey}
                             setReceiverPubKey={setReceiverPubKey}

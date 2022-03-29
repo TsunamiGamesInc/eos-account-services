@@ -3,14 +3,13 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { SliderTextField } from '../CustomTextFields';
 import CustomSliders from '../CustomSliders';
-import Tooltip from '@mui/material/Tooltip';
 import { RecommendedButton, TooltipButtonSmall, CheckoutButton } from '../CustomButtons';
 import CustomCheckBox from '../CustomCheckbox';
 import { GenerateKey } from '../EosClient';
 import CustomAlert from '../CustomAlerts';
 
-export default function ValidNameComponentsOne({ ramQuantity, setRamQuantity,
-    pUWeeks, setPUWeeks, receiverPrivKey, setReceiverPrivKey, setReceiverPubKey, postData, totalPrice }) {
+export default function ValidNameComponentsOne({ ramQuantity, setRamQuantity, receiverPrivKey, setReceiverPrivKey,
+    setReceiverPubKey, postData, totalPrice }) {
     const [keyCopied, setKeyCopied] = React.useState(false);
     const [open, setOpen] = React.useState(false);
 
@@ -29,9 +28,7 @@ export default function ValidNameComponentsOne({ ramQuantity, setRamQuantity,
                     <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 18 }}> RAM </p>
                 </Grid>
                 <Grid item xs={5.0568}>
-                    <RecommendedButton
-                        ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
-                        pUWeeks={pUWeeks} setPUWeeks={setPUWeeks} />
+                    <RecommendedButton ramQuantity={ramQuantity} setRamQuantity={setRamQuantity} />
                 </Grid>
             </Grid>
             <Grid item xs={12}>
@@ -39,18 +36,12 @@ export default function ValidNameComponentsOne({ ramQuantity, setRamQuantity,
                     value={ramQuantity} setValue={setRamQuantity} minimum={0} maximum={10} />
             </Grid>
             <Grid item xs={12}>
-                <Tooltip
-                    title={"3ms CPU & 2KB NET Daily for x Weeks"}
-                    placement="top">
-                    <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 18 }}>PowerUp</p>
-                </Tooltip>
+                <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 12 }}>
+                    Includes a Free EOS PowerUp + 600KB of Bonus RAM!
+                </p>
             </Grid>
             <Grid item xs={12}>
-                <CustomSliders
-                    value={pUWeeks} setValue={setPUWeeks} minimum={0} maximum={10} />
-            </Grid>
-            <Grid item xs={12}>
-                <Box sx={{ height: '2vh' }} />
+                <Box sx={{ height: '1vh' }} />
             </Grid>
             <Grid item xs={12}>
                 <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}> Private Key/Password </p>
@@ -87,7 +78,7 @@ export default function ValidNameComponentsOne({ ramQuantity, setRamQuantity,
     );
 }
 
-export function ValidNameComponentsTwo({ setRamQuantity, ramQuantityMirror, setPUWeeks, pUWeeksMirror }) {
+export function ValidNameComponentsTwo({ setRamQuantity, ramQuantityMirror }) {
     return (
         <>
             <Grid item xs={2.5} container display={{ xs: 'none', md: 'block' }}>
@@ -104,13 +95,8 @@ export function ValidNameComponentsTwo({ setRamQuantity, ramQuantityMirror, setP
                         </Grid>
                         <Grid item xs={12}>
                             <Box sx={{ height: '112px' }}>
-                                <Grid container spacing={4}>
-                                    <Grid item xs={12}>
-                                        <SliderTextField setValue={setRamQuantity} valueMirror={ramQuantityMirror} endAdornmentText="KB" />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <SliderTextField setValue={setPUWeeks} valueMirror={pUWeeksMirror} endAdornmentText="Weeks" />
-                                    </Grid>
+                                <Grid item xs={12}>
+                                    <SliderTextField setValue={setRamQuantity} valueMirror={ramQuantityMirror} endAdornmentText="KB" />
                                 </Grid>
                             </Box>
                         </Grid>

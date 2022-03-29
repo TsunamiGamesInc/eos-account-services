@@ -7,12 +7,11 @@ import NavBar from '../components/NavBar';
 import CustomDrawer from '../components/CustomDrawer';
 
 export default function Resources({ accountName, setAccountName, validName, setValidName,
-    ramQuantity, setRamQuantity, pUWeeks, setPUWeeks, totalPrice, setTotalPrice }) {
+    ramQuantity, setRamQuantity, totalPrice, setTotalPrice }) {
     let postData = {
         accountDetails: {
             accountName: accountName,
-            ramQuantity: ramQuantity,
-            pUWeeks: pUWeeks
+            ramQuantity: ramQuantity
         },
         lineItems:
             [
@@ -20,11 +19,6 @@ export default function Resources({ accountName, setAccountName, validName, setV
                     price: 'price_1KLx2tAVYdsvCkiZ6U3mHNxW', //'price_1KQfYuAVYdsvCkiZEVuwDThX',
                     quantity: ramQuantity,
                     description: "For Account: " + accountName
-                },
-                {
-                    price: 'price_1KgzriAVYdsvCkiZ0EW9azxR',
-                    quantity: pUWeeks,
-                    description: "3ms CPU & 2KB NET Daily for " + pUWeeks + " weeks"
                 }
             ]
     };
@@ -40,10 +34,10 @@ export default function Resources({ accountName, setAccountName, validName, setV
             resourcesPrice = formatter.format(0) + " USD"
         }
         else {
-            resourcesPrice = formatter.format((0.4 * ramQuantity) + (7 * pUWeeks)) + " USD"
+            resourcesPrice = formatter.format(0.4 * ramQuantity) + " USD"
         }
         setTotalPrice(resourcesPrice)
-    }, [validName, ramQuantity, pUWeeks, setTotalPrice])
+    }, [validName, ramQuantity, setTotalPrice])
 
     return (
         <div>
@@ -70,7 +64,6 @@ export default function Resources({ accountName, setAccountName, validName, setV
                         <ResourcesComponents
                             accountName={accountName} setAccountName={setAccountName}
                             ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
-                            pUWeeks={pUWeeks} setPUWeeks={setPUWeeks}
                             validName={validName} setValidName={setValidName}
                             postData={postData} totalPrice={totalPrice}
                         />

@@ -5,9 +5,8 @@ import { ResourcesTextField } from '../CustomTextFields';
 import ResourcesValidName, { ResourcesValidNameComponentsTwo } from './ResourcesValidName.js'
 
 export default function ResourcesComponents({ accountName, setAccountName, validName, setValidName,
-    ramQuantity, setRamQuantity, pUWeeks, setPUWeeks, postData, totalPrice }) {
+    ramQuantity, setRamQuantity, postData, totalPrice }) {
     let ramQuantityMirror = ramQuantity;
-    let pUWeeksMirror = pUWeeks;
 
     return (
         <Grid container spacing={3}>
@@ -33,7 +32,6 @@ export default function ResourcesComponents({ accountName, setAccountName, valid
                 {validName &&
                     <ResourcesValidName
                         ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
-                        pUWeeks={pUWeeks} setPUWeeks={setPUWeeks}
                         postData={postData} totalPrice={totalPrice}
                     />}
             </Grid>
@@ -41,8 +39,6 @@ export default function ResourcesComponents({ accountName, setAccountName, valid
                 <ResourcesValidNameComponentsTwo
                     ramQuantity={ramQuantity} setRamQuantity={setRamQuantity}
                     ramQuantityMirror={ramQuantityMirror}
-                    pUWeeks={pUWeeks} setPUWeeks={setPUWeeks}
-                    pUWeeksMirror={pUWeeksMirror}
                 />}
         </Grid >
     );

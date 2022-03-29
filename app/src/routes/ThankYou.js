@@ -9,9 +9,10 @@ export default function ThankYou() {
     let thankYouURL = window.location.href;
     let thankYouArray = thankYouURL.split('?');
     const blokURL = 'https://bloks.io/account/' + thankYouArray[1];
+    const powerUpURL = 'https://eospowerup.io/free';
+    const ramURL = 'https://eosaccountservices.com/app/resources.html';
     const tokenURL = blokURL + '?loadContract=true&tab=Actions';
     const nftURL = blokURL + '#nfts';
-    const resourcesURL = 'https://eosaccountservices.com/app/resources.html';
     const purchasedItems = [false, false, false, false, false];
 
     if (thankYouArray[1] !== "undefined") { // created an account
@@ -20,19 +21,16 @@ export default function ThankYou() {
     if (thankYouArray[2] !== "undefined") { // bought RAM
         purchasedItems[2] = true
     }
-    if (thankYouArray[3] !== "undefined") { // powered up
+    if (thankYouArray[3] !== "undefined") { // bought a vanity key
         purchasedItems[3] = true
     }
-    if (thankYouArray[4] !== "undefined") { // bought a vanity key
+    if (thankYouArray[4] !== "undefined") { // created an nft
+        purchasedItems[1] = false
         purchasedItems[4] = true
     }
-    if (thankYouArray[5] !== "undefined") { // created an nft
+    if (thankYouArray[5] !== "undefined") { // created a custom token
         purchasedItems[1] = false
         purchasedItems[5] = true
-    }
-    if (thankYouArray[6] !== "undefined") { // created a custom token
-        purchasedItems[1] = false
-        purchasedItems[6] = true
     }
 
     return (
@@ -82,23 +80,16 @@ export default function ThankYou() {
                                     </Grid>
                                 }
                                 {purchasedItems[3] &&
-                                    <Grid item xs={12}>
-                                        <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
-                                            You will have resources for {thankYouArray[3]} weeks.
-                                        </p>
-                                    </Grid>
-                                }
-                                {purchasedItems[4] &&
                                     <VanityKeyInstructions thankYouArray={thankYouArray} />
                                 }
-                                {purchasedItems[5] &&
+                                {purchasedItems[4] &&
                                     <Grid item xs={12}>
                                         <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
                                             You can view your NFT <a href={nftURL}>here.</a>
                                         </p>
                                     </Grid>
                                 }
-                                {purchasedItems[6] &&
+                                {purchasedItems[5] &&
                                     <Grid item xs={12}>
                                         <p style={{ color: 'white', lineHeight: 2, fontWeight: 'normal', fontSize: 16 }}>
                                             You can preform token actions <a href={tokenURL}>here.</a>
@@ -106,8 +97,8 @@ export default function ThankYou() {
                                             <br />Start by issuing/minting tokens.
                                             <br />Then, try a transfer!
                                             <br />If you run into issues:
-                                            <br />You may need to <a href={resourcesURL}>PowerUp.</a>
-                                            <br />Or, <a href={resourcesURL}>Get RAM.</a>
+                                            <br />You may need to <a href={powerUpURL}>PowerUp.</a>
+                                            <br />Or, <a href={ramURL}>Get RAM.</a>
                                         </p>
                                     </Grid>
                                 }
