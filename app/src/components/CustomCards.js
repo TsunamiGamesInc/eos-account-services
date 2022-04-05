@@ -18,7 +18,7 @@ export default function CustomCards({ linkTxt, cardImg, txt }) {
                         alt="Card Image"
                     />
                     <CardContent>
-                        <Typography style={{ fontSize: 14, fontFamily: 'Calibri', color: '#0937FF', fontWeight: 'bold' }}>
+                        <Typography style={{ fontSize: 14, fontFamily: 'Calibri', color: '#0083FF', fontWeight: 'bold' }}>
                             {txt}
                         </Typography>
                     </CardContent>
@@ -34,7 +34,7 @@ export function CustomCardsMobile({ linkTxt, txt }) {
             <CardActionArea>
                 <Link to={linkTxt} style={{ textDecoration: 'none' }}>
                     <CardContent>
-                        <Typography style={{ fontSize: 14, fontFamily: 'Calibri', color: '#0937FF', fontWeight: 'bold' }}>
+                        <Typography style={{ fontSize: 14, fontFamily: 'Calibri', color: '#0083FF', fontWeight: 'bold' }}>
                             {txt}
                         </Typography>
                     </CardContent>

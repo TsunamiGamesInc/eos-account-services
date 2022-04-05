@@ -7,7 +7,6 @@ import NavBar from '../components/NavBar';
 import CustomDrawer from '../components/CustomDrawer';
 
 export default function Learn() {
-
     return (
         <div>
             <Helmet>

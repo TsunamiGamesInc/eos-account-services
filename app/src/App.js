@@ -17,6 +17,14 @@ const RouteNotFound = lazy(() => import('./routes/404'));
 // Articles
 
 const CheapToken = lazy(() => import('./components/learn/CheapToken'));
+const CheapNFT = lazy(() => import('./components/learn/CheapNFT'));
+const CheapAccount = lazy(() => import('./components/learn/CheapAccount'));
+const CheapRAM = lazy(() => import('./components/learn/CheapRAM'));
+const FreePowerUp = lazy(() => import('./components/learn/FreePowerUp'));
+const VideoNFT = lazy(() => import('./components/learn/VideoNFT'));
+const SongNFT = lazy(() => import('./components/learn/SongNFT'));
+const TokenInfo = lazy(() => import('./components/learn/TokenInfo'));
+const BigInt = lazy(() => import('./components/learn/BigInt'));
 
 const theme = createTheme({
   palette: {
@@ -123,6 +131,30 @@ function App() {
                 } />
                 <Route path="/cheap-token.html" element={
                   <CheapToken />
+                } />
+                <Route path="/cheap-nft.html" element={
+                  <CheapNFT />
+                } />
+                <Route path="/cheap-account.html" element={
+                  <CheapAccount />
+                } />
+                <Route path="/cheap-ram.html" element={
+                  <CheapRAM />
+                } />
+                <Route path="/free-powerup.html" element={
+                  <FreePowerUp />
+                } />
+                <Route path="/video-nft.html" element={
+                  <VideoNFT />
+                } />
+                <Route path="/song-nft.html" element={
+                  <SongNFT />
+                } />
+                <Route path="/token-info.html" element={
+                  <TokenInfo />
+                } />
+                <Route path="/big-int.html" element={
+                  <BigInt />
                 } />
                 <Route path="*" element={
                   <RouteNotFound />

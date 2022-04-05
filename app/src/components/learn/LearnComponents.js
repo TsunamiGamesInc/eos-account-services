@@ -2,7 +2,8 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import CustomCards, { CustomCardsMobile } from '../CustomCards'
-import wile from './wileecoyote.jpg';
+import easImg from './eas-default.avif';
+import powerUpImg from './powerup-img.avif';
 
 export default function LearnComponents() {
     const bigIntErr = "IPFS: How to Fix \"Cannot Convert a BigInt\"";
@@ -21,27 +22,27 @@ export default function LearnComponents() {
             </Grid>
             <Grid item xs={4}>
                 <CustomCards
-                    linkTxt="/cheap-token.html" cardImg={wile}
+                    linkTxt="/cheap-token.html" cardImg={easImg}
                     txt="The Cheapest Way to Create a Custom Token on EOS" />
             </Grid>
             <Grid item xs={4}>
                 <CustomCards
-                    linkTxt="/create-account.html" cardImg={wile}
+                    linkTxt="/cheap-nft.html" cardImg={easImg}
                     txt="The Cheapest Way to Create a NFT on EOS" />
             </Grid>
             <Grid item xs={4}>
                 <CustomCards
-                    linkTxt="/create-account.html" cardImg={wile}
+                    linkTxt="/cheap-account.html" cardImg={easImg}
                     txt="The Cheapest Way to Create an Account on EOS" />
             </Grid>
             <Grid item xs={4}>
                 <CustomCards
-                    linkTxt="/create-account.html" cardImg={wile}
+                    linkTxt="/cheap-ram.html" cardImg={easImg}
                     txt="The Cheapest Way to Buy RAM on EOS" />
             </Grid>
             <Grid item xs={4}>
                 <CustomCards
-                    linkTxt="/create-account.html" cardImg={wile}
+                    linkTxt="/free-powerup.html" cardImg={powerUpImg}
                     txt="How to Get a Free PowerUp on EOS" />
             </Grid>
             <Grid item xs={12} container justifyContent="flex-start">
@@ -51,32 +52,32 @@ export default function LearnComponents() {
             </Grid>
             <Grid item xs={4}>
                 <CustomCards
-                    linkTxt="/create-account.html" cardImg={wile}
+                    linkTxt="/video-nft.html" cardImg={easImg}
                     txt="How to Make a Video NFT on EOS" />
             </Grid>
             <Grid item xs={4}>
                 <CustomCards
-                    linkTxt="/create-account.html" cardImg={wile}
+                    linkTxt="/song-nft.html" cardImg={easImg}
                     txt="How to Make a Song NFT on EOS" />
             </Grid>
             <Grid item xs={4}>
                 <CustomCards
-                    linkTxt="/create-account.html" cardImg={wile}
+                    linkTxt="/token-info.html" cardImg={easImg}
                     txt="Personal Token Contract vs Token Contract Based on Another Account" />
             </Grid>
             <Grid item xs={4}>
                 <CustomCards
-                    linkTxt="/create-account.html" cardImg={wile}
+                    linkTxt="/big-int.html" cardImg={easImg}
                     txt={bigIntErr} />
             </Grid>
             <Grid item xs={4}>
                 <CustomCards
-                    linkTxt="/create-account.html" cardImg={wile}
+                    linkTxt="/create-account.html" cardImg={easImg}
                     txt={bufferErr} />
             </Grid>
             <Grid item xs={4}>
                 <CustomCards
-                    linkTxt="/create-account.html" cardImg={wile}
+                    linkTxt="/create-account.html" cardImg={easImg}
                     txt={daysConfig} />
             </Grid>
         </Grid>

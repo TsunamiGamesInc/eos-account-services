@@ -102,6 +102,21 @@ export function LearnButton() {
     );
 }
 
+export function LearnSimpleButton(props) {
+    return (
+        <StyledButton
+            variant="outlined"
+            style={{
+                height: '16px',
+                minWidth: '100%',
+                maxWidth: '100%',
+                padding: '16px 10px',
+                fontSize: '14px',
+                backgroundColor: '#0083FF'
+            }}>{props.txt}</StyledButton>
+    );
+}
+
 export function RecommendedButton({ ramQuantity, setRamQuantity }) {
     let recommendedIcon = null;
     let checkIcon =
