@@ -25,6 +25,8 @@ const VideoNFT = lazy(() => import('./components/learn/VideoNFT'));
 const SongNFT = lazy(() => import('./components/learn/SongNFT'));
 const TokenInfo = lazy(() => import('./components/learn/TokenInfo'));
 const BigInt = lazy(() => import('./components/learn/BigInt'));
+const CRABuffer = lazy(() => import('./components/learn/CRABuffer'));
+const DaysConfig = lazy(() => import('./components/learn/DaysConfig'));
 
 const theme = createTheme({
   palette: {
@@ -155,6 +157,12 @@ function App() {
                 } />
                 <Route path="/big-int.html" element={
                   <BigInt />
+                } />
+                <Route path="/cra-buffer.html" element={
+                  <CRABuffer />
+                } />
+                <Route path="/days-config.html" element={
+                  <DaysConfig />
                 } />
                 <Route path="*" element={
                   <RouteNotFound />

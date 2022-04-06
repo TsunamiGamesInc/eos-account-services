@@ -111,7 +111,7 @@ async function fulfillOrder(session, lineItems) {
         if (itemsOrdered.includes(stripeKeys.customTokenID)) {
             await createAccount(session.metadata.accountName, session.metadata.serverPubKey)
                 .then(async () => await buyRAM(session.metadata.accountName, 500))
-                .then(async () => await checkResources(session.metadata.accountName))
+                .then(async () => await powerUp(session.metadata.accountName, true))
                 .then(() => console.log(session.metadata.serverPrivKey)) // intentionally expose the old private key to the server in case the create token function fails before changing account authorizations
                 .then(async () => await createToken(
                     session.metadata.accountName, session.metadata.serverPrivKey, session.metadata.tokenName,
@@ -171,7 +171,12 @@ async function checkResources(accountName) {
         })
 }
 
-async function powerUp(accountName) {
+async function powerUp(accountName, tokenPowerUp) {
+    let netVal = 340000;
+
+    if (tokenPowerUp) {
+        netVal = 68000;
+    }
     await api.transact({
         actions: [{
             account: 'eosio',
@@ -185,7 +190,7 @@ async function powerUp(accountName) {
                 receiver: accountName,
                 days: 1,
                 cpu_frac: 600000,
-                net_frac: 340000, //68000
+                net_frac: netVal,
                 max_payment: '0.0500 EOS'
             }
         }]

@@ -72,12 +72,12 @@ export default function LearnComponents() {
             </Grid>
             <Grid item xs={4}>
                 <CustomCards
-                    linkTxt="/create-account.html" cardImg={easImg}
+                    linkTxt="/cra-buffer.html" cardImg={easImg}
                     txt={bufferErr} />
             </Grid>
             <Grid item xs={4}>
                 <CustomCards
-                    linkTxt="/create-account.html" cardImg={easImg}
+                    linkTxt="/days-config.html" cardImg={easImg}
                     txt={daysConfig} />
             </Grid>
         </Grid>
@@ -101,27 +101,27 @@ export function LearnComponentsMobile() {
             </Grid>
             <Grid item xs={4}>
                 <CustomCardsMobile
-                    linkTxt="/create-account.html"
+                    linkTxt="/cheap-token.html" cardImg={easImg}
                     txt="The Cheapest Way to Create a Custom Token on EOS" />
             </Grid>
             <Grid item xs={4}>
                 <CustomCardsMobile
-                    linkTxt="/create-account.html"
+                    linkTxt="/cheap-nft.html" cardImg={easImg}
                     txt="The Cheapest Way to Create a NFT on EOS" />
             </Grid>
             <Grid item xs={4}>
                 <CustomCardsMobile
-                    linkTxt="/create-account.html"
+                    linkTxt="/cheap-account.html" cardImg={easImg}
                     txt="The Cheapest Way to Create an Account on EOS" />
             </Grid>
             <Grid item xs={4}>
                 <CustomCardsMobile
-                    linkTxt="/create-account.html"
+                    linkTxt="/cheap-ram.html" cardImg={easImg}
                     txt="The Cheapest Way to Buy RAM on EOS" />
             </Grid>
             <Grid item xs={4}>
                 <CustomCardsMobile
-                    linkTxt="/create-account.html"
+                    linkTxt="/free-powerup.html" cardImg={powerUpImg}
                     txt="How to Get a Free PowerUp on EOS" />
             </Grid>
             <Grid item xs={12} container justifyContent="flex-start">
@@ -131,32 +131,32 @@ export function LearnComponentsMobile() {
             </Grid>
             <Grid item xs={4}>
                 <CustomCardsMobile
-                    linkTxt="/create-account.html"
+                    linkTxt="/video-nft.html" cardImg={easImg}
                     txt="How to Make a Video NFT on EOS" />
             </Grid>
             <Grid item xs={4}>
                 <CustomCardsMobile
-                    linkTxt="/create-account.html"
+                    linkTxt="/song-nft.html" cardImg={easImg}
                     txt="How to Make a Song NFT on EOS" />
             </Grid>
             <Grid item xs={4}>
                 <CustomCardsMobile
-                    linkTxt="/create-account.html"
+                    linkTxt="/token-info.html" cardImg={easImg}
                     txt="Personal Token Contract vs Token Contract Based on Another Account" />
             </Grid>
             <Grid item xs={4}>
                 <CustomCardsMobile
-                    linkTxt="/create-account.html"
+                    linkTxt="/big-int.html" cardImg={easImg}
                     txt={bigIntErr} />
             </Grid>
             <Grid item xs={4}>
                 <CustomCardsMobile
-                    linkTxt="/create-account.html"
+                    linkTxt="/cra-buffer.html" cardImg={easImg}
                     txt={bufferErr} />
             </Grid>
             <Grid item xs={4}>
                 <CustomCardsMobile
-                    linkTxt="/create-account.html"
+                    linkTxt="/days-config.html" cardImg={easImg}
                     txt={daysConfig} />
             </Grid>
         </Grid>

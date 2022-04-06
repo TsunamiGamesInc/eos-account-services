@@ -43,9 +43,9 @@ export default function CRABuffer() {
                             <Grid item xs={12}>
                                 <Box sx={{ maxHeight: { xs: '360px', md: '800px' }, textAlign: 'left', overflow: 'auto' }} >
                                     <p style={{ fontSize: 14, fontFamily: 'Calibri', color: 'white' }}>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;A wonderful bootstrapping option is available to programmers in create-react-app (CRA). But, the newest react-scripts has updated to Webpack 5.0+ and opted to discontinue automatic polyfills at the same time. Polyfills allow for some nodejs functionality to be used in browsers without having to update libraries. Manual polyfills can be quite the headache and often require elaborate workarounds or abandoning project crutial libraries.
+                                        &nbsp;&nbsp;&nbsp;&nbsp;A wonderful bootstrapping option is available to programmers in create-react-app (CRA). But, the newest react-scripts has updated to Webpack 5.0+ and opted to discontinue automatic polyfills at the same time. Polyfills allow for some nodejs functionality to be used in browsers without having to update libraries. Manual polyfills can be quite the headache and often require elaborate workarounds or abandoning project crucial libraries.
                                         <br />
-                                        <br />This issue has been much discussed <a href="https://github.com/facebook/create-react-app/issues/11756">on Facebook's GitHub</a>
+                                        <br />This issue has been much discussed <a href="https://github.com/facebook/create-react-app/issues/11756">on Facebook's GitHub.</a>
                                         <br />
                                         <br /><b>The Solution</b>
                                         <br />
@@ -60,13 +60,13 @@ export default function CRABuffer() {
                                         <br />
                                         <br />Option 3:
                                         <br />1. npm uninstall all packages that require polyfills
-                                        <br />&nbsp;&nbsp;&nbsp;&nbsp;These may be identifiable in your error message; otherwise guess and check each library
+                                        <br />&nbsp;&nbsp;&nbsp;&nbsp;These may be identifiable in your error message; otherwise guess and check each package
                                         <br />
                                         <br />Option 4 (Not Recommended):
                                         <br />1. react eject or abandon create-react-app
                                         <br />2. Manage your own webpack to manually include polyfills
                                         <br />
-                                        <br />There are a few other options, but these are the most advisable. This website reverted to 4.0.3
+                                        <br />There are a few other options, but these are the most advisable. This website reverted to 4.0.3.
                               
                                     </p>
                                 </Box>

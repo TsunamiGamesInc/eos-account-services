@@ -8,7 +8,7 @@ import CustomDrawer from '../CustomDrawer';
 import { Link } from 'react-router-dom';
 
 export default function BigInt() {
-    const bigIntErr = "\"TypeError: Cannot convert a BigInt value to a number\"," + " \"at Math.pow (<anonymous>)\"";
+    const bigIntErr = "\"TypeError: Cannot convert a BigInt value to a number\", \"at Math.pow (<anonymous>)\"";
     return (
         <div>
             <Helmet>
