@@ -72,7 +72,7 @@ export default function VanityKeys({ accountName, setAccountName, validName, set
         lineItems:
             [
                 {
-                    price: 'price_1KTbKoAVYdsvCkiZSQlyplsF',
+                    price: 'price_1KnTUvAVYdsvCkiZXUVDnb7N',
                     quantity: 1,
                     description: "Vanity Key: " + receiverPubKey
                 }

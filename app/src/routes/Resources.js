@@ -16,7 +16,7 @@ export default function Resources({ accountName, setAccountName, validName, setV
         lineItems:
             [
                 {
-                    price: 'price_1KLx2tAVYdsvCkiZ6U3mHNxW', //'price_1KQfYuAVYdsvCkiZEVuwDThX',
+                    price: 'price_1KnTUSAVYdsvCkiZiUMxnPhf',
                     quantity: ramQuantity,
                     description: "For Account: " + accountName
                 }

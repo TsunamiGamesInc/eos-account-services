@@ -37,7 +37,7 @@ export default function ValidNameComponentsOne({ ramQuantity, setRamQuantity, re
             </Grid>
             <Grid item xs={12}>
                 <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 12 }}>
-                    Includes a Free EOS PowerUp + 600KB of Bonus RAM!
+                    Includes a Free EOS PowerUp + 680B of Bonus RAM!
                 </p>
             </Grid>
             <Grid item xs={12}>

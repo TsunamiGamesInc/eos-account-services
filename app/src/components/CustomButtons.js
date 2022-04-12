@@ -240,19 +240,46 @@ export function TooltipButtonSmall(props) {
     );
 }
 
-export function UploadButton({ setNftHash }) {
+export function UploadButton({ setFileType, setNftHash }) {
     const [buttonText, setButtonText] = React.useState("Upload Media (Img/Video/Song: 200MB Max)");
+    let isImg = true;
 
     const onChange = file => {
         if (file.target.files[0].size < 209715200.1) {
             setButtonText("Processing... Please Wait.")
             const reader = new FileReader();
             reader.readAsArrayBuffer(file.target.files[0])
+
             reader.onload = async () => {
                 const ipfs = await IPFS.create({ repo: ('repo' + Math.random()) });
                 const cid = await ipfs.add(reader.result);
 
-                console.log(cid.path)
+                const videoSuffixes = [
+                    'mp4', 'mov', 'avi', 'flv', 'mkv', 'wmv', 'avchd', 'webm', 'swf', 'ogg', 'mpg', 'mpeg'
+                ];
+                const audioSuffixes = [
+                    'pcm', 'wav', 'aiff', 'mp3', 'aac', 'wma', 'flac', 'alac'
+                ];
+
+                setFileType('img')
+
+                for (let vSuffix of videoSuffixes) {
+                    if (file.target.files[0].name.endsWith(vSuffix)) {
+                        isImg = false
+                        setFileType('video')
+                        break;
+                    }
+                }
+
+                if (isImg) {
+                    for (let aSuffix of audioSuffixes) {
+                        if (file.target.files[0].name.endsWith(aSuffix)) {
+                            isImg = false
+                            setFileType('audio')
+                            break;
+                        }
+                    }
+                }
 
                 setNftHash(cid.path)
                 setButtonText(file.target.files[0].name)

@@ -9,8 +9,7 @@ export default function ThankYou() {
     let thankYouURL = window.location.href;
     let thankYouArray = thankYouURL.split('?');
     const blokURL = 'https://bloks.io/account/' + thankYouArray[1];
-    const powerUpURL = 'https://eospowerup.io/free';
-    const ramURL = 'https://eosaccountservices.com/app/resources.html';
+    const resourcesURL = 'https://www.eosaccountservices.com/resources.html';
     const tokenURL = blokURL + '?loadContract=true&tab=Actions';
     const nftURL = blokURL + '#nfts';
     const purchasedItems = [false, false, false, false, false];
@@ -84,8 +83,9 @@ export default function ThankYou() {
                                 }
                                 {purchasedItems[4] &&
                                     <Grid item xs={12}>
-                                        <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
+                                        <p style={{ color: 'white', lineHeight: 2, fontWeight: 'normal', fontSize: 16 }}>
                                             You can view your NFT <a href={nftURL}>here.</a>
+                                            <br />NFT management can be done <a href={'https://eos.atomichub.io/'}>here.</a>
                                         </p>
                                     </Grid>
                                 }
@@ -97,8 +97,7 @@ export default function ThankYou() {
                                             <br />Start by issuing/minting tokens.
                                             <br />Then, try a transfer!
                                             <br />If you run into issues:
-                                            <br />You may need to <a href={powerUpURL}>PowerUp.</a>
-                                            <br />Or, <a href={ramURL}>Get RAM.</a>
+                                            <br />You may need to <a href={resourcesURL}>Get RAM/PowerUp.</a>
                                         </p>
                                     </Grid>
                                 }
@@ -115,8 +114,13 @@ export default function ThankYou() {
 }
 
 function VanityKeyInstructions({ thankYouArray }) {
-    const saltLetter = thankYouArray[3].substring(0, 1);
-    const letterPlacement = (Number(thankYouArray[3].substring(1)) + 1);
+    let saltLetter;
+    let letterPlacement;
+
+    if (thankYouArray[3] !== undefined) {
+        saltLetter = thankYouArray[3].substring(0, 1);
+        letterPlacement = (Number(thankYouArray[3].substring(1)) + 1);
+    }
 
     return (
         <Grid item xs={12}>

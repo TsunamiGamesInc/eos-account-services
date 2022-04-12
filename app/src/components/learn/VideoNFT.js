@@ -45,7 +45,7 @@ export default function VideoNFT() {
                                     <p style={{ fontSize: 14, fontFamily: 'Calibri', color: 'white' }}>
                                         &nbsp;&nbsp;&nbsp;&nbsp;Atomic Assets, which is the currently dominating standard for EOS NFTs, allows for the creation of video NFTs. Like on other chains, this is done through the use of the InterPlanetary File System (IPFS). IPFS is a decentralized means of storing data online. IPFS uses hashes of the data it is storing as the URL for the data. NFTs then reference that URL/hash to display the desired video. This means the video NFTs on EOS and (practically) every other chain will not have their data actually stored on-chain. Rather, the data is stored using IPFS in a decentralized manner, then referenced on-chain. This guide may also help people who need help understanding "how to use IPFS desktop" or need an "IPFS companion tutorial"
                                         <br />
-                                        <br />The following steps assume you understand how to create a <a href={"https://www.eosacountservices.com/cheap-nft.html"}>typical NFT using AtomicHub.</a>
+                                        <br />The following steps assume you understand how to create a <a href={"https://www.eosaccountservices.com/cheap-nft.html"}>typical NFT using AtomicHub.</a>
                                         <br />
                                         <br />1. Download your computer's version of IPFS Desktop by scrolling down <a href="https://github.com/ipfs/ipfs-desktop#ipfs-desktop">here</a>
                                         <br />&nbsp;&nbsp;&nbsp;&nbsp;a. After installation your local node of IPFS will be setup. This will allow you to upload files
@@ -57,7 +57,7 @@ export default function VideoNFT() {
                                         <br />7. Login to <a href="https://eos.atomichub.io/creator">AtomicHub</a>
                                         <br />8. Create or edit an existing NFT schema (you can setup a schema using <a href={"https://www.youtube.com/watch?v=bXuuFJPJ5Mc"}>Crypton's video</a> or <a href={"https://eosnation.io/create-nfts/"}>EOS Nation's text guide</a>)
                                         <br />9. Click Add New Attribute
-                                        <br />10. Under Attribute Type select IPFS Hash
+                                        <br />10. Under Attribute Type select IPFS Hash (name the attribute video, audio, or img)
                                         <br />11. Save the Schema
                                         <br />12. Click Mint New Asset
                                         <br />13. Fill out the empty textboxes with your desired info (copies, name, etc.)

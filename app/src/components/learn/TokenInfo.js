@@ -49,7 +49,7 @@ export default function TokenInfo() {
                                         <br />
                                         <br />The main difference between <b>Personal Token Contracts</b> and <b>Token Contracts Based on Another Account</b> is who has authority to make all the changes above
                                         <br />
-                                        <br />In <b>Personal Token Contracts</b>, like those offered on <a href={"https://eosaccountservices.com/create-token.html"}>this site</a>, you have complete authority.
+                                        <br />In <b>Personal Token Contracts</b>, like those offered on <a href={"https://www.eosaccountservices.com/create-token.html"}>this site</a>, you have complete authority.
                                         <br />In <b>Token Contracts Based on Another Account</b>, like those offered on competing sites, you must trust the owner to not change or modify anything.
                                         <br />
                                         <br />This means the token creator, not you, will permanently be able make any of the previously mentioned changes without your permission. If the owner is nefarious, you have no recourse to prevent theft, etc. and must restart with a new token.

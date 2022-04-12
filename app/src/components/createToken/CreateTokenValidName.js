@@ -28,7 +28,7 @@ export default function TokenValidNameComponent({ tokenName, accountName, setAcc
         },
         lineItems: [
             {
-                price: 'price_1KWnWbAVYdsvCkiZHsu5Odgg',
+                price: 'price_1KnTUqAVYdsvCkiZ4qa2OAxa',
                 quantity: 1,
                 description: "Token Name: " + tokenName + " Account Name: " + accountName
             }

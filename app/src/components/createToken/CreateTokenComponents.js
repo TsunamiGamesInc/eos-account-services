@@ -4,8 +4,9 @@ import Box from '@mui/material/Box';
 import { TokenTextField } from '../CustomTextFields';
 import CreateTokenValidName from './CreateTokenValidName.js'
 
-export default function CreateTokenComponents({ tokenName, setTokenName, accountName, setAccountName, validName, setValidName,
+export default function CreateTokenComponents({ tokenName, setTokenName, accountName, setAccountName,
     receiverPrivKey, setReceiverPrivKey, receiverPubKey, setReceiverPubKey, totalPrice }) {
+    const [tokenValidName, setTokenValidName] = React.useState(false);
 
     return (
         <Grid container spacing={3}>
@@ -15,12 +16,12 @@ export default function CreateTokenComponents({ tokenName, setTokenName, account
                     <Box sx={{ height: '1vh' }} display={{ xs: 'block', md: 'none' }} />
                 </Grid>
                 <Grid item xs={12}>
-                    <TokenTextField tokenName={tokenName} setTokenName={setTokenName} setValidName={setValidName} />
+                    <TokenTextField tokenName={tokenName} setTokenName={setTokenName} setTokenValidName={setTokenValidName} />
                 </Grid>
                 <Grid item xs={12}>
                     <Box sx={{ height: '1.1vh' }} />
                 </Grid>
-                {!validName &&
+                {!tokenValidName &&
                     <Grid item xs={12}>
                         <p style={{ color: 'white', lineHeight: 2, fontWeight: 'normal', fontSize: 16 }}>
                             Getting started is as easy as choosing a name.
@@ -29,7 +30,7 @@ export default function CreateTokenComponents({ tokenName, setTokenName, account
                         </p>
                     </Grid>
                 }
-                {validName &&
+                {tokenValidName &&
                     <CreateTokenValidName
                         tokenName={tokenName}
                         accountName={accountName} setAccountName={setAccountName}

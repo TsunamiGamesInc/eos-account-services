@@ -66,11 +66,11 @@ function App() {
               <title>EOS Account Services</title>
               <meta
                 name="description"
-                content="Get the easiest EOS account creation, RAM, powerups, vanity keys, NFTs, and custom cryptocurrency tokens, all with a credit card."
+                content="Get the easiest EOS account creation, RAM, vanity keys, NFTs, and custom cryptocurrency tokens, all with a credit card."
               />
               <meta
                 name="keywords"
-                content="EOS Account Creator, EOS RAM, Powerup, Vanity Key, NFT, Custom Token, Credit Card, Easy, Cheap, Blockchain"
+                content="EOS Account Creator, EOS RAM, PowerUp, Vanity Key, NFT, Custom Token, Credit Card, Easy, Cheap, Blockchain"
               />
             </Helmet>
             <Suspense fallback={<div></div>}>
@@ -114,7 +114,6 @@ function App() {
                   <CreateToken
                     tokenName={tokenName} setTokenName={setTokenName}
                     accountName={accountName} setAccountName={setAccountName}
-                    validName={validName} setValidName={setValidName}
                     receiverPrivKey={receiverPrivKey} setReceiverPrivKey={setReceiverPrivKey}
                     receiverPubKey={receiverPubKey} setReceiverPubKey={setReceiverPubKey}
                     totalPrice={totalPrice} setTotalPrice={setTotalPrice} />} />

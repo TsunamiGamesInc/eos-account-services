@@ -1,7 +1,7 @@
 import { JsonRpc } from 'eosjs';
 import { ecc } from 'eosjs/dist/eosjs-ecc-migration';
 
-const endpoint = 'https://jungle3.greymass.com';
+const endpoint = 'https://eos.api.eosnation.io'; //'https://jungle3.greymass.com';
 const rpc = new JsonRpc(endpoint);
 
 export async function GenerateKey({ setReceiverPrivKey, setReceiverPubKey }) {
@@ -24,10 +24,13 @@ export async function GenerateServerKey({ setServerPrivKey, setServerPubKey }) {
 
 export default async function GetAccountInfo(receiverName, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle) {
     await rpc.get_account(receiverName)
-        .then((data) => {
+        .then(() => {
+
+            /* Dev Tools
             console.log("CPU: " + data.cpu_limit.available)
             console.log("NET: " + data.net_limit.available)
-            console.log("RAM: " + (data.ram_quota - data.ram_usage))
+            console.log("RAM: " + (data.ram_quota - data.ram_usage)) */
+
             setIcon(closeIconMd)
             setValidName(false)
             setTooltipTitle("Name is taken!")
@@ -64,27 +67,3 @@ export async function CheckExistingName(receiverName, setIcon, checkIconMd, clos
             setTooltipTitle("That account doesn't exist!")
         });
 }
-
-//just for testing catalyst functions without building eosjs everytime
-
-/* export async function GenerateKey({ setReceiverPrivKey, setReceiverPubKey }) {
-    setReceiverPrivKey("Hello")
-    setReceiverPubKey("Hello")
-}
-
-export default async function GetAccountInfo(receiverName, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle) {
-    setIcon(checkIconMd)
-    setValidName(true)
-    setTooltipTitle("Name is available!")
-}
-
-export async function GetAccountInfoNoValid(receiverName, setIcon, checkIconMd, closeIconMd, setTooltipTitle) {
-    setIcon(checkIconMd)
-    setTooltipTitle("Name is available!")
-}
-
-export async function CheckExistingName(receiverName, setIcon, checkIconMd, closeIconMd, setValidName, setTooltipTitle) {
-    setIcon(checkIconMd)
-    setValidName(true)
-    setTooltipTitle("Found your account!")
-} */

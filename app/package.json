@@ -28,13 +28,29 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postbuild": "react-snap"
   },
   "reactSnap": {
     "include": [
-      "/create-account",
-      "/resources",
-      "/thank-you"
+      "/create-account.html",
+      "/resources.html",
+      "/vanity-keys.html",
+      "/create-nft.html",
+      "/create-token.html",
+      "/thank-you.html",
+      "/learn.html",
+      "/big-int.html",
+      "/cheap-account.html",
+      "/cheap-nft.html",
+      "/cheap-ram.html",
+      "/cheap-token.html",
+      "/cra-buffer.html",
+      "/days-config.html",
+      "/free-powerup.html",
+      "/song-nft.html",
+      "/video-nft.html",
+      "/token-info.html"
     ]
   },
   "eslintConfig": {

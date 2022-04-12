@@ -12,12 +12,12 @@ receiverPubKey, setReceiverPubKey, totalPrice, setTotalPrice }) {
     const [items, setItems] = React.useState(
         [
             {
-                price: 'price_1KLXPhAVYdsvCkiZzOz41XOl', //'price_1KK7ZXAVYdsvCkiZdawW9HoX'
+                price: 'price_1KnTTsAVYdsvCkiZlXM79HFc',
                 quantity: 1,
                 description: "Account Name: " + accountName
             },
             {
-                price: 'price_1KLx2tAVYdsvCkiZ6U3mHNxW', //'price_1KQfYuAVYdsvCkiZEVuwDThX',
+                price: 'price_1KnTUSAVYdsvCkiZiUMxnPhf',
                 quantity: ramQuantity
             }
         ]
@@ -36,7 +36,7 @@ receiverPubKey, setReceiverPubKey, totalPrice, setTotalPrice }) {
             setItems(
                 [
                     {
-                        price: 'price_1KLXPhAVYdsvCkiZzOz41XOl',
+                        price: 'price_1KnTTsAVYdsvCkiZlXM79HFc',
                         quantity: 1,
                         description: "For Account: " + accountName
                     }
@@ -47,12 +47,12 @@ receiverPubKey, setReceiverPubKey, totalPrice, setTotalPrice }) {
             setItems(
                 [
                     {
-                        price: 'price_1KLXPhAVYdsvCkiZzOz41XOl',
+                        price: 'price_1KnTTsAVYdsvCkiZlXM79HFc',
                         quantity: 1,
                         description: "Account Name: " + accountName
                     },
                     {
-                        price: 'price_1KLx2tAVYdsvCkiZ6U3mHNxW',
+                        price: 'price_1KnTUSAVYdsvCkiZiUMxnPhf',
                         quantity: ramQuantity
                     }
                 ]

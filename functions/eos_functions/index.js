@@ -14,7 +14,7 @@ const endpointSecret = stripeKeys.webhookKey;
 const { Api, Serialize } = require('eosjs');
 const eosjs_jsonrpc = require('eosjs');
 const { JsSignatureProvider } = require('eosjs/dist/eosjs-jssig.js');
-const endpoint = 'https://jungle3.greymass.com';
+const endpoint = 'https://eos.api.eosnation.io';
 
 const creatorKeyPath = path.resolve(__dirname, './files/creatorKey.txt');
 const keyHoldover = fs.readFileSync(creatorKeyPath, 'utf-8');
@@ -82,44 +82,39 @@ async function fulfillOrder(session, lineItems) {
 
     setTimeout(eosFulfill, 3000)
 
+    let powerUpIncluded = false;
+
     async function eosFulfill() {
         let itemsOrdered = "";
         lineItems.data.forEach(function (currentItem) {
             itemsOrdered += currentItem.price.product
         })
 
-        console.log(itemsOrdered)
-
         if (itemsOrdered.includes(stripeKeys.eosAccountID)) {
             await createAccount(session.metadata.accountName, session.metadata.receiverPubKey)
-                .then(
-                    setTimeout(async () => {
-                        await powerUp(session.metadata.accountName)
-                    }, 2000)
-                )
+                .then(() => {
+                    powerUpIncluded = true
+                })
                 .catch(err => console.log(err))
         }
 
         if (itemsOrdered.includes(stripeKeys.eosRAMID)) {
             setTimeout(async () => {
                 await buyRAM(session.metadata.accountName, session.metadata.ramQuantity)
-                    .then(await powerUp(session.metadata.accountName))
+                    .then(() => {
+                        powerUpIncluded = true
+                    })
                     .catch(err => console.log(err))
             }, 1000)
         }
 
-        if (itemsOrdered.includes(stripeKeys.customTokenID)) {
-            await createAccount(session.metadata.accountName, session.metadata.serverPubKey)
-                .then(async () => await buyRAM(session.metadata.accountName, 500))
-                .then(async () => await powerUp(session.metadata.accountName, true))
-                .then(() => console.log(session.metadata.serverPrivKey)) // intentionally expose the old private key to the server in case the create token function fails before changing account authorizations
-                .then(async () => await createToken(
-                    session.metadata.accountName, session.metadata.serverPrivKey, session.metadata.tokenName,
-                    session.metadata.maxTokenSupply, session.metadata.precision, session.metadata.receiverPubKey))
-                .catch(err => console.log(err))
+        if (powerUpIncluded) {
+            setTimeout(async () => {
+                await powerUp(session.metadata.accountName)
+            }, 2000)
         }
-        else if (itemsOrdered.includes(stripeKeys.nftID)) {
-            console.log(session.metadata.nftHash);
+
+        if (itemsOrdered.includes(stripeKeys.nftID)) {
             let randomAccName;
 
             while (randomAccName === undefined) {
@@ -127,14 +122,13 @@ async function fulfillOrder(session, lineItems) {
                 randomAccName = "w" + randomAccName.substring(2, 13)
                 randomAccName = randomAccName.replace(/[06789]/g, 1)
 
-                console.log(randomAccName)
-
                 await rpc.get_account(randomAccName)
                     .then(() => {
                         randomAccName = undefined;
                     })
                     .catch(async () => {
-                        await createAccount(randomAccName, 'EOS8YcArDgxTnDpR5yrYpzvjizRd8KEApTj3JTWSHbA83F9dPnSWK')
+                        await createAccount(randomAccName, 'EOS5NFTmNiEwdBm7YhjrMwNVuRMP7nM8WxWxyGzt6B4TNe7TToTpE')
+                            .catch((err) => console.log(err))
                     })
             }
 
@@ -143,10 +137,20 @@ async function fulfillOrder(session, lineItems) {
                     .then(await powerUp(randomAccName))
                     .then(await createNFT(
                         session.metadata.accountName, randomAccName,
-                        session.metadata.nftTitle, session.metadata.nftDesc, session.metadata.nftHash
+                        session.metadata.nftTitle, session.metadata.nftDesc, session.metadata.fileType, session.metadata.nftHash
                     ))
                     .catch(err => console.log(err))
             }, 4000)
+        }
+        else if (itemsOrdered.includes(stripeKeys.customTokenID)) {
+            await createAccount(session.metadata.accountName, session.metadata.serverPubKey)
+                .then(async () => await buyRAM(session.metadata.accountName, 500))
+                .then(async () => await powerUp(session.metadata.accountName, true))
+                .then(() => console.log(session.metadata.serverPrivKey)) // intentionally expose the old private key to the server in case the create token function fails before changing account authorizations
+                .then(async () => await createToken(
+                    session.metadata.accountName, session.metadata.serverPrivKey, session.metadata.tokenName,
+                    session.metadata.maxTokenSupply, session.metadata.precision, session.metadata.receiverPubKey))
+                .catch(err => console.log(err))
         }
     }
 }
@@ -161,21 +165,21 @@ function sendErrorResponse(res) {
 async function checkResources(accountName) {
     await rpc.get_account(accountName)
         .then(async (data) => {
-            if ((data.cpu_limit.available < 4000) || (data.net_limit.available < 12000)) {
+            if ((data.cpu_limit.available < 4000) || (data.net_limit.available < 8000)) {
                 await powerUp(accountName)
             }
 
-            if ((data.ram_quota - data.ram_usage) < 500) {
+            if ((data.ram_quota - data.ram_usage) < 5000) {
                 await buyRAM(accountName, 10)
             }
         })
 }
 
 async function powerUp(accountName, tokenPowerUp) {
-    let netVal = 340000;
+    let netVal = 400000; //68000;
 
     if (tokenPowerUp) {
-        netVal = 68000;
+        netVal = 400000; //340000;
     }
     await api.transact({
         actions: [{
@@ -189,8 +193,8 @@ async function powerUp(accountName, tokenPowerUp) {
                 payer: 'serveaccount',
                 receiver: accountName,
                 days: 1,
-                cpu_frac: 600000,
-                net_frac: netVal,
+                cpu_frac: 300000000, //600000
+                net_frac: 400000, //netVal
                 max_payment: '0.0500 EOS'
             }
         }]
@@ -272,6 +276,120 @@ async function buyRAM(accountName, ramQuantity) {
     });
 }
 
+async function createNFT(accountName, randomAccName, nftTitle, nftDesc, fileType, nftHash) {
+    const signatureProvider = new JsSignatureProvider(nftKey);
+    const api = new Api({ rpc, signatureProvider });
+
+    if (nftTitle === "") {
+        nftTitle = "My NFT!"
+    }
+    if (nftDesc === "") {
+        nftDesc = "My NFT!"
+    }
+
+    await createCol()
+        .then(setTimeout(createSchema, 3000))
+        .then(setTimeout(mintAsset, 10000))
+
+    async function createCol() {
+        await api.transact({
+            actions: [{
+                account: 'atomicassets',
+                name: 'createcol',
+                authorization: [{
+                    actor: randomAccName,
+                    permission: 'active'
+                }],
+                data: {
+                    author: randomAccName,
+                    collection_name: randomAccName,
+                    allow_notify: true,
+                    authorized_accounts: [randomAccName, accountName],
+                    notify_accounts: [],
+                    market_fee: 0,
+                    data: []
+                }
+            }]
+        }, {
+            blocksBehind: 3,
+            expireSeconds: 30
+        })
+    }
+
+    async function createSchema() {
+        await api.transact({
+            actions: [{
+                account: 'atomicassets',
+                name: 'createschema',
+                authorization: [{
+                    actor: randomAccName,
+                    permission: 'active'
+                }],
+                data: {
+                    authorized_creator: randomAccName,
+                    collection_name: randomAccName,
+                    schema_name: randomAccName,
+                    schema_format: [
+                        {
+                            name: 'name',
+                            type: 'string'
+                        },
+                        {
+                            name: 'description',
+                            type: 'string'
+                        },
+                        {
+                            name: fileType,
+                            type: 'ipfs'
+                        }
+                    ]
+                }
+            }]
+        }, {
+            blocksBehind: 3,
+            expireSeconds: 30
+        });
+    }
+
+    async function mintAsset() {
+        await api.transact({
+            actions: [{
+                account: 'atomicassets',
+                name: 'mintasset',
+                authorization: [{
+                    actor: randomAccName,
+                    permission: 'active'
+                }],
+                data: {
+                    authorized_minter: randomAccName,
+                    collection_name: randomAccName,
+                    schema_name: randomAccName,
+                    template_id: -1,
+                    new_asset_owner: accountName,
+                    immutable_data: [{
+                        key: 'name',
+                        value: ['string', nftTitle]
+                    },
+                    {
+                        key: 'description',
+                        value: ['string', nftDesc]
+                    },
+                    {
+                        key: fileType,
+                        value: ['string', nftHash]
+                    }
+                    ],
+                    mutable_data: [],
+                    tokens_to_back: []
+                }
+            }]
+        }, {
+            blocksBehind: 3,
+            expireSeconds: 30
+        });
+    }
+}
+
 async function createToken(accountName, serverPrivKey, tokenName, maxTokenSupply, precision, receiverPubKey) {
     const signatureProvider = new JsSignatureProvider([serverPrivKey]);
     const recApi = new Api({ rpc, signatureProvider });
@@ -309,7 +427,6 @@ async function createToken(accountName, serverPrivKey, tokenName, maxTokenSupply
         }
     }
     tokenDetails = tokenDetails + " " + tokenName;
-    console.log(tokenDetails)
 
     await recApi.transact({
         actions: [{
@@ -344,8 +461,8 @@ async function createToken(accountName, serverPrivKey, tokenName, maxTokenSupply
     })
         .then(
             async () => {
-                setTimeout(createAction, 1000)
-                setTimeout(updateAuth, 1500)
+                setTimeout(createAction, 2000)
+                setTimeout(updateAuth, 2500)
             }
         )
 
@@ -419,162 +536,6 @@ async function createToken(accountName, serverPrivKey, tokenName, maxTokenSupply
             blocksBehind: 3,
             expireSeconds: 30
         })
-    }
-}
-
-async function createNFT(accountName, randomAccName, nftTitle, nftDesc, nftHash) {
-    const signatureProvider = new JsSignatureProvider(nftKey);
-    const api = new Api({ rpc, signatureProvider });
-
-    if (nftTitle === "") {
-        nftTitle = "My NFT!"
-    }
-    if (nftDesc === "") {
-        nftDesc = "My NFT!"
-    }
-
-    await createCol()
-        .then(setTimeout(createSchema, 2000))
-        .then(setTimeout(mintAsset, 3000))
-
-    async function createCol() {
-        console.log("started create collection")
-        /*         await api.transact({
-                    actions: [{
-                        account: 'atomicassets',
-                        name: 'createcol',
-                        authorization: [{
-                            actor: randomAccName,
-                            permission: 'active'
-                        }],
-                        data: {
-                            author: randomAccName,
-                            collection_name: accountName,
-                            allow_notify: true,
-                            authorized_accounts: [{
-                                0: accountName,
-                                1: randomAccName
-                            }],
-                            notify_accounts: [],
-                            market_fee: 0,
-                            data: [{
-                                0: {
-                                    key: 'name',
-                                    value: [{
-                                        0: 'string',
-                                        1: accountName
-                                    }]
-                                },
-                                1: {
-                                    key: 'img',
-                                    value: [{
-                                        0: 'string',
-                                        1: 'QmeMiJQ8jjmhk5Xznu7cuEKUPaEDLdjGu9omdud83NQqAu'
-                                    }]
-                                }
-                            }]
-                        }
-                    }]
-                }, {
-                    blocksBehind: 3,
-                    expireSeconds: 30
-                }) */
-
-        await api.transact({
-            actions: [{
-                account: 'atomicassets',
-                name: 'createcol',
-                authorization: [{
-                    actor: randomAccName,
-                    permission: 'active'
-                }],
-                data: {
-                    author: randomAccName,
-                    collection_name: randomAccName,
-                    allow_notify: true,
-                    authorized_accounts: [randomAccName, accountName],
-                    notify_accounts: [],
-                    market_fee: 0,
-                    data: []
-                }
-            }]
-        }, {
-            blocksBehind: 3,
-            expireSeconds: 30
-        })
-    }
-
-    async function createSchema() {
-        await api.transact({
-            actions: [{
-                account: 'atomicassets',
-                name: 'createschema',
-                authorization: [{
-                    actor: randomAccName,
-                    permission: 'active'
-                }],
-                data: {
-                    authorized_creator: randomAccName,
-                    collection_name: randomAccName,
-                    schema_name: randomAccName,
-                    schema_format: [
-                        {
-                            name: 'name',
-                            type: 'string'
-                        },
-                        {
-                            name: 'description',
-                            type: 'string'
-                        },
-                        {
-                            name: 'data',
-                            type: 'ipfs'
-                        }
-                    ]
-                }
-            }]
-        }, {
-            blocksBehind: 3,
-            expireSeconds: 30
-        });
-    }
-
-    async function mintAsset() {
-        await api.transact({
-            actions: [{
-                account: 'atomicassets',
-                name: 'mintasset',
-                authorization: [{
-                    actor: randomAccName,
-                    permission: 'active'
-                }],
-                data: {
-                    authorized_minter: randomAccName,
-                    collection_name: randomAccName,
-                    schema_name: randomAccName,
-                    template_id: -1,
-                    new_asset_owner: accountName,
-                    immutable_data: [{
-                        key: 'name',
-                        value: ['string', nftTitle]
-                    },
-                    {
-                        key: 'description',
-                        value: ['string', nftDesc]
-                    },
-                    {
-                        key: 'data',
-                        value: ['string', nftHash]
-                    }
-                    ],
-                    mutable_data: [],
-                    tokens_to_back: []
-                }
-            }]
-        }, {
-            blocksBehind: 3,
-            expireSeconds: 30
-        });
     }
 }
 

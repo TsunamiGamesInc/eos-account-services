@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import NavBar from '../components/NavBar';
 import CustomDrawer from '../components/CustomDrawer';
 
-export default function CreateToken({ tokenName, setTokenName, accountName, setAccountName, validName, setValidName,
+export default function CreateToken({ tokenName, setTokenName, accountName, setAccountName,
     receiverPrivKey, setReceiverPrivKey, receiverPubKey, setReceiverPubKey, totalPrice, setTotalPrice }) {
 
     useEffect(() => {
@@ -16,7 +16,7 @@ export default function CreateToken({ tokenName, setTokenName, accountName, setA
         });
         let tokenPrice = formatter.format(249.99) + " USD";
         setTotalPrice(tokenPrice)
-    }, [validName, setTotalPrice])
+    }, [setTotalPrice])
 
     return (
         <div>
@@ -43,7 +43,6 @@ export default function CreateToken({ tokenName, setTokenName, accountName, setA
                         <CreateTokenComponents
                             tokenName={tokenName} setTokenName={setTokenName}
                             accountName={accountName} setAccountName={setAccountName}
-                            validName={validName} setValidName={setValidName}
                             receiverPrivKey={receiverPrivKey} setReceiverPrivKey={setReceiverPrivKey}
                             receiverPubKey={receiverPubKey} setReceiverPubKey={setReceiverPubKey}
                             totalPrice={totalPrice}

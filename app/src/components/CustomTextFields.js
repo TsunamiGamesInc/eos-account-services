@@ -264,7 +264,7 @@ export function VanityTextField({ accountName, setAccountName, setValidName }) {
     )
 }
 
-export function TokenTextField({ tokenName, setTokenName, setValidName }) {
+export function TokenTextField({ tokenName, setTokenName, setTokenValidName }) {
     const [error, setError] = useState("");
     const [icon, setIcon] = useState(null);
     const [tooltipTitle, setTooltipTitle] = useState("3 to 7 characters, A-Z only");
@@ -272,20 +272,20 @@ export function TokenTextField({ tokenName, setTokenName, setValidName }) {
     useEffect(() => {
         if (tokenName.length === 0) {
             setIcon(null)
-            setValidName(false)
+            setTokenValidName(false)
             setTooltipTitle("3 to 7 characters, A-Z only")
         }
         else if ((tokenName.length < 3) && (icon !== closeIconMd)) {
             setIcon(closeIconMd)
-            setValidName(false)
+            setTokenValidName(false)
             setTooltipTitle("3 to 7 characters, A-Z only")
         }
         else if ((tokenName.length >= 3) && (icon !== checkIconMd)) {
             setIcon(checkIconMd)
-            setValidName(true)
+            setTokenValidName(true)
             setTooltipTitle("Token name available!")
         }
-    }, [tokenName, setValidName, icon])
+    }, [tokenName, setTokenValidName, icon])
 
     const onChange = (e) => {
         const newValue = e.target.value;
@@ -390,12 +390,12 @@ export function TokenAccountTextField({ accountName, setAccountName }) {
 export function TokenSupplyTextField({ maxTokenSupply, setMaxTokenSupply }) {
     const [error, setError] = useState("");
     const [icon, setIcon] = useState(checkIconMd);
-    const [tooltipTitle, setTooltipTitle] = useState("1 to 999 trillion");
+    const [tooltipTitle, setTooltipTitle] = useState("1 to 999 billion");
 
     useEffect(() => {
         if (maxTokenSupply.length === 0) {
             setIcon(null)
-            setTooltipTitle("1 to 999 trillion")
+            setTooltipTitle("1 to 999 billion")
         }
         else if ((maxTokenSupply.length >= 1) && (icon !== checkIconMd)) {
             setIcon(checkIconMd)
@@ -430,7 +430,7 @@ export function TokenSupplyTextField({ maxTokenSupply, setMaxTokenSupply }) {
                     }}
                     inputProps={{
                         'aria-label': 'Maximum token supply',
-                        maxLength: 15,
+                        maxLength: 12,
                     }}
                 />
             </Box>
@@ -441,12 +441,12 @@ export function TokenSupplyTextField({ maxTokenSupply, setMaxTokenSupply }) {
 export function PrecisionTextField({ precision, setPrecision }) {
     const [error, setError] = useState("");
     const [icon, setIcon] = useState(checkIconMd);
-    const [tooltipTitle, setTooltipTitle] = useState("0 to 15 decimals");
+    const [tooltipTitle, setTooltipTitle] = useState("0 to 6 decimals");
 
     useEffect(() => {
         if (precision.length === 0) {
             setIcon(null)
-            setTooltipTitle("0 to 15 decimals")
+            setTooltipTitle("0 to 6 decimals")
         }
         else if ((precision.length >= 1) && (icon !== checkIconMd)) {
             setIcon(checkIconMd)
@@ -460,8 +460,8 @@ export function PrecisionTextField({ precision, setPrecision }) {
         if ((newValue.slice(-1).match(/[0-9]/) || (newValue === ""))) {
             setError("")
 
-            if (newValue > 15) {
-                setPrecision(15)
+            if (newValue > 6) {
+                setPrecision(6)
             }
             else {
                 setPrecision(newValue)
@@ -487,7 +487,7 @@ export function PrecisionTextField({ precision, setPrecision }) {
                     }}
                     inputProps={{
                         'aria-label': 'Decimal precision',
-                        maxLength: 2,
+                        maxLength: 1,
                     }}
                 />
             </Box>
