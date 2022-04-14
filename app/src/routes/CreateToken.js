@@ -21,7 +21,7 @@ export default function CreateToken({ tokenName, setTokenName, accountName, setA
     return (
         <div>
             <Helmet>
-                <title>Create Account</title>
+                <title>Create Token</title>
                 <meta
                     name="description"
                     content="The easiest and cheapest EOS token creation by Credit Card."

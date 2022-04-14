@@ -82,11 +82,11 @@ receiverPubKey, setReceiverPubKey, totalPrice, setTotalPrice }) {
                 <title>Create Account</title>
                 <meta
                     name="description"
-                    content="The easiest and cheapest EOS account creation by credit card."
+                    content="Get the easiest and cheapest EOS account creation by credit card, plus a free PowerUp."
                 />
                 <meta
                     name="keywords"
-                    content="EOS Account Creator, Blockchain, Cheap, Easy, Credit Card"
+                    content="EOS Account Creator, Blockchain, Cheap, Easy, Credit Card, Free PowerUp, Bonus RAM"
                 />
             </Helmet>
             <Grid container spacing={4} justifyContent="center">

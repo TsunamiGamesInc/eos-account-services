@@ -14,7 +14,7 @@ export default function CheapAccount() {
                 <title>Cheapest EOS RAM</title>
                 <meta
                     name="description"
-                    content="The Cheapest and Simplest Ways to buy RAM on EOS."
+                    content="The cheapest and simplest ways to buy RAM on EOS."
                 />
                 <meta
                     name="keywords"

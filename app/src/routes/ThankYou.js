@@ -14,20 +14,20 @@ export default function ThankYou() {
     const nftURL = blokURL + '#nfts';
     const purchasedItems = [false, false, false, false, false];
 
-    if (thankYouArray[1] !== "undefined") { // created an account
+    if ((thankYouArray[1] !== "undefined") && (thankYouArray[1] !== undefined)) { // created an account
         purchasedItems[1] = true
     }
-    if (thankYouArray[2] !== "undefined") { // bought RAM
+    if ((thankYouArray[2] !== "undefined") && (thankYouArray[2] !== undefined)) { // bought RAM
         purchasedItems[2] = true
     }
-    if (thankYouArray[3] !== "undefined") { // bought a vanity key
+    if ((thankYouArray[3] !== "undefined") && (thankYouArray[3] !== undefined)) { // bought a vanity key
         purchasedItems[3] = true
     }
-    if (thankYouArray[4] !== "undefined") { // created an nft
+    if ((thankYouArray[4] !== "undefined") && (thankYouArray[4] !== undefined)) { // created an nft
         purchasedItems[1] = false
         purchasedItems[4] = true
     }
-    if (thankYouArray[5] !== "undefined") { // created a custom token
+    if ((thankYouArray[5] !== "undefined") && (thankYouArray[5] !== undefined)) { // created a custom token
         purchasedItems[1] = false
         purchasedItems[5] = true
     }
@@ -42,7 +42,7 @@ export default function ThankYou() {
                 />
                 <meta
                     name="keywords"
-                    content="Thank you, Purchase, EOS Account, EOS RAM, Vanity Key"
+                    content="Thank you, Purchase, EOS Account, EOS RAM, Vanity Key, NFT, Custom Token"
                 />
             </Helmet>
             <Grid container spacing={4} justifyContent="center">

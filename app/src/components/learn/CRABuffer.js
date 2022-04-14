@@ -14,7 +14,7 @@ export default function CRABuffer() {
                 <title>EOSJS: How to Fix "Requires Buffer" With CRA</title>
                 <meta
                     name="description"
-                    content="How to Fix Requires Buffer When Using CRA and EOSJS."
+                    content="How to fix Requires Buffer when using CRA and EOSJS."
                 />
                 <meta
                     name="keywords"

@@ -11,10 +11,10 @@ export default function CheapNFT() {
     return (
         <div>
             <Helmet>
-                <title>Cheapest EOS Custom Token</title>
+                <title>Cheapest EOS NFTs</title>
                 <meta
                     name="description"
-                    content="The Cheapest and Simplest Ways to Create a NFT on EOS."
+                    content="The cheapest and simplest ways to create a NFT on EOS."
                 />
                 <meta
                     name="keywords"

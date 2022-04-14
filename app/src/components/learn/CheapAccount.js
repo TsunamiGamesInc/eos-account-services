@@ -11,10 +11,10 @@ export default function CheapAccount() {
     return (
         <div>
             <Helmet>
-                <title>Cheapest EOS Custom Token</title>
+                <title>Cheapest EOS Account</title>
                 <meta
                     name="description"
-                    content="The Cheapest and Simplest Ways to Create an Account on EOS."
+                    content="The cheapest and simplest ways to create an account on EOS."
                 />
                 <meta
                     name="keywords"

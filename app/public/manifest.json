@@ -1,7 +1,7 @@
 {
   "name": "EOS Account Services",
   "short_name": "EOS Services",
-  "description": "Get the easiest and cheapest EOS account creation, plus quick EOS RAM, all with a credit card.",
+  "description": "Get the easiest EOS account creation, RAM, vanity keys, NFTs, and custom cryptocurrency tokens, all with a credit card.",
   "icons": [
     {
       "src": "eos_tsunami.ico",

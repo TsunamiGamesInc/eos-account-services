@@ -14,7 +14,7 @@ export default function SongNFT() {
                 <title>How to Make a Song NFT on EOS</title>
                 <meta
                     name="description"
-                    content="How to make a Song NFT on EOS."
+                    content="How to make a song NFT on EOS."
                 />
                 <meta
                     name="keywords"

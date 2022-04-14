@@ -11,10 +11,10 @@ export default function FreePowerUp() {
     return (
         <div>
             <Helmet>
-                <title>Cheapest EOS Custom Token</title>
+                <title>Free EOS PowerUp</title>
                 <meta
                     name="description"
-                    content="How to Get a Free PowerUp on EOS."
+                    content="How to get a free PowerUp on EOS."
                 />
                 <meta
                     name="keywords"

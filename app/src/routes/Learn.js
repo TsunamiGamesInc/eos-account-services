@@ -17,7 +17,7 @@ export default function Learn() {
                 />
                 <meta
                     name="keywords"
-                    content="How to Use EOS, Simple EOS, Cheap, EOS development"
+                    content="How to Use EOS, Simple EOS, Cheap, EOS Development"
                 />
             </Helmet>
             <Grid container spacing={4} justifyContent="center">

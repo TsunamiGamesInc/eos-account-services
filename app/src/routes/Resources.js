@@ -45,11 +45,11 @@ export default function Resources({ accountName, setAccountName, validName, setV
                 <title>Resources</title>
                 <meta
                     name="description"
-                    content="Get EOS RAM and PowerUps with a credit card."
+                    content="Get EOS RAM, plus a free PowerUp, with a credit card."
                 />
                 <meta
                     name="keywords"
-                    content="EOS RAM, PowerUp, Simple, Credit Card"
+                    content="EOS RAM, Free PowerUp, Simple, Credit Card"
                 />
             </Helmet>
             <Grid container spacing={4} justifyContent="center">

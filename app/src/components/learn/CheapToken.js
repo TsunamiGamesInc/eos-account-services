@@ -14,7 +14,7 @@ export default function CheapToken() {
                 <title>Cheapest EOS Custom Token</title>
                 <meta
                     name="description"
-                    content="The Cheapest and Simplest Ways to Create a Custom token on EOS."
+                    content="The cheapest and simplest ways to create a custom token on EOS."
                 />
                 <meta
                     name="keywords"

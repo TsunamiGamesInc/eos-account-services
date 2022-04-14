@@ -14,7 +14,7 @@ export default function TokenInfo() {
                 <title>Personal Token Contract vs Token Contract Based on Another Account</title>
                 <meta
                     name="description"
-                    content="What is the Difference Between a Personal Token Contract and a Token Contract Based on Another Account?"
+                    content="What is the difference between a Personal Token Contract and a Token Contract Based on Another Account?"
                 />
                 <meta
                     name="keywords"

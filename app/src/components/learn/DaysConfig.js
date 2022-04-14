@@ -14,7 +14,7 @@ export default function DaysConfig() {
                 <title>EOSIO: How to Fix "Assertion Failure: Days Doesn't Match Configuration"</title>
                 <meta
                     name="description"
-                    content="How to Fix Assertion Failure When Using EOSIO PowerUp."
+                    content="How to fix Assertion Failure when using EOSIO PowerUp."
                 />
                 <meta
                     name="keywords"

@@ -15,7 +15,7 @@ export default function BigInt() {
                 <title>IPFS: How to Fix "Cannot Convert a BigInt"</title>
                 <meta
                     name="description"
-                    content="How to Fix TypeError: Cannot convert a BigInt value to a number."
+                    content="How to fix TypeError: Cannot convert a BigInt value to a number."
                 />
                 <meta
                     name="keywords"
