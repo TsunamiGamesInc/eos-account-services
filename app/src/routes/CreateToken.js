@@ -24,7 +24,7 @@ export default function CreateToken({ tokenName, setTokenName, accountName, setA
                 <title>Create Token</title>
                 <meta
                     name="description"
-                    content="The easiest and cheapest EOS token creation by Credit Card."
+                    content="The easiest and cheapest EOS token creation by credit card."
                 />
                 <meta
                     name="keywords"

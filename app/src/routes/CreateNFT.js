@@ -46,7 +46,7 @@ export default function CreateNFT({ accountName, setAccountName, validName, setV
                 <title>Create NFT</title>
                 <meta
                     name="description"
-                    content="The easiest and cheapest EOS NFT creation by Credit Card."
+                    content="The easiest and cheapest EOS NFT creation by credit card."
                 />
                 <meta
                     name="keywords"

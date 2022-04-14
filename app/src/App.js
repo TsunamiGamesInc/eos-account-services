@@ -66,7 +66,7 @@ function App() {
               <title>EOS Account Services</title>
               <meta
                 name="description"
-                content="Get the easiest EOS account creation, RAM, vanity keys, NFTs, and custom cryptocurrency tokens, all with a credit card."
+                content="Get the easiest EOS account creation, RAM, vanity keys, NFTs, and custom cryptocurrency tokens, all without the technical hassle."
               />
               <meta
                 name="keywords"
