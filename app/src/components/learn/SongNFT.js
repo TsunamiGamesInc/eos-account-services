@@ -11,7 +11,7 @@ export default function SongNFT() {
     return (
         <div>
             <Helmet>
-                <title>How to Make a Song NFT on EOS</title>
+                <title>Learn How to Make a Song NFT - EOS Blockchain</title>
                 <meta
                     name="description"
                     content="How to make a song NFT on EOS."

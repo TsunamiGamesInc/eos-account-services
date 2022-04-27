@@ -82,7 +82,7 @@ export default function VanityKeys({ accountName, setAccountName, validName, set
     return (
         <div>
             <Helmet>
-                <title>Vanity Keys</title>
+                <title>Get Custom Vanity Keys for the EOS Blockchain</title>
                 <meta
                     name="description"
                     content="Get EOS Vanity Keys with a credit card."

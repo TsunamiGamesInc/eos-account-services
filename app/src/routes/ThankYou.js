@@ -35,7 +35,7 @@ export default function ThankYou() {
     return (
         <div>
             <Helmet>
-                <title>Thank You</title>
+                <title>Thank You for Using EOS Account Services!</title>
                 <meta
                     name="description"
                     content="Thank you for your purchase."
@@ -55,13 +55,14 @@ export default function ThankYou() {
                 <Grid item xl={6}>
                     <Box sx={{ width: '300px' }}>
                         <Grid item xs={12}>
-                            <Box sx={{ height: '15vh' }} />
+                            <Box sx={{ height: '14vh' }} />
                         </Grid>
                         <Grid item xs={12}>
                             <Grid container>
                                 <Grid item xs={12}>
-                                    <p style={{ color: 'white', lineHeight: 0, fontWeight: 'normal', fontSize: 16 }}>
+                                    <p style={{ color: 'white', lineHeight: 2, fontWeight: 'normal', fontSize: 16 }}>
                                         Success! Thank you.
+                                        <br />(Your order may take up to 1 minute to fulfill)
                                     </p>
                                 </Grid>
                                 {purchasedItems[1] &&

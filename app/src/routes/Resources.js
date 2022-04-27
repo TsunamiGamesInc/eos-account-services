@@ -42,7 +42,7 @@ export default function Resources({ accountName, setAccountName, validName, setV
     return (
         <div>
             <Helmet>
-                <title>Resources</title>
+                <title>Resources (EOS RAM & a Free PowerUp)</title>
                 <meta
                     name="description"
                     content="Get EOS RAM, plus a free PowerUp, with a credit card."

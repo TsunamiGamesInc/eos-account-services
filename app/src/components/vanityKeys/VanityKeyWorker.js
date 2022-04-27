@@ -17,3 +17,14 @@ async function checkKey(message, privateKey) {
         postMessage({ receiverPubKey: publicKey, receiverPrivKey: privateKey })
     }
 }
+
+/*  Not case-sensitive version
+    let publicKey = ecc.privateToPublic(privateKey);
+    let pubKeyLower = publicKey.toLowerCase();
+    let messageLower = message.data.accountName.toLowerCase();
+
+    if (pubKeyLower.startsWith(messageLower, 4)) {
+        keyFound = true;
+        postMessage({ receiverPubKey: publicKey, receiverPrivKey: privateKey })
+    }
+*/

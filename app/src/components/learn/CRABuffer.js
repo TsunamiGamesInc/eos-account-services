@@ -11,7 +11,7 @@ export default function CRABuffer() {
     return (
         <div>
             <Helmet>
-                <title>EOSJS: How to Fix "Requires Buffer" With CRA</title>
+                <title>EOSJS: How to Fix "Requires Buffer" With create-react-app</title>
                 <meta
                     name="description"
                     content="How to fix Requires Buffer when using CRA and EOSJS."

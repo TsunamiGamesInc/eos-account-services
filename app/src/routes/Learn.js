@@ -10,7 +10,7 @@ export default function Learn() {
     return (
         <div>
             <Helmet>
-                <title>Learn</title>
+                <title>Learn the Simplest and Cheapest Ways to Use EOS</title>
                 <meta
                     name="description"
                     content="Learn about the simplest and cheapest ways to use the EOS Blockchain."

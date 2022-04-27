@@ -80,7 +80,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
 async function fulfillOrder(session, lineItems) {
     checkResources('serveaccount')
 
-    setTimeout(eosFulfill, 3000)
+    setTimeout(eosFulfill, 8000)
 
     let powerUpIncluded = false;
 
@@ -105,13 +105,13 @@ async function fulfillOrder(session, lineItems) {
                         powerUpIncluded = true
                     })
                     .catch(err => console.log(err))
-            }, 1000)
+            }, 4000)
         }
 
         if (powerUpIncluded) {
             setTimeout(async () => {
                 await powerUp(session.metadata.accountName)
-            }, 2000)
+            }, 4000)
         }
 
         if (itemsOrdered.includes(stripeKeys.nftID)) {
@@ -176,10 +176,12 @@ async function checkResources(accountName) {
 }
 
 async function powerUp(accountName, tokenPowerUp) {
-    let netVal = 400000; //68000;
+    let cpuVal = 300000000;
+    let netVal = 400000;
 
     if (tokenPowerUp) {
-        netVal = 400000; //340000;
+        netVal = 1600000;
+        cpuVal = 900000000;
     }
     await api.transact({
         actions: [{
@@ -193,8 +195,8 @@ async function powerUp(accountName, tokenPowerUp) {
                 payer: 'serveaccount',
                 receiver: accountName,
                 days: 1,
-                cpu_frac: 300000000, //600000
-                net_frac: 400000, //netVal
+                cpu_frac: cpuVal,
+                net_frac: netVal,
                 max_payment: '0.0500 EOS'
             }
         }]
@@ -288,8 +290,8 @@ async function createNFT(accountName, randomAccName, nftTitle, nftDesc, fileType
     }
 
     await createCol()
-        .then(setTimeout(createSchema, 3000))
-        .then(setTimeout(mintAsset, 10000))
+        .then(setTimeout(createSchema, 4000))
+        .then(setTimeout(mintAsset, 11000))
 
     async function createCol() {
         await api.transact({
@@ -461,8 +463,8 @@ async function createToken(accountName, serverPrivKey, tokenName, maxTokenSupply
     })
         .then(
             async () => {
-                setTimeout(createAction, 2000)
-                setTimeout(updateAuth, 2500)
+                setTimeout(createAction, 5000)
+                setTimeout(updateAuth, 11000)
             }
         )
 

@@ -12,7 +12,7 @@ export default function BigInt() {
     return (
         <div>
             <Helmet>
-                <title>IPFS: How to Fix "Cannot Convert a BigInt"</title>
+                <title>Learn: IPFS: How to Fix 'Cannot Convert a BigInt' - InterPlanetary File System</title>
                 <meta
                     name="description"
                     content="How to fix TypeError: Cannot convert a BigInt value to a number."
